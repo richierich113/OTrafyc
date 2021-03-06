@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:ndroid="http://schemas.android.com/tools"
+
+    android:layout_margin="15dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue9"
+                android:orientation="horizontal">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_margin="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:fontFamily="@font/typographica_regular"
+                        android:gravity="center_vertical"
+                        android:text="How to Use"
+                        android:textSize="18sp"
+                        android:textColor ="@color/blue1"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_help"
+                        android:layout_marginStart="2dp"
+                        android:contentDescription="TODO" />
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarSize="2dp"
+                android:padding="10dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                   <!-- <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="How to Use"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="Requirements"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="1.5dp"
+                        android:text="- Active internet connection is required for full functionality
+                              \n- Device’s location access should be allowed to get your precise current location with high accuracy"
+                        android:textAllCaps="false"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="Zooming in to current location"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="1.5dp"
+                        android:text="- Click on location button to zoom in to your current location (blue dot indicates where you are)"
+                        android:textAllCaps="false"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/location_but"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- <ImageView
+                         android:layout_width="100dp"
+                         android:layout_height="100dp"
+                         android:layout_margin="10dp"
+                         android:src="@drawable/location_but"
+                         android:saveEnabled="false"
+                         android:clickable="false"
+                         android:layout_gravity="center_horizontal"/>-->
+
+                    <!-- <org.sufficientlysecure.htmltextview.HtmlTextView
+                         android:id="@+id/google_play_services"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:textSize="16sp" />
+                     <org.sufficientlysecure.htmltextview.HtmlTextView
+                         android:id="@+id/google_analytics_for_firebase"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:textSize="16sp" />
+
+                     <org.sufficientlysecure.htmltextview.HtmlTextView
+                         android:id="@+id/firebase_crashlytics"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:textSize="16sp" />
+         -->
+                    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:text="Google Play Services"
+                         android:textSize="16sp"
+                         android:clickable="true"
+                         android:focusable="true"
+                         android:onClick="openGooglePrivacy"
+                         android:textColor="@color/americanOrange" />-->
+
+                    <!-- <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="10dp"
+                         android:text="Google Analytics for Firebase"
+                         android:textSize="16sp"
+                         android:onClick="openGoogleAnalyticsPrivacy"
+                         android:clickable="true"
+                         android:focusable="true"
+                         android:textColor="@color/americanOrange" />-->
+
+
+                    <!--<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Firebase Crashlytics"
+                        android:textSize="16sp"
+                        android:onClick="openGoogleCrashlyticsPrivacy"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:textColor="@color/americanOrange" />-->
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="- Turn on switch located at the bottom left of map screen to zoom in to your current location (this adds a marker to your current location and automatically keeps your location at the center of map)"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/on_off_switch"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="On Road and Off Road Modes"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Turn on switch to be in On Road mode. This adds a marker to your current location and automatically zooms in and keeps your location at the center of map when driving."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/on_off_switch"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Turn off switch to be in Off Road mode."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text=  "This removes location marker and allows you to zoom in and out manually with fingers and perform all map swipes and gestures without automatically zooming in to current location."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Get fastest route to destination"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on search icon located at the top right of map screen and search place to get fastest route.
+                              \n Long tap on map where you want to go and get fastest route."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Restrict search to your country"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on search icon located at the top right of map screen and click on countries icon on the right on search bar and choose your country code"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/country_but"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Navigate with turn by turn direction guide to destination"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on blue navigation button to choose how you want to navigate after getting fastest route."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/navigate"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Add moment(s), snap and share"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on orange button and proceed with “YES”. Enter custom title and description, choose an icon and click on Add moment button."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/orange_mem"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on snap button to automatically take screenshot of map and choose how you like to share."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text= "This features works currently on devices operating on Android version 6 and lower. You can however take screenshot manually using your device’s screenshot feature."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/map_snapshot"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Copy location coordinates to clipboard"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on orange button to copy location coordinates to clipboard"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Get real-time traffic update"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on button with plus(+) sign and click on Traffic On / Off"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_margin="10dp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="2dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_gravity="center_horizontal">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/how_to_use_imgs_background"
+                            android:theme="@style/HowToUseImageBackground"
+
+                            android:src="@drawable/open_float_but"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Get night map view"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on button with plus(+) sign and click on Night / Day Map
+"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Share location with friends &amp; family"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Click on button with plus(+) sign and click on Share Location"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Share app with friends"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Go to menu and click on Invite a Friend and choose how you like to share
+"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Send direct feedback and suggestions"
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="- Go to menu and go to Contact Us section and send us your reviews and app feature suggestions."
+                        android:textColor="@color/smokyBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+
+    android:orientation="vertical"
+    tools:context=".FeedbackActivity">
+
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onBackButtonPressed"
+        android:padding="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/feedback_back_button_onclick_ripple_backgrnd"
+        android:src="@drawable/ic_arrow_back_"
+        android:transitionName="contactUs_to_feedback_img_transition"
+        app:tint="@color/smokyBlack"
+        android:contentDescription="TODO" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                style="@style/Animation.Design.BottomSheetDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/feedback"
+                android:textAllCaps="true"
+                android:textColor="@color/smokyBlack"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:alpha="0.9"
+                android:transitionName="contactUs_to_feedback_title_transition"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/have_feedback_we_are_always_seeking_how_best_we_can_improve_our_services_for_our_users_nplease_don_t_share_sensitive_information"
+                android:textSize="14sp"
+
+                android:textColor="@color/smokyBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_feedback_to"
+                    android:textSize="14sp"
+
+                    android:textColor="@color/smokyBlack"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/onimtechnologies_gmail_com"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/blue1"
+                    android:alpha="0.7"
+                    android:textIsSelectable="true" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/formLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:transitionName="contactUs_to_feedback_form_transition">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/to"
+                    android:textColorHint="@color/smokyBlack"
+                    app:boxStrokeColor="@color/smokyBlack"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconTint="@color/smokyBlack"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/smokyBlack"
+                    app:startIconDrawable="@drawable/ic_email_icon"
+                    app:startIconTint="@color/smokyBlack">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/toEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/smokyBlack" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/subject"
+                    android:textColorHint="@color/smokyBlack"
+                    app:boxStrokeColor="@color/smokyBlack"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconTint="@color/smokyBlack"
+
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/smokyBlack"
+
+                    app:startIconTint="@color/smokyBlack">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/subjectEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif"
+                        android:inputType="textCapWords"
+                        android:textColor="@color/smokyBlack" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/message"
+                    app:hintAnimationEnabled="true"
+
+                    app:helperTextEnabled="true"
+                    android:textColorHint="@color/smokyBlack"
+                    app:boxStrokeColor="@color/smokyBlack"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconTint="@color/smokyBlack"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/smokyBlack"
+                    app:startIconTint="@color/smokyBlack">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/messageEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/smokyBlack" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/sendText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/send"
+                        android:textColor="@color/smokyBlack"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:textAllCaps="true"
+                        android:layout_toStartOf="@+id/send_feedback_button"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageView
+                        android:id="@+id/send_feedback_button"
+                        android:layout_width="55dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/feedback_send_button_onclick_ripple_backgrnd"
+                        android:src="@drawable/ic_send"
+                        android:padding="5dp"
+                        app:tint="@color/blue2"
+                        android:contentDescription="TODO" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</LinearLayout>

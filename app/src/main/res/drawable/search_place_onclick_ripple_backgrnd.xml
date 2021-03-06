@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/blue12"
+    tools:targetApi="LOLLIPOP">
+
+    <item>
+        <shape  android:shape="rectangle" >
+            <corners
+                android:radius="30dp"
+                />
+            <!--americanOrange was the previous color-->
+            <gradient
+                android:angle="45"
+                android:centerX="35%"
+                android:centerColor="@color/blue1"
+                android:startColor="@color/blue1"
+                android:endColor="@color/blue1"
+                android:type="linear"
+                />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+            <size
+                android:width="40dp"
+                android:height="40dp"
+                />
+            <stroke
+                android:width="0dp"
+                android:color="@color/myOrange"
+                />
+        </shape>
+
+    </item>
+</ripple>
+
+

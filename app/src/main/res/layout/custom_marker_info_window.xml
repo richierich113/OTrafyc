@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="30dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgMarkerRiderInfoWindow"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_destination"
+            android:layout_gravity="center_vertical"
+            app:tint="@color/blue1"
+            android:contentDescription="TODO" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:orientation="vertical"
+            >
+
+
+            <TextView
+                android:id="@+id/txtMarkerInfoWindowTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pickup Point"
+                android:textColor="@color/layoutRegisterColor"
+                android:textStyle="bold"
+                android:layout_weight="10"/>
+
+
+                <TextView
+                    android:id="@+id/txtInfoWindowSnippet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="optional"
+                    android:textStyle="italic"
+                    android:textColor="@color/layoutRegisterColor" />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

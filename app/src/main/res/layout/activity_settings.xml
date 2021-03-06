@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue12"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="0dp"
+    tools:context=".SettingsActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/CustomToolbarStyle2"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp"
+        app:popupTheme="@style/CustomPopupStyle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/BackArrow"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/contact_us_backbuton_onclick_ripple_backgrnd"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="OnBackButtonClick"
+                android:padding="5dp"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="@android:color/white"
+                android:contentDescription="TODO" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="2dp"
+        android:scrollbarStyle="insideOverlay"
+        android:transitionName="menu_to_Activities_transition">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="80dp"
+                android:background="@color/White"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:id="@+id/location_accuracy_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:onClick="locationAccuracy"
+
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp">
+
+
+                        <TextView
+                            android:id="@+id/location_accuracy_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:layout_toEndOf="@+id/feedback_img"
+                            android:padding="2dp"
+                            android:text="Location accuracy"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp"
+                            android:transitionName="contactUs_to_feedback_title_transition" />
+
+                        <TextView
+                            android:id="@+id/location_accuracy_subtext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/location_accuracy_head"
+                            android:layout_marginStart="0dp"
+                            android:text="Get tips to optimize your location"
+                            android:textAllCaps="false"
+                            android:textColor="@color/grayColor"
+                            android:textSize="14sp"
+                            android:transitionName="contactUs_to_feedback_form_transition" />
+
+                        <ImageView
+                            android:id="@+id/settings_img1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_navigate_next"
+                            app:tint="@color/grayColor"
+                            tools:ignore="ContentDescription" />
+
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/grayColor" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/location_settings_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:onClick="openLocationAccessSetting"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp">
+
+
+                        <TextView
+                            android:id="@+id/location_settings_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:layout_toEndOf="@+id/feedback_img"
+                            android:padding="2dp"
+                            android:text="Location settings"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp"
+                            android:transitionName="contactUs_to_feedback_title_transition" />
+
+
+                        <ImageView
+                            android:id="@+id/settings_img4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_navigate_next"
+                            app:tint="@color/grayColor"
+                            tools:ignore="ContentDescription" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/grayColor" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/privacy_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:onClick="openPrivacyPolicyPage"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp"
+                        android:transitionName="menu_to_Activities_transition"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/privacy_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:layout_toEndOf="@+id/suggestions_img"
+                            android:padding="2dp"
+                            android:text="Privacy Policy"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp" />
+
+
+                        <ImageView
+                            android:id="@+id/settings_img2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_navigate_next"
+                            app:tint="@color/grayColor"
+
+                            tools:ignore="ContentDescription" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/grayColor" />
+
+                    <RelativeLayout
+                        android:id="@+id/terms_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:onClick="openTermsPage"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp"
+                        android:transitionName="menu_to_Activities_transition">
+
+
+                        <TextView
+                            android:id="@+id/terms_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:layout_toEndOf="@+id/suggestions_img"
+                            android:padding="2dp"
+                            android:text="Terms of Service"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp"/>
+
+
+                        <ImageView
+                            android:id="@+id/settings_img3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_navigate_next"
+                            app:tint="@color/grayColor"
+
+                            tools:ignore="ContentDescription" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/lightgrayColor">
+
+
+            </LinearLayout>-->
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/White"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/White"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="0dp"
+                        android:alpha="0.7"
+                        android:text="About"
+                        android:textColor="@color/blue2"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/otrafyc_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp">
+
+
+                        <TextView
+                            android:id="@+id/otrafyc_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:layout_toEndOf="@+id/review_img"
+                            android:padding="2dp"
+                            android:text="OTrafyc"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/otrafyc_head"
+                            android:layout_toEndOf="@+id/review_img"
+                            android:text="©2021 Onim Technologies"
+                            android:textAllCaps="false"
+                            android:textColor="@color/grayColor"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/version_rel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clickable="true"
+                        android:clipChildren="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:padding="0dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp">
+
+
+                        <TextView
+                            android:id="@+id/review_head"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            android:padding="2dp"
+                            android:text="Version"
+                            android:textColor="@color/smokyBlack"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/review_head"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="1.0.3"
+                            android:textAllCaps="false"
+                            android:textColor="@color/grayColor"
+                            android:textSize="14sp" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

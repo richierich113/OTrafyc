@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+    <group android:checkableBehavior="single">  <!-- android:checkableBehavior="single" -->
+
+
+
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_map"
+            android:title="Map" />
+       <!-- <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
+-->
+
+    </group>
+
+
+    <item android:title="Help">
+        <menu>
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:id="@+id/nav_ContactUs"
+                    android:icon="@drawable/ic_contact_us"
+                    android:title= "Contact Us"
+                    />
+
+                <item
+                    android:id="@+id/nav_HowToUse"
+                    android:icon="@drawable/ic_help"
+                    android:title= "How to Use"/>
+
+                <item
+                    android:id="@+id/nav_Settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title= "Settings"
+
+                    />
+
+            </group>
+
+
+
+        </menu>
+
+    </item>
+
+    <item android:title="Support Us">
+        <menu>
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:id="@+id/nav_inviteFriends"
+                    android:icon="@drawable/ic_invite_friends"
+                    android:title="Invite a Friend" />
+
+                <item
+                    android:id="@+id/nav_rateUs"
+                    android:icon="@drawable/ic_rate_us"
+                    android:title="Rate OTrafyc" />
+
+            </group>
+
+
+
+        </menu>
+
+    </item>
+
+    <item android:title="Legal">
+        <menu>
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:id="@+id/nav_privacy_policy"
+                    android:icon="@drawable/ic_privacy_policy"
+                    android:title="Privacy Policy" />
+
+                <item
+                    android:id="@+id/nav_terms"
+                    android:icon="@drawable/ic_terms"
+                    android:title="Terms of Service" />
+
+            </group>
+
+
+
+        </menu>
+
+    </item>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/ic_logout"
+                android:title="Exit" />
+
+
+        </menu>
+
+    </item>
+
+
+</menu>

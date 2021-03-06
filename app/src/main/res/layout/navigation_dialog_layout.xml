@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="15dp">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        android:background="@color/White"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/navigate_dialog_close_img_backgrnd">
+
+
+                <ImageView
+                    android:id="@+id/img1_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_close"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    app:tint="@color/black"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Navigate  Using .  .  ."
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="normal"
+                android:theme="@style/CustomNavigateDialogStyle"
+                android:alpha="0.8"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/waze1_img"
+                    android:layout_width="90dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/waze_logo_2020"
+                    android:layout_gravity="start"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/navigation_dialog_imgs_background"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="OR"
+                    android:textStyle="bold"
+                    android:theme="@style/CustomNavigateDialogStyle"
+                    android:textColor="@color/blue1"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/googleMaps1_img"
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="-5dp"
+                    android:src="@drawable/google_maps_logo"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/navigation_dialog_imgs_background"
+                    android:contentDescription="TODO" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

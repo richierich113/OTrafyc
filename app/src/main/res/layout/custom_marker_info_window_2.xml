@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="30dp"
+    app:layout_anchor="@drawable/ic_user_destination_marker"
+    app:layout_anchorGravity="center_horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imgMarkerRiderInfoWindow"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_destination"
+                android:layout_gravity="center_vertical"
+                app:tint="@color/blue1"
+                android:contentDescription="TODO" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:orientation="vertical"
+                >
+
+
+                <TextView
+                    android:id="@+id/txtMarkerInfoWindowTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="Pickup Point"
+                    android:textColor="@color/layoutRegisterColor"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtInfoWindowSnippet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="optional"
+                    android:textStyle="italic"
+                    android:textColor="@color/layoutRegisterColor" />
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/share_dest_butt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/exit_dialog_cancel_button_backgrnd"
+                android:text="Share"
+                android:textAllCaps="true"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/go_dest_butt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/exit_dialog_exit_button_backgrnd"
+                android:text="Go"
+                android:textColor="@color/white"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

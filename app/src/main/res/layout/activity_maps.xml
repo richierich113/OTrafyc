@@ -1,0 +1,709 @@
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MapsActivity"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:id="@+id/mapScreenLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keepScreenOn="true"
+        android:transitionName="splash_screen_to_maps_transition">
+
+
+        <LinearLayout
+            android:id="@+id/fullScreen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/toolbar_rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue1"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:theme="@style/CustomToolbarStyle"
+                        app:popupTheme="@style/CustomPopupStyle"
+                        >
+                        <!--app:title="OTrafyc"
+                        app:titleMarginStart="30dp"-->
+
+                        <!--  app:menu="@menu/options_menu" -->
+                        <TextView
+                            android:id="@+id/toolbalTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/app_name"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_marginStart="30dp"
+                            android:gravity="center_vertical"/>
+
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <ImageView
+                        android:id="@+id/searchPlace"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/search_place_onclick_ripple_backgrnd"
+                        android:clickable="true"
+                        android:contentDescription="@string/search"
+                        android:focusable="true"
+                        android:foregroundGravity="center_vertical"
+                        android:padding="5dp"
+
+                        android:src="@drawable/ic_search_icon"
+                        app:tint="@android:color/white" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/how_to_use_icon_lottie"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="60dp"
+                        android:background="@drawable/search_place_onclick_ripple_backgrnd"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="how_to_use_1.json"
+                        app:lottie_loop="true"
+                        app:lottie_speed="1.0" />
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <fragment
+                    android:id="@+id/interactive_infoWindowMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:name="com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment"/>
+
+               <!-- <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mapTypeCardView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginBottom="310dp"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="10dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/map_type"
+                        android:src="@drawable/ic_map_type" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+-->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/navigateCardView"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="240dp"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/quantum_lightblue700"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/white">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/navigate"
+                        android:src="@drawable/ic_navigate"
+                        app:tint="@android:color/white" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <!--<com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/contact_us_gray_ripple_backround"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:text="Overview"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </com.google.android.material.card.MaterialCardView>-->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/share_memoryCard"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="-20dp"
+                    android:layout_marginBottom="194.5dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="20dp"
+                    app:strokeColor="@color/blue1"
+                    app:strokeWidth="1.5dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="55dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_share_memory" /><!--  app:tint="@color/yellowOrange"-->
+
+
+                    <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textColor="@color/black"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"/>-->
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/tapNavigateCardView"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="240dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/quantum_lightblue700"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/white">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_navigate"
+                        app:tint="@android:color/white" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/trafficLegend_cardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="100dp"
+
+                    android:visibility="gone"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/trafficLegend_LinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <Button
+                            android:id="@+id/trafficLegend_button"
+                            android:layout_width="135dp"
+                            android:layout_height="20dp"
+                            android:background="@color/smokyBlack"
+                            android:drawableEnd="@drawable/ic_arrow_drop_down2"
+                            android:drawableTint="@color/grayColor"
+                            android:onClick="btnLegend"
+                            android:text="@string/legend"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="10sp"
+                            android:textStyle="normal" />
+
+
+                        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                            android:id="@+id/trafficLegend_expLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+
+                            app:ael_duration="2100"
+                            app:ael_expanded="true"
+                            app:ael_interpolator="bounce"
+                            app:ael_orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="3dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="@color/veryHighTrafficColor" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/very_high_traffic"
+                                        android:textColor="@color/smokyBlack"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="3dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="#ff0000" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/high_traffic"
+                                        android:textColor="@color/smokyBlack"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="3dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_marginStart="2dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:background="@color/americanOrange" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/medium_traffic"
+                                        android:textColor="@color/smokyBlack"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="3dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_margin="5dp"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_marginRight="5dp"
+                                        android:background="@color/switchBasePressColor" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/low_no_traffic"
+                                        android:textColor="@color/smokyBlack"
+                                        android:textSize="10sp" />
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <!-- <EditText
+                     android:id="@+id/placeEdit"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:hint="Enter Pickup Location"
+                     android:layout_weight="5"
+                     android:layout_margin="10dp" /> -->
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/autocompleteCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:alpha="0.85"
+                    android:background="@color/grayColor"
+                    android:visibility="gone"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="10dp"
+                    app:strokeColor="@color/blue2"
+                    app:strokeWidth="0.2dp"
+                    tools:targetApi="O"> <!--americanOrange was the previous stroke color-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="6">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:alpha="0.8"
+                            android:contentDescription="@string/where_to"
+                            android:onClick="whereTo"
+                            android:src="@drawable/ic_where_to" />
+
+                        <fragment
+                            android:id="@+id/OtrafycAutocomplete_fragment"
+                            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="3dp"
+                            android:layout_marginBottom="7dp"
+                            android:background="@color/grayColor" />
+
+
+                        <ImageView
+                            android:id="@+id/countries_select"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="2dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:contentDescription="@string/select_country_code"
+                            android:contextClickable="true"
+                            android:focusable="true"
+                            android:src="@drawable/ic_countries"
+                            app:tint="@color/grayColor" />
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <!-- <Button
+                       android:id="@+id/btnGo"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Go"
+                      android:layout_marginTop="10dp"
+                       android:background="@color/colorPrimary"
+                       android:layout_weight="1"/>  -->
+
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="0dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/bottom_LinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="vertical">
+
+
+                    <com.getbase.floatingactionbutton.FloatingActionsMenu
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_margin="5dp"
+                        app:fab_addButtonColorNormal="@android:color/white"
+                        app:fab_addButtonColorPressed="@color/blue9"
+                        app:fab_addButtonPlusIconColor="@color/blue2"
+                        app:fab_addButtonSize="normal"
+                        app:fab_addButtonStrokeVisible="true"
+                        app:fab_expandDirection="up"
+
+                        app:fab_labelStyle="@style/ExpandableLayoutButton"
+                        app:fab_labelsPosition="left">
+
+
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/shareLocationFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:baselineAlignBottom="true"
+                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorPressed="@color/blue9"
+                            app:fab_icon="@drawable/ic_sharelocation_icon1"
+                            app:fab_size="mini"
+                            app:fab_title="Share Location" />
+
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/traffficFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorPressed="@color/blue9"
+                            app:fab_icon="@drawable/ic_fab_traffic"
+                            app:fab_size="mini"
+                            app:fab_title="Traffic On / Off" />
+
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/dark_light_MapFab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="changeMapStyle"
+                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorPressed="@color/blue9"
+                            app:fab_icon="@drawable/ic_dark"
+                            app:fab_size="mini"
+                            app:fab_title="Night / Day Map" />
+
+                    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/locationImageLayout"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="17dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/current_location_ripple_background"
+                        android:clickable="true"
+                        android:contextClickable="true"
+                        android:focusable="true"
+
+                        app:cardCornerRadius="27dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/blue2"
+                        app:strokeWidth="0.3dp"> <!--americanOrange is the previous color-->  <!-- increase the corner radius size to about 90dp to create the cool transparent look of the location imageview below -->
+
+                        <ImageView
+                            android:id="@+id/locationImage"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/move_to_my_location"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/blue2" /> <!--myOrange was the previous color-->
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/bottomCardview"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="0dp"
+                        app:cardBackgroundColor="@color/blue12"
+                        app:cardElevation="4dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/location_switch"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:layout_weight="2"
+                                android:contentDescription="@string/road_switch"
+                                android:padding="-8dp"
+                                app:showText="true"
+                                app:splitTrack="true"
+                                app:thumbTextPadding="2dp"
+                                app:thumbTint="@android:color/white"
+                                app:trackTint="@color/smokyBlack"
+                                app:useMaterialThemeColors="true" />
+
+
+                            <Button
+                                android:id="@+id/displayOnOffButton"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="5dp"
+                                android:layout_weight="6"
+                                android:background="@drawable/bottom_card_button_design"
+                                android:padding="0dp"
+                                android:text="@string/welcome"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="14sp"
+                                android:textStyle="normal" />
+
+
+                            <ImageView
+                                android:id="@+id/copy_locationImg"
+                                android:layout_width="0dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="5dp"
+                                android:layout_weight="2"
+                                android:clickable="true"
+                                android:contentDescription="@string/proceed_and_add_moment"
+                                android:focusable="true"
+                                android:padding="4dp"
+                                android:src="@mipmap/ic_mem_image_round" />
+
+                        </LinearLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationTheme"
+        android:transitionName="menu_to_Activities_transition"
+        app:headerLayout="@layout/nav_header"
+        app:itemIconTint="@color/grayColor"
+        app:itemTextColor="@color/layoutRegisterColor"
+        app:menu="@menu/nav_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

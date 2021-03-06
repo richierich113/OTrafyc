@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    xmlns:ndroid="http://schemas.android.com/tools"
+
+    android:layout_margin="15dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue9"
+                android:orientation="horizontal">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_margin="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:fontFamily="@font/typographica_regular"
+                        android:gravity="center_vertical"
+                        android:text="Moment Today"
+                        android:textSize="18sp"
+                        android:textColor ="@color/blue1"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_mem_blue_white_stroke"
+                        android:layout_marginStart="2dp"
+                        android:contentDescription="TODO" />
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarSize="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/memoryTitle_editText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:hint="Title"
+                        android:textColorHint="@color/grayColor"
+                        app:boxStrokeColor="@color/blue9"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/grayRippleColor"
+                        app:helperText="Title of moment"
+                        app:helperTextTextColor="@color/grayRippleColor"
+                        app:hintEnabled="true"
+                        app:hintTextColor="@color/smokyBlack">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/memoryTitle_editText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/smokyBlack" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/memoryDescription_editText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:hint="Moment"
+                        android:textColorHint="@color/grayColor"
+                        app:boxStrokeColor="@color/blue9"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/grayRippleColor"
+                        app:helperText="Briefly describe  moment"
+                        app:helperTextTextColor="@color/grayRippleColor"
+                        app:hintEnabled="true"
+                        app:hintTextColor="@color/smokyBlack">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/memoryDescription_editText2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="sans-serif"
+                            android:inputType="textCapSentences"
+                            android:textColor="@color/smokyBlack" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!--  <DatePicker
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center"
+                          android:layout_margin="5dp"
+                          android:datePickerMode="spinner" />-->
+
+
+                    <LinearLayout
+                        android:id="@+id/memoryIcons_cardView_headLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/blue12"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Select a mood that describes the moment"
+                            android:textColor="@color/blue2"
+                            android:textStyle="bold"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:id="@+id/memoryIcons_scrollView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbarStyle="insideOverlay"
+                        android:scrollbarSize="2dp"
+                        android:background="@color/blue12">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                           >
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/lovely_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                app:cardElevation="5dp"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"> <!--change radius for all cards to 20dp on update-->
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_love"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/happy_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_happy"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/amazing_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_selfie"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/sad_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_sad"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/cool_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_cool"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/angry_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_angry1"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/pain_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_pain"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/awkward_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_awkward"
+                                    android:contentDescription="TODO" />
+
+                          </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/confused_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_confused"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/crying_cardView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_crying"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/highweed_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_highweed"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/kiss_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_kiss"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/laugh_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_laugh"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/pampered_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_pampered"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/scared_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_scared"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/shock_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_shock"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/sleeping_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_sleeping"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/teasing_cardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:background="@color/blue12"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:checkable="true"
+                                android:saveEnabled="true"
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp">
+
+                                <ImageView
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="10dp"
+                                    android:src="@drawable/ic_teasing"
+                                    android:contentDescription="TODO" />
+
+                            </com.google.android.material.card.MaterialCardView>
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/lightgrayColor1" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp">
+
+
+                        <Button
+                            android:id="@+id/addMemory_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/exit_dialog_exit_button_backgrnd"
+                            android:text="Add moment"
+                            android:textAllCaps="false"
+                            android:textColor="@color/White"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="15dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        android:background="@color/White">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/network_dialog_img_backgrnd"
+    android:orientation="vertical"
+   >
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_network_check"
+        android:layout_gravity="center"
+        android:alpha="0.6"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+
+        app:tint="@color/quantum_googred"
+        android:contentDescription="TODO" />
+
+</LinearLayout>
+
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Internet is required for full map functionality"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:alpha="0.7"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/lightgrayColor1"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <Button
+                    android:id="@+id/noThanksImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="No Thanks"
+                    android:textStyle="normal"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:background="@drawable/exit_dialog_cancel_button_backgrnd"
+                    android:layout_marginEnd="10dp" />
+
+                <Button
+                    android:id="@+id/connectImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:text="Connect"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textColor="@color/White"
+                    android:background="@drawable/exit_dialog_exit_button_backgrnd"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

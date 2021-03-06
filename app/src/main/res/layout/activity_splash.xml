@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splashConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue2"
+    tools:context=".SplashActivity"
+    android:paddingTop="25dp"> <!--myOrange is the previous background color-->
+
+
+   <!-- <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/trafycView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.659"
+        app:lottie_autoPlay="true"
+        android:layout_marginTop="20dp"
+        app:lottie_speed="1.0"
+        app:lottie_fileName="load_traffic_lottie.json"
+        app:lottie_loop="true" />
+-->
+
+    <ImageView
+        android:id="@+id/splash_icon"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="TODO"
+        android:paddingTop="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_mem_original"
+        app:layout_constraintBottom_toTopOf="@+id/trafycView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/trafycView"
+        fontPath="fonts/typographica_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="268dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/typographica_regular"
+        android:text="OTrafyc"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:transitionName="splash_screen_to_maps_transition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/splash_icon"
+        tools:ignore="MissingPrefix" />
+
+    <!-- <TextView
+         android:id="@+id/sloganView"
+         android:layout_width="0dp"
+         android:layout_height="30dp"
+         android:layout_marginStart="10dp"
+         android:layout_marginTop="10dp"
+         android:layout_marginBottom="140dp"
+         android:text="Smooth   rides   with   fun"
+         android:textAlignment="center"
+         android:textColor="@color/blue9"
+         android:textSize="18sp"
+         android:textStyle="bold"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="1.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/trafycView"
+         app:layout_constraintVertical_bias="0.6"
+         fontPath="fonts/typographica_regular"
+         tools:ignore="MissingPrefix" />-->     <!--yellowOrange is the previous text color-->
+
+   <!-- <TextView
+        android:id="@+id/welcomeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome !"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/blue4"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trafycView"
+        app:layout_constraintVertical_bias="0.726"
+        tools:ignore="MissingConstraints,MissingPrefix"
+        fontPath="fonts/typographica_regular"/> --><!--americanOrange is the previous text color-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

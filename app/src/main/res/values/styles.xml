@@ -1,0 +1,126 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/blue1</item>  <!--colorPrimaryDark specifies status bar color-->
+        <item name="colorAccent">@color/transparentColor</item>
+
+    </style>
+
+    <!--Navigation menu Theme-->
+    <style name="NavigationTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/blue2</item>
+        <item name="colorControlHighlight">@color/blue10</item> <!--yellowOrange is the previous colorControlHighlight color-->
+    </style>
+
+
+    <!--    bottom sheet theme-->
+
+
+    <!-- custom toolbar theme....."ThemeOverlay.AppCompat.Dark.ActionBar"  gives a white text and icons on toolbar due to the Dark used -->
+    <style name="CustomToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/blue1</item> <!--americanOrange is the previous color-->
+        <item name="android:fontFamily">@font/typographica_regular</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <style name="CustomNavigateDialogStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/White</item> <!--americanOrange is the previous color-->
+        <item name="android:fontFamily">@font/typographica_regular</item>
+
+    </style>
+
+    <style name="CustomToolbarStyle2" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/blue1</item> <!--americanOrange is the previous color-->
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+
+
+
+    <!-- custom options menu item theme ...  previously used  <style name="CustomPopupStyle" parent="Theme.AppCompat.Light.NoActionBar" >
+     ..."Theme.AppCompat.Light.NoActionBar" gives a dark text and icons on toolbar due to the Light used
+       "overlapAnchor" and "android:dropDownVerticalOffset"  makes the options menu drop below toolbar/actionbar
+       -->
+    <style name="CustomPopupStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:background">@color/americanOrange</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">-4dp</item>
+
+    </style>
+
+
+    <style name="ExpandableLayoutButton" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@color/blue1</item>
+    </style>
+
+    <style name="DialogAnimationScale">
+        <item name="android:windowEnterAnimation">@anim/dialog_show_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_close_anim</item>
+    </style>
+
+    <style name="DialogAnimationVerticalSlide">
+        <item name="android:windowEnterAnimation">@anim/slide_up_anim
+        </item>
+        <item name="android:windowExitAnimation">@anim/slide_down_anim</item>
+
+    </style>
+
+    <style name="DialogAnimationHorizontalSlide">
+        <item name="android:windowEnterAnimation">@anim/slide_right_anim
+        </item>
+        <item name="android:windowExitAnimation">@anim/slide_left_anim</item>
+
+    </style>
+
+
+    <style name="DialogAnimationSlideAndDisappear">
+        <item name="android:windowEnterAnimation">@anim/slide_up_anim
+        </item>
+        <item name="android:windowExitAnimation">@anim/dialog_close_anim</item>
+
+    </style>
+
+
+
+
+
+    <style name="ToolbarTitleDarkBackgroundStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/darkBlueBlackColor</item>
+
+       <!-- <item name="titleTextAppearance">@style/ToolbarTitleStyle</item>-->
+
+    </style>
+
+    <style name="ToolbarTitleBlueBackgroundStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/smokyBlack</item>
+
+        <!-- <item name="titleTextAppearance">@style/ToolbarTitleStyle</item>-->
+
+    </style>
+
+
+    <style name="MapTypeImageBackground" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="shapeAppearance">@drawable/map_type_img_background</item>
+        <item name="shapeAppearanceOverlay">@drawable/map_type_img_background</item>
+
+
+    </style>
+
+    <style name="HowToUseImageBackground" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="shapeAppearance">@drawable/how_to_use_imgs_background</item>
+        <item name="shapeAppearanceOverlay">@drawable/how_to_use_imgs_background</item>
+
+
+    </style>
+
+
+
+
+</resources>

@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name" translatable="false">OTrafyc</string>
+    <string name="title_activity_map">Map</string>
+    <string name="motto" translatable="true">Smooth   rides   with   fun</string>
+
+    <string name="google_direction_api">AIzaSyBsqBmV1mQ_FP_YyKkGLHjcc7LkzlET7wk</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="you_are_online" translatable="true">You\'re Online</string>
+    <string name="you_are_offline" translatable="true">You\'re Offline</string>
+    <string name="you_are_offRoad" translatable="true">You\'re Off Road</string>
+    <string name="you_are_onRoad" translatable="true">You\'re On Road</string>
+    <string name="message" translatable="true">Message</string>
+
+
+    <string name="privacypolicyfirstpart" translatable="true">Onim Technologies built OTrafyc app as a free app. This service is provided by Onim Technologies at no cost and it is intended for use as is unless you request for certain paid features.\n\nThis page is used to inform users regarding our policies with the collection, use, and disclosure of non-personal Information if anyone decided to use our Service.\n\nIf you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.\n\nThe terms used in this Privacy Policy have the same meanings as in our Terms of Service, which is accessible at Onim Technologies unless otherwise defined in this Privacy Policy.\n\nWhen we say \"Onim\", \"our\", \"we\", or \"us\", we are talking about Onim Technologies. This Privacy Policy applies to all of our apps, services, features, software unless specified otherwise.</string>
+    <string name="privacy_policy_2nd_part" translatable="true">For a better experience, while using our Service, we may require certain non-personal identifiable information such as your phone\'s IP address . The information that we retrieve will be retained by us and used as described in this privacy policy.\n\nThe app does use third party services that may collect information used to identify you.\n\nLinks to privacy policy of third party service providers used by the app:</string>
+    <string name="onimtechnologies_gmail_com" translatable="false">onimtechnologies@gmail.com</string>
+    <string name="search_countryHint" translatable="true">search country…</string>
+    <string name="select_country_codeText" translatable="true">Select Country code</string>
+    <string name="restart" translatable="true">Restart</string>
+    <string name="update_downloaded" translatable="true">Update is Downloaded. Restart OTrafyc to apply the changes</string>
+    <string name="legend" translatable="true">legend</string>
+    <string name="turn_on_your_device_s_location_access">Turn on your device\'s location access</string>
+    <string name="welcome">welcome</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="move_to_my_location">move to my location</string>
+    <string name="proceed_and_add_moment">proceed and add moment</string>
+    <string name="road_switch">road switch</string>
+    <string name="select_country_code">select country code</string>
+    <string name="where_to">where to</string>
+    <string name="low_no_traffic">Low / No traffic</string>
+    <string name="medium_traffic">Medium Traffic</string>
+    <string name="high_traffic">High Traffic</string>
+    <string name="very_high_traffic">Very High Traffic</string>
+    <string name="navigate">navigate</string>
+    <string name="search">search</string>
+    <string name="map_type">map type</string>
+    <string name="have_feedback_we_are_always_seeking_how_best_we_can_improve_our_services_for_our_users_nplease_don_t_share_sensitive_information">Have feedback? We are always seeking how best we can improve our services for our users.\nPlease don\'t share sensitive information</string>
+    <string name="feedback">Feedback</string>
+    <string name="send_feedback_to">Send feedback to</string>
+    <string name="to">To</string>
+    <string name="subject">Subject</string>
+    <string name="send">SEND</string>
+    <string name="todo">TODO</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="reviews_bug_reports">Reviews? Bug Reports?</string>
+    <string name="your_suggestions">Your Suggestions</string>
+    <string name="tell_us_what_you_think_nsuggest_new_app_features">Tell us what you think\nSuggest new app features</string>
+    <string name="review_otrafyc_in_google_play_store">Review OTrafyc in Google Play Store</string>
+    <string name="rate_amp_review"><![CDATA[Rate & Review]]></string>
+    <string name="let_others_know_your_views">Let others know your views</string>
+    <string name="how_to_use">How to Use</string>
+    <string name="requirements">Requirements</string>
+    <string name="requirement_description">- Active internet connection is required for full functionality \n- Device’s location access should be allowed to get your precise current location with high accuracy</string>
+    <string name="zooming_in_to_current_location">Zooming in to current location</string>
+    <string name="zoom_in_to_your_current_location_point_1">- Click on location button to zoom in to your current location (blue dot indicates where you are)</string>
+    <string name="zoom_in_to_your_current_location_point_2">- Turn on switch located at the bottom left of map screen to zoom in to your current location (this adds a marker to your current location and automatically keeps your location at the center of map)</string>
+    <string name="on_road_and_off_road_modes">On Road and Off Road Modes</string>
+    <string name="on_road_and_off_road_modes_point_1">- Turn on switch to be in On Road mode. This adds a marker to your current location and automatically zooms in and keeps your location at the center of map when driving.</string>
+    <string name="on_road_and_off_road_modes_point_2">- Turn off switch to be in Off Road mode.</string>
+    <string name="on_road_and_off_road_modes_note_this">This removes location marker and allows you to zoom in and out manually with fingers and perform all map swipes and gestures without automatically zooming in to current location.</string>
+    <string name="get_fastest_route_to_destination">Get fastest route to destination</string>
+    <string name="get_fastest_route_to_destination_point_1">- Click on search icon located at the top right of map screen and search place to get fastest route. \n Long tap on map where you want to go and get fastest route.</string>
+    <string name="restrict_search_to_your_country">Restrict search to your country</string>
+    <string name="restrict_search_to_your_country_point_1">- Click on search icon located at the top right of map screen and click on countries icon on the right on search bar and choose your country code</string>
+    <string name="navigate_with_turn_by_turn_direction_guide_to_destination">Navigate with turn by turn direction guide to destination</string>
+    <string name="navigate_with_turn_by_turn_direction_guide_to_destination_point_1">- Click on blue navigation button to choose how you want to navigate after getting fastest route.</string>
+    <string name="add_moment_s_snap_and_share">Add moment(s), snap and share</string>
+    <string name="add_moment_s_snap_and_share_point_1">- Click on orange button and proceed with “YES”. Enter custom title and description, choose an icon and click on Add moment button.</string>
+    <string name="add_moment_s_snap_and_share_point_2">- Click on snap button to automatically take screenshot of map and choose how you like to share.</string>
+    <string name="add_moment_s_snap_and_share_note_this">This features works currently on devices operating on Android version 6 and lower. You can however take screenshot manually using your device’s screenshot feature.</string>
+    <string name="copy_location_coordinates_to_clipboard">Copy location coordinates to clipboard</string>
+    <string name="copy_location_coordinates_to_clipboard_point_1">- Click on orange button to copy location coordinates to clipboard</string>
+    <string name="get_real_time_traffic_update">Get real-time traffic update</string>
+    <string name="get_real_time_traffic_update_point_1">- Click on button with plus(+) sign and click on Traffic On / Off</string>
+    <string name="get_night_map_view">Get night map view</string>
+    <string name="get_night_map_view_point_1">- Click on button with plus(+) sign and click on Night / Day Map</string>
+    <string name="share_location_with_friends_amp_family"><![CDATA[Share location with friends & family]]></string>
+    <string name="share_location_with_friends_amp_family_point_1">- Click on button with plus(+) sign and click on Share Location</string>
+    <string name="share_app_with_friends">Share app with friends</string>
+    <string name="share_app_with_friends_point_1">- Go to menu and click on Invite a Friend and choose how you like to share</string>
+    <string name="send_direct_feedback_and_suggestions">Send direct feedback and suggestions</string>
+    <string name="send_direct_feedback_and_suggestions_point_1">- Go to menu and go to Contact Us section and send us your reviews and app feature suggestions.</string>
+    <string name="send_suggestions_to">Send suggestions to</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="have_suggestion_we_d_love_to_hear_it_we_always_want_to_serve_our_users_well_nplease_don_t_share_sensitive_information">Have suggestion? We\'d love to hear it. We always want to serve our users well.\nPlease don\'t share sensitive information</string>
+
+</resources>

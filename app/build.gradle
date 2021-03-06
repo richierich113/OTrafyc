@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+
+    defaultConfig {
+        applicationId "com.otrafyc.android.traffic.otrafycapp"
+        minSdkVersion 19
+        targetSdkVersion 29
+        // Enabling multidex support.
+        multiDexEnabled true
+        versionCode 11
+        versionName "1.0.3"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            resValue "string", "google_maps_key", "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o"
+        }
+        release {
+            resValue "string", "google_maps_key", "AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74"
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+
+    //implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+
+    //for lottie animations using lottie json files
+    implementation 'com.airbnb.android:lottie:3.4.1'
+     //for material designs and animation designs for editText fields
+    implementation 'com.google.android.material:material:1.2.1'
+
+    //material design
+    implementation 'com.google.android.material:material:1.3.0-rc01'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+
+    //this library is used no more by google
+    //implementation 'com.google.android.gms:play-services-places:17.0.0'
+
+    // new places sdk library
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+
+    // for expandable layout for traffic legend
+    implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
+
+    //for floating action button
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+
+
+    //support design library for androidx
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+
+//    for routing library
+    implementation 'com.github.jd-alexander:library:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.3.1-alpha03'
+
+    // for html textviews used as link
+    implementation 'org.sufficientlysecure:html-textview:4.0'
+
+
+    implementation 'com.google.android.play:core:1.9.1'//for new version updater
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'com.appolica:interactive-info-window:v1.0.6' // for Interactive marker InfoWindow
+
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+
+
+}
+apply plugin: 'com.google.gms.google-services'

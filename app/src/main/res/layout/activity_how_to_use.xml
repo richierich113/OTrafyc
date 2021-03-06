@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:padding="0dp"
+    android:orientation="vertical"
+    tools:context=".HowToUseActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/CustomToolbarStyle2"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp"
+        app:popupTheme="@style/CustomPopupStyle">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/HowToUseBackArrow"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/contact_us_backbuton_onclick_ripple_backgrnd"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="OnBackButtonClick"
+                android:padding="5dp"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="@android:color/white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                android:text="@string/how_to_use"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:scrollbarSize="2dp"
+        android:scrollbarStyle="insideOverlay"
+        android:background="@color/blue12"
+        android:transitionName="menu_to_Activities_transition">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:text="How to Use"
+                android:textColor="@color/smokyBlack"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/requirements"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="1.5dp"
+                android:text="@string/requirement_description"
+                android:textAllCaps="false"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="10dp"
+                android:gravity="center_horizontal"
+                android:text="@string/zooming_in_to_current_location"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="1.5dp"
+                android:text="@string/zoom_in_to_your_current_location_point_1"
+                android:textAllCaps="false"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/location_but"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- <org.sufficientlysecure.htmltextview.HtmlTextView
+                 android:id="@+id/google_play_services"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:textSize="16sp" />
+             <org.sufficientlysecure.htmltextview.HtmlTextView
+                 android:id="@+id/google_analytics_for_firebase"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:textSize="16sp" />
+
+             <org.sufficientlysecure.htmltextview.HtmlTextView
+                 android:id="@+id/firebase_crashlytics"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:textSize="16sp" />
+ -->
+            <!-- <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:text="Google Play Services"
+                 android:textSize="16sp"
+                 android:clickable="true"
+                 android:focusable="true"
+                 android:onClick="openGooglePrivacy"
+                 android:textColor="@color/americanOrange" />-->
+
+            <!-- <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:text="Google Analytics for Firebase"
+                 android:textSize="16sp"
+                 android:onClick="openGoogleAnalyticsPrivacy"
+                 android:clickable="true"
+                 android:focusable="true"
+                 android:textColor="@color/americanOrange" />-->
+
+
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Firebase Crashlytics"
+                android:textSize="16sp"
+                android:onClick="openGoogleCrashlyticsPrivacy"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="@color/americanOrange" />-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/zoom_in_to_your_current_location_point_2"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/on_off_switch"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/on_road_and_off_road_modes"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/on_road_and_off_road_modes_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/on_off_switch"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/on_road_and_off_road_modes_point_2"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text=  "@string/on_road_and_off_road_modes_note_this"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/get_fastest_route_to_destination"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/get_fastest_route_to_destination_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/restrict_search_to_your_country"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/restrict_search_to_your_country_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/country_but"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/navigate_with_turn_by_turn_direction_guide_to_destination"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/navigate_with_turn_by_turn_direction_guide_to_destination_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/navigate"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/add_moment_s_snap_and_share"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_moment_s_snap_and_share_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/orange_mem"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_moment_s_snap_and_share_point_2"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text= "@string/add_moment_s_snap_and_share_note_this"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/map_snapshot"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/copy_location_coordinates_to_clipboard"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/copy_location_coordinates_to_clipboard_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/get_real_time_traffic_update"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/get_real_time_traffic_update_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+
+            <com.google.android.material.card.MaterialCardView
+
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/how_to_use_imgs_background"
+                    android:theme="@style/HowToUseImageBackground"
+
+                    android:src="@drawable/open_float_but"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/get_night_map_view"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/get_night_map_view_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/share_location_with_friends_amp_family"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/share_location_with_friends_amp_family_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/share_app_with_friends"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/share_app_with_friends_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/send_direct_feedback_and_suggestions"
+                android:textColor="@color/smokyBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/send_direct_feedback_and_suggestions_point_1"
+                android:textColor="@color/smokyBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
