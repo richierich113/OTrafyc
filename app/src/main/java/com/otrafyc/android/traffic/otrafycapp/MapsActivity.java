@@ -5953,6 +5953,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+    //set poi click listener
     private void setPoiClick(final GoogleMap map) {
         map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
