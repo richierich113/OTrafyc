@@ -77,6 +77,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.appolica.interactiveinfowindow.InfoWindow;
+import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
@@ -268,7 +270,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     LatLng currentPosition, startPosition, endPosition, destinationLatLng, currentLatLong, poiLatLng;
     private int index, next;
 
-    String mDestination, mDestinationLat, mDestinationLong;
+    String mDestination, mDestinationLat, mDestinationLong, poiLat, poiLong;
 
     String destinationLoc, destinationLong, destinationLat, destinationName;
     String currentLocationLat, currentLocationLong;
@@ -369,6 +371,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
+
+        //interactive fra
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);// making toolbar ur actionBar
@@ -1331,7 +1336,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //String apiKey = getString(R.string.api_key);
         // String apiKey = getResources().getString(R.string.google_maps_key);
 
-        String apiKey = "AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74";
+        String apiKey = "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o";  //AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o....AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74
         if (!Places.isInitialized()) {
             // initialize sdk
             Places.initialize(getApplicationContext(), apiKey);
@@ -1364,7 +1369,11 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         // places.setCountries("GH");
         // Specify the types of places data to return.
         if (places != null) {
-            places.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+            //just added Place.Field.ADDRESS
+            places.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.NAME, Place.Field.LAT_LNG));
+            places.setHint("Where to?");
+            /*places.getSharedElementEnterTransition();
+            places.getSharedElementReturnTransition();*/
         }
         // Set up a PlaceSelectionListener to handle the response
         if (places != null) {
@@ -4110,10 +4119,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                                 mMap.animateCamera(mCameraUpdate);
 
                                 polylineOptions = new PolylineOptions();
-                                polylineOptions.color(getResources().getColor(R.color.quantum_lightblue600));
+                                polylineOptions.color(getResources().getColor(R.color.quantum_lightblue600)); //quantum_lightblue600
                                 polylineOptions.width(15);
                                 polylineOptions.zIndex(10f);
-
                                 polylineOptions.startCap(new RoundCap());
                                 polylineOptions.endCap(new RoundCap());
                                 polylineOptions.jointType(JointType.ROUND);
@@ -4122,7 +4130,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
                                 blackPolylineOptions = new PolylineOptions();
-                                blackPolylineOptions.color(Color.BLACK);
+                                blackPolylineOptions.color(getResources().getColor(R.color.smokyBlack));
                                 blackPolylineOptions.width(10);
                                 blackPolylineOptions.startCap(new SquareCap());
                                 blackPolylineOptions.endCap(new SquareCap());
@@ -4520,6 +4528,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         }
         mMap.setMyLocationEnabled(true);
 
+
         // mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setTrafficEnabled(false);
 
@@ -4690,6 +4699,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     Location TapdestinationLocation = new Location("");
                     TapdestinationLocation.setLatitude(latLng.latitude);
                     TapdestinationLocation.setLongitude(latLng.longitude);
+
+
+                    //float lineDistance = polyLineList.size() - 1;
 
                     float distance = startLocation.distanceTo(TapdestinationLocation);
                     DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
@@ -4879,8 +4891,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     public static Boolean isLocationEnabled(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 // This is new method provided in API 28
-            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            return lm != null && lm.isLocationEnabled();
+            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            return locationManager != null && locationManager.isLocationEnabled();
         } else {
 // This is Deprecated in API 28
             int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
@@ -5032,7 +5044,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                         //setting center to lower with a latitude offset of 0.0026
                         double offset = 0.0026;
-                         camera = new LatLng(mUserMarker.getPosition().latitude + offset, mUserMarker.getPosition().longitude);
+                        camera = new LatLng(mUserMarker.getPosition().latitude + offset, mUserMarker.getPosition().longitude);
 
                         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(camera, 16f));
 
@@ -5059,8 +5071,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));*/
 
 
-
-                         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
                                 .target(camera)
                                 .zoom(16f)
                                 .tilt(50f)
@@ -5622,6 +5633,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
                 }
+
+
             }
         }
 
@@ -5946,7 +5959,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             public void onPoiClick(PointOfInterest poi) {
 
                 poiLatLng = new LatLng(poi.latLng.latitude, poi.latLng.longitude);
-
+                poiLat = String.valueOf(poiLatLng.latitude);
+                poiLong = String.valueOf(poiLatLng.longitude);
+                String poiName =  poi.name;
 
                 if (poiMarker != null) {
                     poiMarker.remove();
@@ -5979,12 +5994,153 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         mBlinkingCardView = false;
                     }
                 }
+                getPoiDirections();
+
+                Location startLocation = new Location("");
+                startLocation.setLatitude(currentPosition.latitude);
+                startLocation.setLongitude(currentPosition.longitude);
+
+                double poiLatD = Double.parseDouble(poiLat);
+                double poiLongD = Double.parseDouble(poiLong);
+                Location poiLocation = new Location("");
+                poiLocation.setLatitude(poiLatD);
+                poiLocation.setLongitude(poiLongD);
+
+
+                float lineDistance = polyLineList.size() - 1;
+
+                float distance = startLocation.distanceTo(poiLocation);
+                DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
+
+                displayOnOffButton.setText(String.format("~ %s km to %s", DecimalPlace.format(distance * 0.001), poiName));
 
 
             }
 
         });
+
+
+    }
+
+    private void getPoiDirections() {
+
+        // poiLatLng = new LatLng(poi.latLng.latitude, poi.latLng.longitude);
+        poiLat = String.valueOf(poiLatLng.latitude);
+        poiLong = String.valueOf(poiLatLng.longitude);
+
+
+        currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+                .target(currentPosition)
+                .zoom(20f)
+                .tilt(70f)
+                .build()));
+
+
+        String requestApi = null;
+
+        try {
+            requestApi = "https://maps.googleapis.com/maps/api/directions/json?" +
+                    "mode=driving&" +
+                    "transit_routing_preference=less_driving&" +
+                    "origin=" + currentPosition.latitude + "," + currentPosition.longitude + "&" +
+                    "destination=" + poiLat + "," + poiLong + "&" +
+                    "key=" + getResources().getString(R.string.google_direction_api);
+
+            Log.d(TAG, requestApi);  // print url for debug
+            mService.getPath(requestApi)
+                    .enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.body().toString());
+
+                                JSONArray jsonArray = jsonObject.getJSONArray("routes");
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject route = jsonArray.getJSONObject(i);
+                                    JSONObject poly = route.getJSONObject("overview_polyline");
+                                    String polyline = poly.getString("points");
+                                    polyLineList = decodePoly(polyline);
+
+                                }
+                                //Adjust Bounds
+                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                                for (LatLng latLng : polyLineList)
+                                    builder.include(latLng);
+                                LatLngBounds bounds = builder.build();
+                                CameraUpdate mCameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 2);
+                                mMap.animateCamera(mCameraUpdate);
+
+                                polylineOptions = new PolylineOptions();
+                                polylineOptions.color(getResources().getColor(R.color.quantum_lightblue600));
+                                polylineOptions.width(15);
+                                polylineOptions.zIndex(10f);
+
+                                polylineOptions.startCap(new RoundCap());
+                                polylineOptions.endCap(new RoundCap());
+                                polylineOptions.jointType(JointType.ROUND);
+                                polylineOptions.addAll(polyLineList);
+                                greyPolyline = mMap.addPolyline(polylineOptions);
+
+
+                                blackPolylineOptions = new PolylineOptions();
+                                blackPolylineOptions.color(Color.BLACK);
+                                blackPolylineOptions.width(10);
+                                blackPolylineOptions.startCap(new SquareCap());
+                                blackPolylineOptions.endCap(new SquareCap());
+                                blackPolylineOptions.jointType(JointType.ROUND);
+                                blackPolyline = mMap.addPolyline(blackPolylineOptions);
+
+                                //destinationMarker1 = mMap.addMarker(new MarkerOptions().position(polyLineList.get(polyLineList.size() - 1)).title("Destination").icon(BitmapDescriptorFactory.fromResource(R.drawable.client)));
+
+                                mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setPosition(polyLineList.get(polyLineList.size() - 1));
+
+
+//                                Animation
+                                ValueAnimator polyLineAnimator = ValueAnimator.ofInt(0, 100);
+                                polyLineAnimator.setDuration(2000);
+                                polyLineAnimator.setInterpolator(new LinearInterpolator());
+                                polyLineAnimator.addUpdateListener(valueAnimator -> {
+                                    List<LatLng> points = greyPolyline.getPoints();
+                                    int percentValue = (int) valueAnimator.getAnimatedValue();
+                                    int size = points.size();
+                                    int newPoints = (int) (size * (percentValue / 100.0f));
+                                    List<LatLng> p = points.subList(0, newPoints);
+                                    greyPolyline.setPoints(p);
+
+
+                                });
+
+                                //Add Animation of car for route
+                                polyLineAnimator.start();
+
+                               /* mUserMarker = mMap.addMarker(new MarkerOptions().position(currentPosition).flat(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.car)));
+                                handler = new Handler();
+                                index = -1;
+                                next = 1;
+                                handler.postDelayed(drawPathRunnable, 3000);
+*/
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(MapsActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
 }
+

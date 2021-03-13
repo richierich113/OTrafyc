@@ -103,12 +103,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+               <!-- <fragment
                     android:id="@+id/interactive_infoWindowMap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:name="com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment"/>
-
+-->
                <!-- <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mapTypeCardView"
                     android:layout_width="40dp"
@@ -507,7 +507,7 @@
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
+
                     android:layout_marginBottom="0dp" />
 
 

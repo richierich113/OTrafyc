@@ -31,7 +31,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
        /* CalligraphyConfig.initDefault(new CalligraphyConfig.Builder().setDefaultFontPath("fonts/typographica_regular.otf")
                      .setFontAttrId(R.attr.fontPath)
                       .build());*/
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_privacy_policy);
 
 
