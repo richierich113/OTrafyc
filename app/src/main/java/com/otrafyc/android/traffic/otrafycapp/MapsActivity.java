@@ -1353,7 +1353,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //String apiKey = getString(R.string.api_key);
         // String apiKey = getResources().getString(R.string.google_maps_key);
 
-        String apiKey = "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o";  //AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o....AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74
+        String apiKey = "";  
         if (!Places.isInitialized()) {
             // initialize sdk
             Places.initialize(getApplicationContext(), apiKey);
