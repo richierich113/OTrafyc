@@ -103,12 +103,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <fragment
+               <!-- <fragment
                     android:id="@+id/interactive_infoWindowMap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:name="com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment"/>
-
+-->
                <!-- <com.google.android.material.card.MaterialCardView
                     android:id="@+id/mapTypeCardView"
                     android:layout_width="40dp"
@@ -137,6 +137,34 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/navigateCardView"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="240dp"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/quantum_lightblue700"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/white">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/navigate"
+                        android:src="@drawable/ic_navigate"
+                        app:tint="@android:color/white" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/poiNavigateCardView"
                     android:layout_width="58dp"
                     android:layout_height="58dp"
                     android:layout_gravity="bottom"
@@ -507,7 +535,7 @@
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
+
                     android:layout_marginBottom="0dp" />
 
 

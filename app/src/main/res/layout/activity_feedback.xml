@@ -64,7 +64,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-                <TextView
+               <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/send_feedback_to"
@@ -80,7 +80,7 @@
                     android:textStyle="italic"
                     android:textColor="@color/blue1"
                     android:alpha="0.7"
-                    android:textIsSelectable="true" />
+                    android:textIsSelectable="true" />-->
 
 
             </LinearLayout>

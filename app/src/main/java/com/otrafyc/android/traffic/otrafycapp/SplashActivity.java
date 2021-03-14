@@ -105,37 +105,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
 
-                boolean firstTime = sharedPreferences.getBoolean("firstTime", true);
-
-                if (firstTime) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("firstTime",false);
-                    editor.apply();
-                    editor.commit();
-
-
-                    Intent intent = new Intent(SplashActivity.this, OnBoardingActivity.class);
-
-                    Pair[] pairs1 = new Pair[1];
-                    pairs1[0] = new Pair<View, String>(OTrafyc, "splash_screen_to_maps_transition");
-
-
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this, pairs1);
-
-
-                        startActivity(intent, options.toBundle());
-                        //means you dnt come back to this activity wen u press back at the subsequent activity
-                        finish();
-
-                    } else {
-
-                        startActivity(intent);
-                        finish();
-                    }
-                }else {
                     Intent intent = new Intent(SplashActivity.this, MapsActivity.class);
 
                     Pair[] pairs1 = new Pair[1];
@@ -156,7 +126,6 @@ public class SplashActivity extends AppCompatActivity {
                         finish();
 
                     }
-                }
 
 
                 finish();
