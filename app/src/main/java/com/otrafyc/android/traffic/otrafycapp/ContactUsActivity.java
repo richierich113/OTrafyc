@@ -131,4 +131,9 @@ public class ContactUsActivity extends AppCompatActivity {
 
 
     }
+
+    public void openFacebook(View view) {
+        Intent facebookIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(""));
+
+    }
 }

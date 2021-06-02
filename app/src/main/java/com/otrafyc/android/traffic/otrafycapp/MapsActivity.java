@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -77,8 +78,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.appolica.interactiveinfowindow.InfoWindow;
-import com.appolica.interactiveinfowindow.fragment.MapInfoWindowFragment;
+
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
@@ -165,6 +165,9 @@ import retrofit2.Response;
 /*GoogleMap.OnMarkerClickListener*/
 public class MapsActivity extends AppCompatActivity implements RoutingListener, OnMapReadyCallback, LocationListener, NavigationView.OnNavigationItemSelectedListener {
 
+
+
+    MaterialCardView search_routeModeLayout;
 
     private static final String REQUESTING_LOCATION_UPDATES_KEY = "";
     //private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
@@ -377,6 +380,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);// making toolbar ur actionBar
+
+
+
+        search_routeModeLayout = findViewById(R.id.search_routeModeLayout);
 
 
         //  dialogs init
@@ -686,6 +693,22 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         locationSettingOnOffLottie = findViewById(R.id.animation_view);
         howToUseIconLottie = findViewById(R.id.how_to_use_icon_lottie);
         howToUseIconLottie.setRepeatCount(200);
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("howToUse", MODE_PRIVATE);
+
+        boolean firstTime = sharedPreferences.getBoolean("firstTime", true);
+
+        if (firstTime) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstTime", false);
+            editor.apply();
+            editor.commit();
+
+            howToUseIconLottie.setVisibility(View.VISIBLE);
+
+        }else howToUseIconLottie.setVisibility(View.GONE);
+
         howToUseIconLottie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1445,6 +1468,13 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
                         getDirection();
+
+
+                        if (autocompleteCardView.getVisibility() ==View.VISIBLE) {
+                            autocompleteCardView.setVisibility(View.GONE);
+                        }
+
+                        search_routeModeLayout.setVisibility(View.VISIBLE);
 
                         if (tapNavigateCardView.getVisibility() == View.VISIBLE) {
                             tapNavigateCardView.setVisibility(View.GONE);

@@ -6,8 +6,8 @@
     <string name="google_direction_api">AIzaSyBsqBmV1mQ_FP_YyKkGLHjcc7LkzlET7wk</string>
 
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="you_are_online" translatable="true">You\'re Online</string>
     <string name="you_are_offline" translatable="true">You\'re Offline</string>
     <string name="you_are_offRoad" translatable="true">You\'re Off Road</string>

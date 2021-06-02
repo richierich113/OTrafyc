@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/blue1</item>  <!--colorPrimaryDark specifies status bar color-->
         <item name="colorAccent">@color/transparentColor</item>
+
+        <!--<item name="android:forceDarkAllowed" tools:targetApi="q" />-->
 
     </style>
 

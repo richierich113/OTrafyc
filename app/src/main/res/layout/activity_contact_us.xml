@@ -336,6 +336,76 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+                app:cardCornerRadius="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:orientation="vertical"
+                    >
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/social"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="0dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/contact_us_gray_ripple_backround"
+                        android:clipChildren="true"
+
+                        android:focusableInTouchMode="false"
+
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="10dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:cardCornerRadius="25dp"
+                            android:layout_centerInParent="true"
+                            app:strokeWidth="2dp"
+                            app:strokeColor="#FF000000"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:background="@drawable/contact_us_gray_ripple_backround"
+                            android:onClick="openFacebook">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_facebook"
+                                android:padding="5dp"/>
+
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+                    </RelativeLayout>
+
+                    <!--<RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_gravity="bottom"
+                        android:gravity="bottom">
+
+                    </RelativeLayout>-->
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
 
         </LinearLayout>
 

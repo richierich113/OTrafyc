@@ -9,6 +9,8 @@
     <color name="memoryIconsYellow">#FFBF0B</color>
 
     <color name="americanOrange">#FE8B02</color>
+
+    <color name="mapOverlay">#11111111</color>
     <color name="transparentColor">#00FF0000</color>
     <color name="myOrange">#FF7700</color>
     <color name="smokyBlack">#0F0F0F</color>
@@ -18,6 +20,8 @@
     <color name="lightgrayColor">#F5F5F5</color>
     <color name="lightgrayColor1">#ECECEC</color>
     <color name="white">#ffffff</color>
+    <color name="quantum_googred200">#ffeda29b</color>
+    <color name="quantum_lightblue600">#039be5</color>
 
     <color name="darkBlueBlackColor">#17263c</color>
 

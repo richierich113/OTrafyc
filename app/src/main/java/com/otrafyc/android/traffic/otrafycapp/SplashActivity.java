@@ -33,10 +33,10 @@ public class SplashActivity extends AppCompatActivity {
 
     //call animations
     Animation topAnim, bottomAnim, welcomeAnim, IconAppearAnim;
-    LottieAnimationView trafficLottie;
+    //LottieAnimationView trafficLottie;
     ConstraintLayout splashConstraintLayout;
 
-    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -133,6 +133,9 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         }, SPLASH_TIME);
+
+
+
     }
 
 
