@@ -102,7 +102,8 @@
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="9">
 
 
                <!-- <com.google.android.material.card.MaterialCardView
@@ -558,7 +559,7 @@
 
 
                 </com.google.android.material.card.MaterialCardView>-->
-                 <include layout="@layout/search_route_modes"/>
+                 <!--<include layout="@layout/search_route_modes"/>-->
 
 
                 <com.google.android.material.card.MaterialCardView
@@ -811,6 +812,17 @@
 
             </FrameLayout>
 
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_weight="1"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+            </com.google.android.gms.ads.AdView>
 
         </LinearLayout>
 
@@ -819,7 +831,7 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"

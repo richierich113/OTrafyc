@@ -62,6 +62,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="9"
         android:transitionName="menu_to_Activities_transition">
 
         <LinearLayout
@@ -370,6 +371,7 @@
                         android:paddingEnd="10dp">
 
                         <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/facebookPageCard"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             app:cardCornerRadius="25dp"
@@ -411,6 +413,18 @@
 
 
     </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+    </com.google.android.gms.ads.AdView>
 
 
 </LinearLayout>

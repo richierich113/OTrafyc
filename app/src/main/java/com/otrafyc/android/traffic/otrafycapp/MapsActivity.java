@@ -87,6 +87,11 @@ import com.directions.route.RoutingListener;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.google.android.datatransport.BuildConfig;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -167,7 +172,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
 
-    MaterialCardView search_routeModeLayout;
+    //MaterialCardView search_routeModeLayout;
 
     private static final String REQUESTING_LOCATION_UPDATES_KEY = "";
     //private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
@@ -294,6 +299,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     private static final int REQ_CODE_VERSION_UPDATE = 530;
     AppUpdateManager appUpdateManager;
     private InstallStateUpdatedListener installStateUpdatedListener;
+    private AdView mAdView;
 
 
 
@@ -355,6 +361,17 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_maps);
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         // lock screen orientation to portrait ...works when placed after setContentView
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
@@ -383,7 +400,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
 
-        search_routeModeLayout = findViewById(R.id.search_routeModeLayout);
+        //search_routeModeLayout = findViewById(R.id.search_routeModeLayout);
 
 
         //  dialogs init
@@ -852,7 +869,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     places.setCountries(arrayAdapter.getItem(position));
 
                     countryCodeSearchDialog.dismiss();
-                    Snackbar.make(Objects.requireNonNull(mapFragment.getView()), "Place search queries limited to: " + arrayAdapter.getItem(position), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mapFragment.requireView(), "Place search queries limited to: " + arrayAdapter.getItem(position), Snackbar.LENGTH_LONG).show();
 
                 }
             });
@@ -862,7 +879,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
         drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigationView);
         wholeScreen = findViewById(R.id.mapScreenLayout);
 
 
@@ -1238,7 +1255,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         toggle.syncState();
 
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
+        NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -1286,7 +1303,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     startLocationUpdates();
                     displayLocation();
 
-                    Snackbar.make(Objects.requireNonNull(mapFragment.getView()), " You are Online... On the Road? Drive safely", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mapFragment.requireView(), " You are Online... On the Road? Drive safely", Snackbar.LENGTH_LONG).show();
 
                     displayOnOffButton.setText(R.string.you_are_onRoad);
 
@@ -1348,7 +1365,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     }*/
 
 
-                    Snackbar.make(Objects.requireNonNull(mapFragment.getView()), "You are Offline...off the Road? Stay safe", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mapFragment.requireView(), "You are Offline...off the Road? Stay safe", Snackbar.LENGTH_LONG).show();
 
 
                     displayOnOffButton.setText(R.string.you_are_offRoad);
@@ -1376,7 +1393,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //String apiKey = getString(R.string.api_key);
         // String apiKey = getResources().getString(R.string.google_maps_key);
 
-        String apiKey = "";  
+        String apiKey = "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o";
         if (!Places.isInitialized()) {
             // initialize sdk
             Places.initialize(getApplicationContext(), apiKey);
@@ -1474,7 +1491,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                             autocompleteCardView.setVisibility(View.GONE);
                         }
 
-                        search_routeModeLayout.setVisibility(View.VISIBLE);
+                        //search_routeModeLayout.setVisibility(View.VISIBLE);
 
                         if (tapNavigateCardView.getVisibility() == View.VISIBLE) {
                             tapNavigateCardView.setVisibility(View.GONE);
@@ -4370,6 +4387,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         switch (requestCode) {
             case MY_PERMISSION_REQUEST_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

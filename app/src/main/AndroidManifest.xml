@@ -39,7 +39,8 @@
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,6 +59,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" /> <!-- "com.google.android.maps.v2.API_KEY" -->
         <!-- "com.google.android.geo.API_KEY" -->
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7732231090579598~6197941529"/>
+
+
+
         <activity
             android:name=".MapsActivity"
             android:configChanges="orientation"
