@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:padding="0dp"
     android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".HowToUseActivity">
 
     <com.google.android.material.card.MaterialCardView
@@ -17,6 +17,7 @@
         app:cardCornerRadius="0dp"
         app:cardElevation="4dp"
         app:popupTheme="@style/CustomPopupStyle">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,13 +56,15 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="9"
         android:alpha="0.8"
+        android:background="@color/blue12"
         android:scrollbarSize="2dp"
         android:scrollbarStyle="insideOverlay"
-        android:background="@color/blue12"
         android:transitionName="menu_to_Activities_transition">
 
         <LinearLayout
@@ -111,6 +114,7 @@
                 android:textColor="@color/smokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,25 +128,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/location_but"
 
-                    android:src="@drawable/location_but"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -212,29 +216,27 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/on_off_switch"
 
-                    android:src="@drawable/on_off_switch"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
-
-
 
 
             <TextView
@@ -258,25 +260,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/on_off_switch"
 
-                    android:src="@drawable/on_off_switch"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -293,7 +295,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text=  "@string/on_road_and_off_road_modes_note_this"
+                android:text="@string/on_road_and_off_road_modes_note_this"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -336,25 +338,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/country_but"
 
-                    android:src="@drawable/country_but"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -381,25 +383,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/navigate"
 
-                    android:src="@drawable/navigate"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -425,25 +427,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/orange_mem"
 
-                    android:src="@drawable/orange_mem"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -459,7 +461,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text= "@string/add_moment_s_snap_and_share_note_this"
+                android:text="@string/add_moment_s_snap_and_share_note_this"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -468,28 +470,27 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/map_snapshot"
 
-                    android:src="@drawable/map_snapshot"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
-
 
 
             <TextView
@@ -532,25 +533,25 @@
 
                 android:layout_width="102dp"
                 android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="4dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="2dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_gravity="center_horizontal">
+                app:strokeWidth="2dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/how_to_use_imgs_background"
-                    android:theme="@style/HowToUseImageBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/open_float_but"
 
-                    android:src="@drawable/open_float_but"/>
+                    android:theme="@style/HowToUseImageBackground" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -625,13 +626,25 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
 
 
         </LinearLayout>
 
 
     </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+    </com.google.android.gms.ads.AdView>
 
 
 </LinearLayout>

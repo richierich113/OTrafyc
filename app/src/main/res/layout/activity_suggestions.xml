@@ -26,6 +26,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="9"
         android:padding="20dp">
 
         <LinearLayout
@@ -234,6 +235,17 @@
 
     </ScrollView>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+    </com.google.android.gms.ads.AdView>
 
 
 </LinearLayout>

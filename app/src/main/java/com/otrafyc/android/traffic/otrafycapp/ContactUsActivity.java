@@ -11,16 +11,27 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.card.MaterialCardView;
 
 public class ContactUsActivity extends AppCompatActivity {
 
 
+    AdView mAdView;
     RelativeLayout feedbackLayout, suggestionsLayout;
 
     TextView feedbackSubText, feedbackHead, suggestionsSubText, suggestionsHead;
     ImageView feedbackImg, suggestionsImg;
+
+
 
     /*@Override
     protected void attachBaseContext(Context newBase) {
@@ -34,9 +45,19 @@ public class ContactUsActivity extends AppCompatActivity {
        /* CalligraphyConfig.initDefault(new CalligraphyConfig.Builder().setDefaultFontPath("fonts/typographica_regular.otf")
         .setFontAttrId(R.attr.fontPath)
         .build());*/
-       //getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-         setContentView(R.layout.activity_contact_us);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        setContentView(R.layout.activity_contact_us);
 
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         feedbackLayout = findViewById(R.id.feedback_rel);
@@ -51,7 +72,6 @@ public class ContactUsActivity extends AppCompatActivity {
         suggestionsImg = findViewById(R.id.suggestions_img);
 
 
-
     }
 
     public void openSuggestionsPage(View view) {
@@ -59,24 +79,20 @@ public class ContactUsActivity extends AppCompatActivity {
 
 
         Pair[] pairs = new Pair[3];
-        pairs[0] = new Pair<View, String>(suggestionsImg,"contactUs_to_suggestions_img_transition");
-        pairs[1] = new Pair<View, String>(suggestionsHead,"contactUs_to_suggestions_title_transition");
-        pairs[2] = new Pair<View, String>(suggestionsSubText,"contactUs_to_suggestions_form_transition");
+        pairs[0] = new Pair<View, String>(suggestionsImg, "contactUs_to_suggestions_img_transition");
+        pairs[1] = new Pair<View, String>(suggestionsHead, "contactUs_to_suggestions_title_transition");
+        pairs[2] = new Pair<View, String>(suggestionsSubText, "contactUs_to_suggestions_form_transition");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ContactUsActivity.this,pairs);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ContactUsActivity.this, pairs);
 
 
             startActivity(suggestionsIntent, options.toBundle());
-        }else {
+        } else {
 
             startActivity(suggestionsIntent);
 
         }
-
-
-
-
 
 
     }
@@ -85,23 +101,21 @@ public class ContactUsActivity extends AppCompatActivity {
         Intent feedbackIntent = new Intent(ContactUsActivity.this, FeedbackActivity.class);
 
         Pair[] pairs = new Pair[3];
-        pairs[0] = new Pair<View, String>(feedbackImg,"contactUs_to_feedback_img_transition");
-        pairs[1] = new Pair<View, String>(feedbackHead,"contactUs_to_feedback_title_transition");
-        pairs[2] = new Pair<View, String>(feedbackSubText,"contactUs_to_feedback_form_transition");
+        pairs[0] = new Pair<View, String>(feedbackImg, "contactUs_to_feedback_img_transition");
+        pairs[1] = new Pair<View, String>(feedbackHead, "contactUs_to_feedback_title_transition");
+        pairs[2] = new Pair<View, String>(feedbackSubText, "contactUs_to_feedback_form_transition");
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ContactUsActivity.this,pairs);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ContactUsActivity.this, pairs);
 
 
             startActivity(feedbackIntent, options.toBundle());
-        }else {
+        } else {
 
             startActivity(feedbackIntent);
 
         }
-
-
 
 
     }
@@ -133,7 +147,29 @@ public class ContactUsActivity extends AppCompatActivity {
     }
 
     public void openFacebook(View view) {
-        Intent facebookIntent = new Intent(Intent.ACTION_VIEW,Uri.parse(""));
+
+
+
+        try {
+            Uri fbUri = Uri.parse("https://web.facebook.com/OnimTechnologies");
+            Intent facebookIntent = new Intent(Intent.ACTION_VIEW, fbUri);
+            facebookIntent.setPackage("com.facebook.katana");
+            startActivity(facebookIntent);
+              /*  if (TapNavigateWithWazeIntent.resolveActivity(getPackageManager()) != null) {
+
+                    TapNavigateWithWazeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
+            //}
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Facebook is not installed on your device... \nPlease Install Facebook to handle task", Toast.LENGTH_SHORT).show();
+            Uri facebookIntentUri = Uri.parse("https://play.google.com/store/apps/details?id=com.facebook.katana");
+            Intent facebookIntent1 = new Intent(Intent.ACTION_VIEW, facebookIntentUri);
+
+            facebookIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(facebookIntent1);
+
+
+        }
 
     }
 }

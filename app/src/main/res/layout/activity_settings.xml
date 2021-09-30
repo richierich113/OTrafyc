@@ -62,6 +62,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="9"
         android:scrollbarSize="2dp"
         android:scrollbarStyle="insideOverlay"
         android:transitionName="menu_to_Activities_transition">
@@ -111,7 +112,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="0dp"
-                            android:layout_toEndOf="@+id/feedback_img"
+
                             android:padding="2dp"
                             android:text="Location accuracy"
                             android:textColor="@color/smokyBlack"
@@ -174,7 +175,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="0dp"
-                            android:layout_toEndOf="@+id/feedback_img"
+
                             android:padding="2dp"
                             android:text="Location settings"
                             android:textColor="@color/smokyBlack"
@@ -227,7 +228,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="0dp"
-                            android:layout_toEndOf="@+id/suggestions_img"
+
                             android:padding="2dp"
                             android:text="Privacy Policy"
                             android:textColor="@color/smokyBlack"
@@ -278,7 +279,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="0dp"
-                            android:layout_toEndOf="@+id/suggestions_img"
+
                             android:padding="2dp"
                             android:text="Terms of Service"
                             android:textColor="@color/smokyBlack"
@@ -363,7 +364,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="0dp"
-                            android:layout_toEndOf="@+id/review_img"
+
                             android:padding="2dp"
                             android:text="OTrafyc"
                             android:textColor="@color/smokyBlack"
@@ -373,7 +374,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_below="@+id/otrafyc_head"
-                            android:layout_toEndOf="@+id/review_img"
+
                             android:text="©2021 Onim Technologies"
                             android:textAllCaps="false"
                             android:textColor="@color/grayColor"
@@ -413,7 +414,7 @@
                             android:layout_below="@+id/review_head"
                             android:layout_marginStart="0dp"
                             android:layout_marginBottom="20dp"
-                            android:text="1.0.4"
+                            android:text="@string/_1_1_2"
                             android:textAllCaps="false"
                             android:textColor="@color/grayColor"
                             android:textSize="14sp" />
@@ -432,5 +433,16 @@
 
     </ScrollView>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
