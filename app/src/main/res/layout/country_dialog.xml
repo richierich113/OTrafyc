@@ -42,7 +42,7 @@
                     android:onClick="showHelpMessage"
                     android:padding="5dp"
                     android:src="@drawable/ic_help_question_mark"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
             </LinearLayout>
 
             <EditText

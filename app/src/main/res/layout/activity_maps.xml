@@ -16,6 +16,9 @@
         android:transitionName="splash_screen_to_maps_transition">
 
 
+
+
+
         <LinearLayout
             android:id="@+id/fullScreen_layout"
             android:layout_width="match_parent"
@@ -102,8 +105,7 @@
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="9">
+                android:layout_height="match_parent">
 
 
                <!-- <com.google.android.material.card.MaterialCardView
@@ -265,7 +267,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:contentDescription="TODO"
+                        android:contentDescription="@string/todo"
                         android:src="@drawable/ic_navigate"
                         app:tint="@android:color/white" />
 
@@ -334,8 +336,8 @@
                                         android:layout_height="3dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_margin="5dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="5dp"
+                                        android:layout_marginStart="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="@color/veryHighTrafficColor" />
 
                                     <TextView
@@ -361,8 +363,8 @@
                                         android:layout_height="3dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_margin="5dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="5dp"
+                                        android:layout_marginStart="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="#ff0000" />
 
                                     <TextView
@@ -415,8 +417,8 @@
                                         android:layout_height="3dp"
                                         android:layout_gravity="center_vertical"
                                         android:layout_margin="5dp"
-                                        android:layout_marginLeft="2dp"
-                                        android:layout_marginRight="5dp"
+                                        android:layout_marginStart="2dp"
+                                        android:layout_marginEnd="5dp"
                                         android:background="@color/switchBasePressColor" />
 
                                     <TextView
@@ -794,6 +796,7 @@
                                 android:layout_height="60dp"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginEnd="5dp"
+                                android:visibility="gone"
                                 android:layout_weight="2"
                                 android:clickable="true"
                                 android:contentDescription="@string/proceed_and_add_moment"
@@ -812,7 +815,7 @@
 
             </FrameLayout>
 
-            <com.google.android.gms.ads.AdView
+            <!--<com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"
                 android:layout_weight="1"
@@ -822,7 +825,7 @@
 
                 ads:adSize="SMART_BANNER"
                 ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
-            </com.google.android.gms.ads.AdView>
+            </com.google.android.gms.ads.AdView>-->
 
         </LinearLayout>
 

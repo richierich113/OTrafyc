@@ -25,10 +25,19 @@
         android:roundIcon="@mipmap/ic_mem_blue_icon_white_stroke_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7732231090579598~6197941529"/>
+
+
         <activity android:name=".HowToUseActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".TermsActivity" />
         <activity android:name=".PrivacyPolicyActivity" />
+
+
+
         <activity
             android:name=".FeedbackActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -61,9 +70,6 @@
         <!-- "com.google.android.geo.API_KEY" -->
 
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7732231090579598~6197941529"/>
 
 
 

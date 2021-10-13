@@ -78,7 +78,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:text="Onim \nPrivacy Policy"
+                android:text="@string/onim_nprivacy_policy"
                 android:textSize="30sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold" />
@@ -89,7 +89,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:text="Last Updated:January, 2021"
+                android:text="@string/last_updated_january_2021"
                 android:textSize="16sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/smokyBlack"
-                android:text="Information Collection and Use"
+                android:text="@string/information_collection_and_use"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -140,6 +140,13 @@
 
             <org.sufficientlysecure.htmltextview.HtmlTextView
                 android:id="@+id/firebase_crashlytics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                />
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/google_admob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -184,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Log Data"
+                android:text="@string/log_data"
                 android:textSize="20sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold" />
@@ -196,14 +203,14 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="Onim wants to inform you our user that whenever you use our Service, in case of an error in the app, we collect certain system data and information (through third party products) on your device called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics. We collect this data to help us in addressing technical issues to further improve our Services." />
+                android:text="@string/onim_wants_to_inform_you_our_user_that_whenever_you_use_our_service_in_case_of_an_error_in_the_app_we_collect_certain_system_data_and_information_through_third_party_products_on_your_device_called_log_data_this_log_data_may_include_information_such_as_your_device_internet_protocol_ip_address_device_name_operating_system_version_the_configuration_of_the_app_when_utilizing_our_service_the_time_and_date_of_your_use_of_the_service_and_other_statistics_we_collect_this_data_to_help_us_in_addressing_technical_issues_to_further_improve_our_services" />
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Cookies"
+                android:text="@string/cookies"
                 android:textSize="20sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold" />
@@ -214,13 +221,13 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.\n\nThis Service does not use these “cookies” explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service."/>
+                android:text="@string/cookies_are_files_with_a_small_amount_of_data_that_are_commonly_used_as_anonymous_unique_identifiers_these_are_sent_to_your_browser_from_the_websites_that_you_visit_and_are_stored_on_your_device_s_internal_memory_n_nthis_service_does_not_use_these_cookies_explicitly_however_the_app_may_use_third_party_code_and_libraries_that_use_cookies_to_collect_information_and_improve_their_services_you_have_the_option_to_either_accept_or_refuse_these_cookies_and_know_when_a_cookie_is_being_sent_to_your_device_if_you_choose_to_refuse_our_cookies_you_may_not_be_able_to_use_some_portions_of_this_service"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Service Providers"
+                android:text="@string/service_providers"
                 android:textColor="@color/smokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -231,19 +238,14 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="We may employ third-party companies and individuals due to the following reasons:
-                \n\nTo facilitate our Service
-                 \nTo provide Services on our behalf
-                 \nTo perform Service-related services
-                 \nTo assist us in analyzing how our Service is used
-                 \n\nWe want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose."/>
+                android:text="@string/we_may_employ_third_party_companies_and_individuals_due_to_the_following_reasons_n_nto_facilitate_our_service_nto_provide_services_on_our_behalf_nto_perform_service_related_services_nto_assist_us_in_analyzing_how_our_service_is_used_n_nwe_want_to_inform_users_of_this_service_that_these_third_parties_have_access_to_your_personal_information_the_reason_is_to_perform_the_tasks_assigned_to_them_on_our_behalf_however_they_are_obligated_not_to_disclose_or_use_the_information_for_any_other_purpose"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/smokyBlack"
-                android:text="Security"
+                android:text="@string/security"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -253,13 +255,13 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="We value your trust in providing us your Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security."/>
+                android:text="@string/we_value_your_trust_in_providing_us_your_information_thus_we_are_striving_to_use_commercially_acceptable_means_of_protecting_it_but_remember_that_no_method_of_transmission_over_the_internet_or_method_of_electronic_storage_is_100_secure_and_reliable_and_we_cannot_guarantee_its_absolute_security"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Links to Other Sites"
+                android:text="@string/links_to_other_sites"
                 android:textColor="@color/smokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -270,14 +272,14 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services."/>
+                android:text="@string/this_service_may_contain_links_to_other_sites_if_you_click_on_a_third_party_link_you_will_be_directed_to_that_site_note_that_these_external_sites_are_not_operated_by_us_therefore_we_strongly_advise_you_to_review_the_privacy_policy_of_these_websites_we_have_no_control_over_and_assume_no_responsibility_for_the_content_privacy_policies_or_practices_of_any_third_party_sites_or_services"/>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Children’s Privacy"
+                android:text="@string/children_s_privacy"
                 android:textColor="@color/smokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -289,7 +291,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="The Services comply with the Children's Online Privacy Protection Act. Onim does not knowingly collect personal information from children under the age of 13 through the Services. In the event that a user identifies himself or herself as a child under the age of 13 in connection with any of our Services, we will not collect, store or use any personal information of such user. In addition, if Onim receives personal information provided by a child under the age of 13, the information will promptly be deleted in a secure manner. Further, if any user, being a parent or guardian realizes that his or her child under the age of 13 has provided us with his or her personal information, such user should please contact us so that we will be able to take the necessary action."/>
+                android:text="@string/the_services_comply_with_the_children_s_online_privacy_protection_act_onim_does_not_knowingly_collect_personal_information_from_children_under_the_age_of_13_through_the_services_in_the_event_that_a_user_identifies_himself_or_herself_as_a_child_under_the_age_of_13_in_connection_with_any_of_our_services_we_will_not_collect_store_or_use_any_personal_information_of_such_user_in_addition_if_onim_receives_personal_information_provided_by_a_child_under_the_age_of_13_the_information_will_promptly_be_deleted_in_a_secure_manner_further_if_any_user_being_a_parent_or_guardian_realizes_that_his_or_her_child_under_the_age_of_13_has_provided_us_with_his_or_her_personal_information_such_user_should_please_contact_us_so_that_we_will_be_able_to_take_the_necessary_action"/>
 
 
             <TextView
@@ -297,7 +299,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/smokyBlack"
-                android:text="Changes to This Privacy Policy"
+                android:text="@string/changes_to_this_privacy_policy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -308,14 +310,14 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="Onim may update this Privacy Policy from time to time and at Onim's sole discretion. Thus, you are advised to review this page periodically for any changes. We may notify you of any changes by posting the new Privacy Policy on this page"/>
+                android:text="@string/onim_may_update_this_privacy_policy_from_time_to_time_and_at_onim_s_sole_discretion_thus_you_are_advised_to_review_this_page_periodically_for_any_changes_we_may_notify_you_of_any_changes_by_posting_the_new_privacy_policy_on_this_page"/>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Contact Us"
+                android:text="@string/contact_us"
                 android:textColor="@color/smokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -329,7 +331,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/smokyBlack"
         android:textSize="16sp"
-        android:text="Have questions or legal concerns about our privacy policy?"/>
+        android:text="@string/have_questions_or_legal_concerns_about_our_privacy_policy"/>
 
     <TextView
         android:id="@+id/contactUsText"
@@ -338,7 +340,7 @@
         android:layout_marginTop="1.5dp"
         android:layout_marginBottom="50dp"
 
-        android:text="Contact Us"
+        android:text="@string/contact_us"
         android:textSize="16sp"
         android:clickable="true"
         android:focusable="true"

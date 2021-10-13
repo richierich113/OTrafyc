@@ -23,7 +23,7 @@
             android:src="@drawable/ic_destination"
             android:layout_gravity="center_vertical"
             app:tint="@color/blue1"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/todo" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -37,17 +37,17 @@
                 android:id="@+id/txtMarkerInfoWindowTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pickup Point"
+                android:text="@string/pickup_point"
                 android:textColor="@color/layoutRegisterColor"
                 android:textStyle="bold"
-                android:layout_weight="10"/>
+                />
 
 
                 <TextView
                     android:id="@+id/txtInfoWindowSnippet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="optional"
+                    android:text="@string/optional"
                     android:textStyle="italic"
                     android:textColor="@color/layoutRegisterColor" />
 

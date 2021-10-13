@@ -36,12 +36,12 @@
                     android:src="@drawable/ic_mem_black"
                     android:layout_gravity="center"
                     android:alpha="0.9"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trafyc"
+                    android:text="@string/trafyc"
                     android:fontFamily="@font/typographica_regular"
                     android:layout_marginStart="-1dp"
                     android:layout_gravity="center_vertical"
@@ -53,10 +53,24 @@
             </LinearLayout>
 
 
+
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+
+                ads:adSize="MEDIUM_RECTANGLE"
+                ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
+            </com.google.android.gms.ads.AdView>
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Do you want to exit OTrafyc?"
+                android:text="@string/do_you_want_to_exit_otrafyc"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
@@ -83,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:textStyle="normal"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
@@ -97,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="10dp"
-                    android:text="Exit"
+                    android:text="@string/exit"
                     android:textStyle="bold"
                     android:textAllCaps="true"
                     android:textColor="@color/White"

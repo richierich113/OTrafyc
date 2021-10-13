@@ -25,7 +25,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
     AdView mAdView;
 
     TextView contactUsText;
-    HtmlTextView GooglePlayServicesLink, GoogleAnalyticsFirebaseLink, FirebaseCrashlyticsLink;
+    HtmlTextView GooglePlayServicesLink, GoogleAnalyticsFirebaseLink, FirebaseCrashlyticsLink,GoogleAdmobLink;
 
    /* @Override
     protected void attachBaseContext(Context newBase) {
@@ -60,6 +60,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         GooglePlayServicesLink = findViewById(R.id.google_play_services);
         GoogleAnalyticsFirebaseLink = findViewById(R.id.google_analytics_for_firebase);
         FirebaseCrashlyticsLink = findViewById(R.id.firebase_crashlytics);
+        GoogleAdmobLink = findViewById(R.id.google_admob);
 
 
         GooglePlayServicesLink.setHtml("<font color='blue'><a href='https://policies.google.com/privacy'>Google Play Services</a></font>");
@@ -88,6 +89,21 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        GoogleAdmobLink.setHtml("<font color='blue'><a href='https://policies.google.com/privacy?hl=en&gl=US'>Google Admob </a></font>");
+
+        GoogleAdmobLink.setOnClickATagListener(new OnClickATagListener() {
+            @Override
+            public boolean onClick(View widget, String spannedText, @Nullable String href) {
+                return false;
+            }
+        });
+
+
+
+
+
+
     }
 
     public void OnBackButtonClick(View view) {

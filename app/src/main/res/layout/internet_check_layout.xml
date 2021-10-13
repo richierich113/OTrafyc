@@ -35,7 +35,7 @@
         android:layout_marginTop="10dp"
 
         app:tint="@color/quantum_googred"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
 </LinearLayout>
 
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Internet is required for full map functionality"
+                android:text="@string/internet_is_required_for_full_map_functionality"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="No Thanks"
+                    android:text="@string/no_thanks"
                     android:textStyle="normal"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="10dp"
-                    android:text="Connect"
+                    android:text="@string/connect"
                     android:textStyle="bold"
                     android:textAllCaps="true"
                     android:textColor="@color/White"

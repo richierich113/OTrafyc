@@ -37,7 +37,7 @@
                 android:onClick="OnBackButtonClick"
                 android:src="@drawable/ic_back_arrow"
                 app:tint="@android:color/white"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/todo" />
 
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
                android:gravity="center"
-                android:text="Terms of Service"
+                android:text="@string/terms_of_service"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -77,7 +77,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:text="Onim \nTerms of Service"
+                android:text="@string/onim_nterms_of_service"
                 android:textSize="30sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold" />
@@ -87,7 +87,7 @@
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:text="Last Updated: January, 2021"
+                android:text="@string/last_updated_january_2021"
                 android:textSize="16sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold"
@@ -98,12 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="1.5dp"
-                android:text="By downloading, installing, accessing or using our apps, services, features, or software, then you agree to our  terms of service which will automatically apply to you. You should make sure therefore that you read them carefully before using our services. You’re not allowed to copy, or modify the app, any part of the app, or our trademarks in any way. You’re not allowed to attempt to extract the source code of the app, and you also should not try to translate the app into other languages, or make derivative versions. The app itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Onim Technologies.
-                \n\nOnim is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you’re paying for.
-                \n\nThe OTrafyc app stores and processes personal data that you have provided to us, in order to provide our Service. It’s your responsibility to keep your phone and access to the app secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device. It could make your phone vulnerable to malware/viruses/malicious programs, compromise your phone’s security features and it could mean that the OTrafyc app won’t work properly or at all.
-                \n\nThe app does use third party services that declare their own Terms and Conditions.
-                \nLink to Terms and Conditions of third party service providers used by the app:
-"
+                android:text="@string/by_downloading_installing_accessing_or_using_our_apps_services_features_or_software_then_you_agree_to_our_terms_of_service_which_will_automatically_apply_to_you_you_should_make_sure_therefore_that_you_read_them_carefully_before_using_our_services_you_re_not_allowed_to_copy_or_modify_the_app_any_part_of_the_app_or_our_trademarks_in_any_way_you_re_not_allowed_to_attempt_to_extract_the_source_code_of_the_app_and_you_also_should_not_try_to_translate_the_app_into_other_languages_or_make_derivative_versions_the_app_itself_and_all_the_trade_marks_copyright_database_rights_and_other_intellectual_property_rights_related_to_it_still_belong_to_onim_technologies_n_nonim_is_committed_to_ensuring_that_the_app_is_as_useful_and_efficient_as_possible_for_that_reason_we_reserve_the_right_to_make_changes_to_the_app_or_to_charge_for_its_services_at_any_time_and_for_any_reason_we_will_never_charge_you_for_the_app_or_its_services_without_making_it_very_clear_to_you_exactly_what_you_re_paying_for_n_nthe_otrafyc_app_stores_and_processes_personal_data_that_you_have_provided_to_us_in_order_to_provide_our_service_it_s_your_responsibility_to_keep_your_phone_and_access_to_the_app_secure_we_therefore_recommend_that_you_do_not_jailbreak_or_root_your_phone_which_is_the_process_of_removing_software_restrictions_and_limitations_imposed_by_the_official_operating_system_of_your_device_it_could_make_your_phone_vulnerable_to_malware_viruses_malicious_programs_compromise_your_phone_s_security_features_and_it_could_mean_that_the_otrafyc_app_won_t_work_properly_or_at_all_n_nthe_app_does_use_third_party_services_that_declare_their_own_terms_and_conditions_nlink_to_terms_and_conditions_of_third_party_service_providers_used_by_the_app"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
                 android:textAllCaps="true"/>
@@ -176,12 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:lineSpacingExtra="1.5dp"
-                android:text="You should be aware that there are certain things that Onim will not take responsibility for. Certain functions of the app will require your device to have an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider, but Onim cannot take responsibility for the app not working at it's full functionality if you don’t have access to Wi-Fi, and you don’t have any of your data allowance left.
-                \n\nIf you’re using the app outside of an area with Wi-Fi, you should remember that your terms of the agreement with your mobile network provider will still apply. As a result, you may be charged by your mobile provider for the cost of data for the duration of the connection while accessing the app, or other third party charges. In using the app, you’re accepting responsibility for any such charges, including roaming data charges if you use the app outside of your home territory (i.e. region or country) without turning off data roaming. If you are not the bill payer for the device on which you’re using the app, please be aware that we assume that you have received permission from the bill payer for using the app.
-                \n\nAlong the same line, Onim cannot always take responsibility for the way you use the app i.e. You need to make sure that your device stays charged. If it runs out of battery and you can’t turn it on to avail the Service,Onim cannot accept responsibility.
-                \n\nWith respect to Onim's responsibility for your use of the app, when you’re using the app, it’s important to bear in mind that although we endeavour to ensure that it is updated and correct at all times, we do rely on third parties to provide information to us so that we can make it available to you. Onim accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the app.
-                \n\nWhile using OTrafyc app, pay full attention to the road as you drive and abide by all the road regulations and take full responsibility of your safety even as you use our service. Adding and sharing moments while you drive is strictly prohibited.
-                \n\nAt some point, we may wish to update the app. The app is currently available on Android. The requirements for system(and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need to download the updates if you want to keep using the app. Onim does not promise that it will always update the app so that it is relevant to you and/or works with the Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you. Unless we tell you otherwise, upon any termination;"
+                android:text="@string/you_should_be_aware_that_there_are_certain_things_that_onim_will_not_take_responsibility_for_certain_functions_of_the_app_will_require_your_device_to_have_an_active_internet_connection_the_connection_can_be_wi_fi_or_provided_by_your_mobile_network_provider_but_onim_cannot_take_responsibility_for_the_app_not_working_at_it_s_full_functionality_if_you_don_t_have_access_to_wi_fi_and_you_don_t_have_any_of_your_data_allowance_left_n_nif_you_re_using_the_app_outside_of_an_area_with_wi_fi_you_should_remember_that_your_terms_of_the_agreement_with_your_mobile_network_provider_will_still_apply_as_a_result_you_may_be_charged_by_your_mobile_provider_for_the_cost_of_data_for_the_duration_of_the_connection_while_accessing_the_app_or_other_third_party_charges_in_using_the_app_you_re_accepting_responsibility_for_any_such_charges_including_roaming_data_charges_if_you_use_the_app_outside_of_your_home_territory_i_e_region_or_country_without_turning_off_data_roaming_if_you_are_not_the_bill_payer_for_the_device_on_which_you_re_using_the_app_please_be_aware_that_we_assume_that_you_have_received_permission_from_the_bill_payer_for_using_the_app_n_nalong_the_same_line_onim_cannot_always_take_responsibility_for_the_way_you_use_the_app_i_e_you_need_to_make_sure_that_your_device_stays_charged_if_it_runs_out_of_battery_and_you_can_t_turn_it_on_to_avail_the_service_onim_cannot_accept_responsibility_n_nwith_respect_to_onim_s_responsibility_for_your_use_of_the_app_when_you_re_using_the_app_it_s_important_to_bear_in_mind_that_although_we_endeavour_to_ensure_that_it_is_updated_and_correct_at_all_times_we_do_rely_on_third_parties_to_provide_information_to_us_so_that_we_can_make_it_available_to_you_onim_accepts_no_liability_for_any_loss_direct_or_indirect_you_experience_as_a_result_of_relying_wholly_on_this_functionality_of_the_app_n_nwhile_using_otrafyc_app_pay_full_attention_to_the_road_as_you_drive_and_abide_by_all_the_road_regulations_and_take_full_responsibility_of_your_safety_even_as_you_use_our_service_adding_and_sharing_moments_while_you_drive_is_strictly_prohibited_n_nat_some_point_we_may_wish_to_update_the_app_the_app_is_currently_available_on_android_the_requirements_for_system_and_for_any_additional_systems_we_decide_to_extend_the_availability_of_the_app_to_may_change_and_you_ll_need_to_download_the_updates_if_you_want_to_keep_using_the_app_onim_does_not_promise_that_it_will_always_update_the_app_so_that_it_is_relevant_to_you_and_or_works_with_the_android_version_that_you_have_installed_on_your_device_however_you_promise_to_always_accept_updates_to_the_application_when_offered_to_you_we_may_also_wish_to_stop_providing_the_app_and_may_terminate_use_of_it_at_any_time_without_giving_notice_of_termination_to_you_unless_we_tell_you_otherwise_upon_any_termination"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp" />
 
@@ -193,15 +183,14 @@
                 android:layout_marginTop="10dp"
                 android:lineSpacingExtra="1.5dp"
                 android:textSize="16sp"
-                android:text="(a) the rights and licenses granted to you in these terms will end
-                \n(b) you must stop using the app, and (if needed) delete it from your device."
+                android:text="@string/a_the_rights_and_licenses_granted_to_you_in_these_terms_will_end_n_b_you_must_stop_using_the_app_and_if_needed_delete_it_from_your_device"
                 android:textColor="@color/smokyBlack"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Changes to These Terms"
+                android:text="@string/changes_to_these_terms"
                 android:textSize="20sp"
                 android:textColor="@color/smokyBlack"
                 android:textStyle="bold" />
@@ -212,7 +201,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="We may update our Terms of Service from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Terms on this page."/>
+                android:text="@string/we_may_update_our_terms_of_service_from_time_to_time_thus_you_are_advised_to_review_this_page_periodically_for_any_changes_we_will_notify_you_of_any_changes_by_posting_the_new_terms_on_this_page"/>
 
 
             <TextView
@@ -220,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/smokyBlack"
-                android:text="Contact Us"
+                android:text="@string/contact_us"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -231,7 +220,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/smokyBlack"
                 android:textSize="16sp"
-                android:text="Have questions or legal concerns about our terms of service?"/>
+                android:text="@string/have_questions_or_legal_concerns_about_our_terms_of_service"/>
 
             <TextView
                 android:id="@+id/contactUsText"
@@ -239,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1.5dp"
                 android:layout_marginBottom="50dp"
-                android:text="Contact Us"
+                android:text="@string/contact_us"
                 android:textSize="16sp"
                 android:clickable="true"
                 android:focusable="true"

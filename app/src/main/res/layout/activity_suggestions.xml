@@ -21,7 +21,7 @@
         android:src="@drawable/ic_arrow_back_"
         android:transitionName="contactUs_to_suggestions_img_transition"
         app:tint="@color/smokyBlack"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="To"
+                    android:hint="@string/to"
                     android:textColorHint="@color/smokyBlack"
                     app:boxStrokeColor="@color/smokyBlack"
                     app:boxStrokeWidthFocused="2dp"
@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:hint="Subject"
+                    android:hint="@string/subject"
                     android:textColorHint="@color/smokyBlack"
                     app:boxStrokeColor="@color/smokyBlack"
                     app:boxStrokeWidthFocused="2dp"
@@ -184,7 +184,7 @@
                         android:id="@+id/sendText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SEND"
+                        android:text="@string/send"
                         android:textColor="@color/smokyBlack"
                         android:clickable="true"
                         android:focusable="true"
@@ -207,7 +207,7 @@
                         android:src="@drawable/ic_send"
                         android:padding="5dp"
                         app:tint="@color/blue2"
-                        android:contentDescription="TODO"
+                        android:contentDescription="@string/todo"
                        />
                    <!-- <ImageView
                         android:id="@+id/inactive_send_suggestions_button"

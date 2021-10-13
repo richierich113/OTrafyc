@@ -15,7 +15,7 @@
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:src="@drawable/ic_mem_blue_icon_white_stroke_circle_playstore"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trafyc"
+            android:text="@string/trafyc"
             android:fontFamily="@font/typographica_regular"
             android:layout_marginStart="-1dp"
             android:layout_gravity="center_vertical"

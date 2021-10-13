@@ -47,7 +47,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Navigate  Using .  .  ."
+                android:text="@string/navigate_using"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:layout_marginStart="30dp"
@@ -77,14 +77,14 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:background="@drawable/navigation_dialog_imgs_background"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_marginEnd="10dp"
-                    android:text="OR"
+                    android:text="@string/or"
                     android:textStyle="bold"
                     android:theme="@style/CustomNavigateDialogStyle"
                     android:textColor="@color/blue1"
@@ -102,7 +102,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:background="@drawable/navigation_dialog_imgs_background"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
 
 

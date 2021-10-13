@@ -43,7 +43,7 @@
                         android:layout_margin="0dp"
                         android:fontFamily="@font/typographica_regular"
                         android:gravity="center_vertical"
-                        android:text="Moment Today"
+                        android:text="@string/moment_today"
                         android:textSize="18sp"
                         android:textColor ="@color/blue1"/>
 
@@ -52,7 +52,7 @@
                         android:layout_height="30dp"
                         android:src="@drawable/ic_mem_blue_white_stroke"
                         android:layout_marginStart="2dp"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="@string/todo" />
 
                 </LinearLayout>
 
@@ -83,7 +83,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:hint="Title"
+                        android:hint="@string/title"
                         android:textColorHint="@color/grayColor"
                         app:boxStrokeColor="@color/blue9"
                         app:boxStrokeWidthFocused="2dp"
@@ -114,7 +114,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginStart="5dp"
-                        android:hint="Moment"
+                        android:hint="@string/moment"
                         android:textColorHint="@color/grayColor"
                         app:boxStrokeColor="@color/blue9"
                         app:boxStrokeWidthFocused="2dp"
@@ -157,7 +157,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="Select a mood that describes the moment"
+                            android:text="@string/select_a_mood_that_describes_the_moment"
                             android:textColor="@color/blue2"
                             android:textStyle="bold"
                             android:textSize="14sp" />
@@ -196,7 +196,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_love"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -219,7 +219,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_happy"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -242,7 +242,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_selfie"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -265,7 +265,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_sad"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -288,7 +288,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_cool"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo"/>
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -311,7 +311,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_angry1"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -334,7 +334,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_pain"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo"/>
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -357,7 +357,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_awkward"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo"/>
 
                           </com.google.android.material.card.MaterialCardView>
 
@@ -380,7 +380,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_confused"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo"/>
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -404,7 +404,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_crying"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -427,7 +427,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_highweed"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -450,7 +450,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_kiss"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -473,7 +473,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_laugh"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -496,7 +496,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_pampered"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -519,7 +519,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_scared"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
                             <com.google.android.material.card.MaterialCardView
@@ -541,7 +541,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_shock"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -564,7 +564,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_sleeping"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -587,7 +587,7 @@
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
                                     android:src="@drawable/ic_teasing"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                             </com.google.android.material.card.MaterialCardView>
                         </LinearLayout>
@@ -623,7 +623,7 @@
                             android:layout_marginBottom="15dp"
                             android:layout_marginStart="10dp"
                             android:background="@drawable/exit_dialog_exit_button_backgrnd"
-                            android:text="Add moment"
+                            android:text="@string/add_moment"
                             android:textAllCaps="false"
                             android:textColor="@color/White"
                             android:textStyle="bold" />

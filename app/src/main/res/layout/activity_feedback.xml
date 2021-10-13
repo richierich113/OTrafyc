@@ -22,7 +22,7 @@
         android:src="@drawable/ic_arrow_back_"
         android:transitionName="contactUs_to_feedback_img_transition"
         app:tint="@color/smokyBlack"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <ScrollView
         android:layout_width="match_parent"

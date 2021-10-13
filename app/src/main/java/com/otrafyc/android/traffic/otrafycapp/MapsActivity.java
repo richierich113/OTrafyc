@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -24,11 +25,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.hardware.GeomagneticField;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorListener;
-import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -45,7 +41,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -67,7 +62,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -87,11 +81,16 @@ import com.directions.route.RoutingListener;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.google.android.datatransport.BuildConfig;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -121,7 +120,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
 import com.google.android.gms.maps.model.SquareCap;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -171,7 +169,6 @@ import retrofit2.Response;
 public class MapsActivity extends AppCompatActivity implements RoutingListener, OnMapReadyCallback, LocationListener, NavigationView.OnNavigationItemSelectedListener {
 
 
-
     //MaterialCardView search_routeModeLayout;
 
     private static final String REQUESTING_LOCATION_UPDATES_KEY = "";
@@ -199,8 +196,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     private static int UPDATE_INTERVAL = 3000;
     private static int FASTEST_INTERVAL = 1000;
     private static int DISPLACEMENT = 1;
-
-
 
 
     Animation bottomAnim, bottomAnimReverse, blinkAnim, buttonBounceAnim, blinkAnim2;
@@ -300,6 +295,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     AppUpdateManager appUpdateManager;
     private InstallStateUpdatedListener installStateUpdatedListener;
     private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
+    ProgressDialog progressDialog;
+
 
 
 
@@ -361,16 +359,28 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_maps);
 
+
+
+       final ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
+
+
+
+
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+                //loadInterstitialAd();
             }
         });
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        loadInterstitialAd();
 
+
+
+
+        //mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
 
         // lock screen orientation to portrait ...works when placed after setContentView
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
@@ -379,7 +389,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
+            public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
                 mLastLocation = locationResult.getLastLocation();
             }
@@ -390,14 +400,14 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(this);
 
-        //interactive fra
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);// making toolbar ur actionBar
-
 
 
         //search_routeModeLayout = findViewById(R.id.search_routeModeLayout);
@@ -724,7 +734,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             howToUseIconLottie.setVisibility(View.VISIBLE);
 
-        }else howToUseIconLottie.setVisibility(View.GONE);
+        } else howToUseIconLottie.setVisibility(View.GONE);
 
         howToUseIconLottie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -743,6 +753,14 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
         // copyLocationImg init
         memoryAddIconImg = findViewById(R.id.copy_locationImg);
+
+        int MEMORY_ICON_DELAY = 20000;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                memoryAddIconImg.setVisibility(View.VISIBLE);
+            }
+        }, MEMORY_ICON_DELAY);
         memoryAddIconImg.startAnimation(blinkAnim2);
 
 
@@ -1303,7 +1321,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     startLocationUpdates();
                     displayLocation();
 
-                    Snackbar.make(mapFragment.requireView(), " You are Online... On the Road? Drive safely", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mapFragment.requireView(), getResources().getString(R.string.you_are_onRoad_driveSafely), Snackbar.LENGTH_LONG).show();
 
                     displayOnOffButton.setText(R.string.you_are_onRoad);
 
@@ -1365,7 +1383,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     }*/
 
 
-                    Snackbar.make(mapFragment.requireView(), "You are Offline...off the Road? Stay safe", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mapFragment.requireView(), getResources().getString(R.string.you_are_offRoad_staySafe), Snackbar.LENGTH_LONG).show();
 
 
                     displayOnOffButton.setText(R.string.you_are_offRoad);
@@ -1393,7 +1411,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //String apiKey = getString(R.string.api_key);
         // String apiKey = getResources().getString(R.string.google_maps_key);
 
-        String apiKey = "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o";
+        String apiKey = "AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74";
         if (!Places.isInitialized()) {
             // initialize sdk
             Places.initialize(getApplicationContext(), apiKey);
@@ -1487,7 +1505,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         getDirection();
 
 
-                        if (autocompleteCardView.getVisibility() ==View.VISIBLE) {
+                        if (autocompleteCardView.getVisibility() == View.VISIBLE) {
                             autocompleteCardView.setVisibility(View.GONE);
                         }
 
@@ -1614,6 +1632,58 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         // Shows the InfoWindow or hides it if it is already opened.
         Objects.requireNonNull(mapInfoWindowFragment).infoWindowManager().toggle(infoWindow, true);
 */
+    }
+
+    private void loadInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, getString(R.string.interstitial_AdUnit), adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+
+                        mInterstitialAd = interstitialAd;
+                        Log.i(TAG, "onAdLoaded");
+
+
+                        //set fullscreen callback
+                        /*mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Called when fullscreen content is dismissed.
+                                mInterstitialAd = null;
+                                Log.d("TAG", "The ad was dismissed.");
+
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                // Called when fullscreen content failed to show.
+                                mInterstitialAd = null;
+                                Log.d("TAG", "The ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Called when fullscreen content is shown.
+                                // Make sure to set your reference to null so you don't
+                                // show it a second time.
+                                //mInterstitialAd = null;
+                                Log.d("TAG", "The ad was shown.");
+                            }
+                        });*/
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i(TAG, loadAdError.getMessage());
+                        mInterstitialAd = null;
+                    }
+
+                });
+
+
     }
 
     private void showPoiNavigationDialog() {
@@ -3135,12 +3205,12 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         String dateTime = simpleDateFormat.format(calendar.getTime());
 
 
-        String memoryTitleText = memoryTitle.getEditText().getText().toString().trim();
+        String memoryTitleText = Objects.requireNonNull(memoryTitle.getEditText()).getText().toString().trim();
 
         //START... using  getText same time of both  strings of TextInputLayout and TextInputEditText causes app to crash since either should do it but not both
         //String memoryTitleText2 = memoryTitle_editText2.getText().toString().trim();
         //String memoryDescription2 = memoryDescription_editText2.getText().toString().trim();
-        String memoryDescriptionText = memoryDescription.getEditText().getText().toString().trim();
+        String memoryDescriptionText = Objects.requireNonNull(memoryDescription.getEditText()).getText().toString().trim();
 
 
         //START.. use these if u dnt want to show error if fields are empty with no validation boolean error checking
@@ -3151,92 +3221,128 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             if (lovelyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_love)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (happyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_happy)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (amazingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_selfie)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (coolCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_cool)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (sadCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sad)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (angryCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_angry1)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (painCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pain)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (awkwardCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_awkward)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (kissCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_kiss)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (teasingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_teasing)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (laughCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_laugh)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (cryingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_crying)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (scaredCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_scared)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (sleepingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sleeping)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (shockCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_shock)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (pamperedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pampered)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (confuseCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_confused)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (highWeedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_highweed)).title("(" + dateTime + ")\n" + noTitleText).snippet(memoryDescriptionText).zIndex(2f));
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else {
@@ -3270,109 +3376,145 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             if (lovelyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_love)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (happyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_happy)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (amazingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_selfie)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (coolCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_cool)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (sadCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sad)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (angryCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_angry1)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (painCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pain)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (awkwardCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_awkward)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (kissCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_kiss)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (laughCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_laugh)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (teasingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_teasing)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (cryingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_crying)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (shockCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_shock)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (scaredCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_scared)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (highWeedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_highweed)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (pamperedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pampered)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (confuseCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_confused)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (sleepingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sleeping)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(noDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else {
@@ -3406,37 +3548,49 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             if (lovelyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_love)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (happyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_happy)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (amazingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_selfie)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (coolCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_cool)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (sadCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sad)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
                 shareMemoryCardView.setVisibility(View.VISIBLE);
             } else if (angryCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_angry1)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3444,7 +3598,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (painCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pain)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3452,7 +3608,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (awkwardCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_awkward)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3460,7 +3618,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (kissCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_kiss)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3468,7 +3628,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (laughCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_laugh)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3476,7 +3638,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (teasingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_teasing)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3484,7 +3648,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (cryingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_crying)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3492,7 +3658,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (shockCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_shock)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3500,7 +3668,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (scaredCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_scared)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3508,7 +3678,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (highWeedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_highweed)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3516,7 +3688,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (pamperedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pampered)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3524,7 +3698,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (confuseCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_confused)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3532,7 +3708,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (sleepingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sleeping)).title("(" + dateTime + ")\n" + noTitleText2).snippet(noDescriptionText2).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3563,7 +3741,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             if (lovelyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_love)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3571,7 +3751,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (happyCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_happy)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3579,7 +3761,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (amazingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_selfie)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3587,7 +3771,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (coolCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_cool)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3595,7 +3781,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (sadCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sad)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3603,7 +3791,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (angryCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_angry1)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3611,7 +3801,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (painCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pain)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3619,7 +3811,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (awkwardCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_awkward)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3627,7 +3821,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (kissCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_kiss)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3635,7 +3831,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (laughCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_laugh)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3643,7 +3841,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (teasingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_teasing)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3651,7 +3851,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (cryingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_crying)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3659,7 +3861,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (shockCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_shock)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3667,7 +3871,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (scaredCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_scared)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3675,7 +3881,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (highWeedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_highweed)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3683,7 +3891,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (pamperedCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_pampered)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3691,7 +3901,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (confuseCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_confused)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3699,7 +3911,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             } else if (sleepingCardView.isChecked()) {
                 memoryMarker = mMap.addMarker(new MarkerOptions().position(currentLatLong).icon(bitmapDescriptorFromVector(this, R.drawable.ic_sleeping)).title("(" + dateTime + ")\n" + memoryTitleText).snippet(memoryDescriptionText).zIndex(2f));
 
-                memoryMarker.showInfoWindow();
+                if (memoryMarker != null) {
+                    memoryMarker.showInfoWindow();
+                }
                 memoryMarkerDialog.dismiss();
 
                 shareMemoryCardView.setVisibility(View.VISIBLE);
@@ -3918,7 +4132,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //tapNavigationDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
         tapNavigationDialog.setContentView(R.layout.tap_navigation_dialog_layout);
-        tapNavigationDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(tapNavigationDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         tapNavigationDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideAndDisappear;
 
         // init image views in dialog layout
@@ -4249,17 +4463,25 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             mService.getPath(requestApi)
                     .enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
+                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                             try {
-                                JSONObject jsonObject = new JSONObject(response.body().toString());
+                                JSONObject jsonObject = null;
+                                if (response.body() != null) {
+                                    jsonObject = new JSONObject(response.body().toString());
+                                }
 
-                                JSONArray jsonArray = jsonObject.getJSONArray("routes");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject route = jsonArray.getJSONObject(i);
-                                    JSONObject poly = route.getJSONObject("overview_polyline");
-                                    String polyline = poly.getString("points");
-                                    polyLineList = decodePoly(polyline);
+                                JSONArray jsonArray = null;
+                                if (jsonObject != null) {
+                                    jsonArray = jsonObject.getJSONArray("routes");
+                                }
+                                if (jsonArray != null) {
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject route = jsonArray.getJSONObject(i);
+                                        JSONObject poly = route.getJSONObject("overview_polyline");
+                                        String polyline = poly.getString("points");
+                                        polyLineList = decodePoly(polyline);
 
+                                    }
                                 }
                                 //Adjust Bounds
                                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -4331,7 +4553,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         }
 
                         @Override
-                        public void onFailure(Call<String> call, Throwable t) {
+                        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                             // Toast.makeText(MapsActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             Toast.makeText(MapsActivity.this, "Please check your internet connection \nYou need internet access to get directions", Toast.LENGTH_SHORT).show();
 
@@ -4410,6 +4632,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     // check if location request is not granted then you request permission to access location else if granted then you display location
     private void setUpLocation() {
+        loadInterstitialAd();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -4524,10 +4747,91 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 //mMap.clear();
 
             } else {
-                showExitDialog();
+
+
+                /*progressDialog = new ProgressDialog(MapsActivity.this);
+                progressDialog.setContentView(R.layout.progress_layout);
+               // progressDialog.getWindow().setBackgroundDrawableResource(R.color.transparentColor);
+                progressDialog.show();
+*/
+
+                ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
+
+                progressDialogClass.startLoadingProgress();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //progressDialog.dismiss();
+                        progressDialogClass.dismissProgress();
+
+
+                        showInterstitialAd();
+
+                        /*new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                showExitDialog();
+
+                            }
+                        }, 2000);*/
+
+
+                    }
+                },2000);
+
+
+
+
+
+
+
+
+
+
             }
 
 
+    }
+
+    private void showInterstitialAd() {
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(MapsActivity.this);
+
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    // Called when fullscreen content is dismissed.
+                    //mInterstitialAd = null;
+                    Log.d("TAG", "The ad was dismissed.");
+                    showExitDialog();
+
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    // Called when fullscreen content failed to show.
+                    //mInterstitialAd = null;
+                    Log.d("TAG", "The ad failed to show.");
+                    showExitDialog();
+                }
+
+                @Override
+                public void onAdShowedFullScreenContent() {
+                    // Called when fullscreen content is shown.
+                    // Make sure to set your reference to null so you don't
+                    // show it a second time.
+                    mInterstitialAd = null;
+                    Log.d("TAG", "The ad was shown.");
+                }
+            });
+
+        } else {
+            Log.d("TAG", "ad did not load.");
+            showExitDialog();
+        }
     }
 
 
@@ -4673,6 +4977,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        loadInterstitialAd();
 
         if (!isInternetConnected(this)) {
 
@@ -5611,7 +5916,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             case R.id.nav_exit:
 
-                showExitDialog();
+                showInterstitialAd();
 
 
                 break;
@@ -5674,7 +5979,19 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     public void showExitDialog() {
 
+
         exitAppDialog.setContentView(R.layout.exit_dialog_layout);
+        AdView mAdView;
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = exitAppDialog.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         Objects.requireNonNull(exitAppDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exitAppDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationScale;
 
@@ -5699,7 +6016,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         });
 
         exitAppDialog.show();
-        exitAppDialog.setCancelable(true);
+        exitAppDialog.setCancelable(false);
         exitAppDialog.setCanceledOnTouchOutside(false);
 
         /*
@@ -5886,6 +6203,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     @Override
     protected void onPause() {
         mapFragment.onPause();
+        if (mInterstitialAd != null){
+            mInterstitialAd = null;
+        }
         super.onPause();
         stopLocationUpdates();
 
@@ -5902,6 +6222,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     @Override
     protected void onResume() {
         super.onResume();
+
 
 
         mapFragment.onResume();
