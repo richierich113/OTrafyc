@@ -64,6 +64,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -361,9 +362,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
 
-       final ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
 
 
+
+        final ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -374,8 +376,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         });
 
         loadInterstitialAd();
-
-
 
 
         //mAdView = findViewById(R.id.adView);
@@ -441,6 +441,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
         //initiate array list
         countryListArray = new ArrayList<>();
+
 
         //add array items
         //A
@@ -716,11 +717,16 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         countryListArray.add("ZW");
 
 
+
+
         //init  locationSettingOnOffLottie
         locationSettingOnOffLottie = findViewById(R.id.animation_view);
         howToUseIconLottie = findViewById(R.id.how_to_use_icon_lottie);
         howToUseIconLottie.setRepeatCount(200);
 
+
+
+        //sharedpreference for howtouse for first installers or when data is cleared by user
 
         SharedPreferences sharedPreferences = getSharedPreferences("howToUse", MODE_PRIVATE);
 
@@ -844,6 +850,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             dialogEditText = countryCodeSearchDialog.findViewById(R.id.dialog_edit_text);
             countryList = countryCodeSearchDialog.findViewById(R.id.country_list_view);
             helpMessageImg = countryCodeSearchDialog.findViewById(R.id.help_img);
+            countryList.setBackgroundColor(getResources().getColor(R.color.grayRippleColor));
 
 
             helpMessageImg.setOnClickListener(new View.OnClickListener() {
@@ -901,7 +908,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         wholeScreen = findViewById(R.id.mapScreenLayout);
 
 
-        navigationView.setCheckedItem(R.id.nav_map);
+        //navigationView.setCheckedItem(R.id.nav_map);
+
         navigationView.bringToFront();
 
 
@@ -1196,7 +1204,11 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         // floating button
         final FloatingActionButton shareLocationFloatingActionButton = (FloatingActionButton) findViewById(R.id.shareLocationFab);
         final FloatingActionButton trafficFloatingActionButton = (FloatingActionButton) findViewById(R.id.traffficFab);
-        //FloatingActionButton darkLightMapfloatingActionButton = (FloatingActionButton) findViewById(R.id.dark_light_MapFab);
+        //FloatingActionButton darkLightMapFloatingActionButton = (FloatingActionButton) findViewById(R.id.dark_light_MapFab);
+
+
+
+
 
 
         //both codes work but i reduced it by a line of code
@@ -1229,9 +1241,11 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 // set traffic Overlay when visible or not
                 if (mMap.isTrafficEnabled()) {
                     mMap.setTrafficEnabled(false);
+                    trafficFloatingActionButton.setTitle(getResources().getString(R.string.TrafficOff));
                     Toast.makeText(MapsActivity.this, "Traffic Disabled", Toast.LENGTH_SHORT).show();
                 } else {
                     mMap.setTrafficEnabled(true);
+                    trafficFloatingActionButton.setTitle(getResources().getString(R.string.TrafficOn));
 
                     Toast.makeText(MapsActivity.this, "Traffic Enabled", Toast.LENGTH_SHORT).show();
                 }
@@ -4269,7 +4283,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     private void animateNavigationDrawer() {
 
-        drawer.setScrimColor(getResources().getColor(R.color.blue4));
+        drawer.setScrimColor(getResources().getColor(R.color.changeableBlue4));
 
 
         drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
@@ -4779,15 +4793,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
                     }
-                },2000);
-
-
-
-
-
-
-
-
+                }, 2000);
 
 
             }
@@ -4815,7 +4821,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     // Called when fullscreen content failed to show.
                     //mInterstitialAd = null;
                     Log.d("TAG", "The ad failed to show.");
-                    showExitDialog();
+                    //showExitDialog();
                 }
 
                 @Override
@@ -4903,7 +4909,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             return;
         }
-        mMap.setMyLocationEnabled(true);
+       // mMap.setMyLocationEnabled(true);
 
        /* String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference driverAvailableRef = FirebaseDatabase.getInstance().getReference("driversAvailable");
@@ -4931,7 +4937,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
             }, MY_PERMISSION_REQUEST_CODE);
         }
-        mMap.setMyLocationEnabled(true);
+        //mMap.setMyLocationEnabled(true);
         //LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
@@ -5003,6 +5009,61 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         }
 
         mMap = googleMap;
+
+        //sharedpreference for firstOpen for first installers or when data is cleared by user
+
+        SharedPreferences sharedPreferences2 = getSharedPreferences("firstOpenPref", MODE_PRIVATE);
+
+        boolean firstOpen = sharedPreferences2.getBoolean("firstOpen", true);
+
+        if (firstOpen) {
+            SharedPreferences.Editor editor = sharedPreferences2.edit();
+            editor.putBoolean("firstOpen", false);
+            editor.apply();
+            editor.commit();
+
+
+            //showExitDialog();
+
+        }else {
+
+        }
+
+
+
+        //sharedpreference for dark mode...placed here instead of onCreate method after setContView because mMap which is = googleMap will be null in the onCreate method
+
+        SharedPreferences sharedPreferences1 = getSharedPreferences("darkModePref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+        final boolean isDarkModeOn = sharedPreferences1.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.new_night_map_style));
+
+
+            //Toast.makeText(MapsActivity.this, getResources().getString(R.string.YouSetNightMode), Toast.LENGTH_SHORT).show();
+
+
+
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.new_day_map));
+
+
+           // Toast.makeText(MapsActivity.this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
+
+
+
+        }
+
+
+
+
+
+
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -6057,6 +6118,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     }
 
 
+
     boolean isMapStyleNotLight = false;
 
     public void changeMapStyle(View view) {
@@ -6068,11 +6130,22 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         switch (view.getId()) {
             case R.id.dark_light_MapFab: {
                 if (isMapStyleNotLight) {
+
+
+
+
+
+
+
+
+
+
                     mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.new_day_map));
                     isMapStyleNotLight = false;
-                    Toast.makeText(this, "You set Day Map", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
 
 
+                    darkLightMapfloatingActionButton.setTitle(getResources().getString(R.string.DayMode));
                     // change background color and text color of legend button when map is light
                     //make trafficLegend_cardView and trafficLegendButton global variables to get access to them in this method
 
@@ -6093,19 +6166,27 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     howToUseIconLottie.setBackground(ContextCompat.getDrawable(this, R.drawable.search_place_onclick_ripple_backgrnd));
                     searchPlace.setBackground(ContextCompat.getDrawable(this, R.drawable.search_place_onclick_ripple_backgrnd));
 
-                    bottomCardview.setBackgroundColor(getResources().getColor(R.color.blue12));
-
+                    bottomCardview.setBackgroundColor(getResources().getColor(R.color.changeableBlue12));
 
                 } else {
 
+
+
+
+
+
+
+
+
                     mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.new_night_map_style));
                     isMapStyleNotLight = true;
-                    Toast.makeText(MapsActivity.this, "You set Night Map", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.YouSetNightMode), Toast.LENGTH_SHORT).show();
 
+                    darkLightMapfloatingActionButton.setTitle(getResources().getString(R.string.NightMode));
                     // change background color and text color of legend button when map is dark
                     //make trafficLegend_cardView and trafficLegendButton global variables to get access to them in this method
 
-                    trafficLegendButton.setBackgroundColor(getResources().getColor(R.color.quantum_white_text));
+                    trafficLegendButton.setBackgroundColor(getResources().getColor(R.color.changeableWhite));
                     trafficLegendButton.setTextColor(getResources().getColor(R.color.smokyBlack));
 
                     autocompleteCardView.setCardBackgroundColor(getResources().getColor(R.color.darkBlueBlackColor));
@@ -6124,7 +6205,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
                     bottomCardview.setBackgroundColor(getResources().getColor(R.color.darkBlueBlackColor));
-
 
                 }
 
@@ -6203,26 +6283,28 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     @Override
     protected void onPause() {
         mapFragment.onPause();
-        if (mInterstitialAd != null){
+        if (mInterstitialAd != null) {
             mInterstitialAd = null;
+            //assert false;
+           // Objects.requireNonNull(mInterstitialAd.getFullScreenContentCallback()).onAdShowedFullScreenContent();
         }
-        super.onPause();
         stopLocationUpdates();
+        super.onPause();
+
 
 
     }
 
 
-    @Override
+   /* @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-    }
+    }*/
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
 
 
         mapFragment.onResume();
@@ -6285,9 +6367,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     public void onDestroy() {
 
         unregisterInstallStateUpdListener();
+        super.onDestroy();
         mapFragment.onDestroy();
 
-        super.onDestroy();
+
     }
 
     private void checkForAppUpdate() {

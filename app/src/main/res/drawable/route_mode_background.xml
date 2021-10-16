@@ -11,9 +11,9 @@
     <gradient
         android:angle="45"
         android:centerX="35%"
-        android:centerColor="@color/white"
-        android:startColor="@color/white"
-        android:endColor="@color/white"
+        android:centerColor="@color/changeableWhite"
+        android:startColor="@color/changeableWhite"
+        android:endColor="@color/changeableWhite"
         android:type="linear"/>
 
     <size

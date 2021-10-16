@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">@color/blue2</color>
-    <color name="colorPrimaryDark">@color/blue2</color>
-    <color name="colorAccent">@color/blue2</color>
+    <color name="colorPrimary">@color/changeableBlue2</color>
+    <color name="colorPrimaryDark">@color/changeableBlue2</color>
+    <color name="colorAccent">@color/changeableBlue2</color>
 
 
     <color name="memoryIconsYellow">#FFBF0B</color>
@@ -14,12 +14,14 @@
     <color name="transparentColor">#00FF0000</color>
     <color name="myOrange">#FF7700</color>
     <color name="smokyBlack">#0F0F0F</color>
+    <color name="changeableSmokyBlack">#0F0F0F</color>
     <color name="rippleEffectColor" >#C880FF</color>
     <color name="grayColor">#AFACA7</color>
     <color name="grayRippleColor">#CCC9C9</color>
     <color name="lightgrayColor">#F5F5F5</color>
     <color name="lightgrayColor1">#ECECEC</color>
-    <color name="white">#ffffff</color>
+    <color name="changeableWhite">#ffffff</color>
+    <color name="whiteToPale">#ffffff</color>
     <color name="quantum_googred200">#ffeda29b</color>
     <color name="quantum_lightblue600">#039be5</color>
 
@@ -36,11 +38,15 @@
 
 
     <color name="blue1">#13c3ef</color>
-    <color name="blue2">#25c8ef</color>
-    <color name="blue4">#4ad1f2</color>
+    <color name="UnchangeableBlue1">#13c3ef</color>
+    <color name="changeableBlue2">#25c8ef</color>
+
+    <color name="changeableBlue4">#4ad1f2</color>
+
+
     <color name="blue9">#a5e9f8</color>
     <color name="blue10">#caf2fb</color>
-    <color name="blue12">#eefbfe</color>
+    <color name="changeableBlue12">#eefbfe</color>
 
 
 

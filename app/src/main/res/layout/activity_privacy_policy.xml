@@ -47,7 +47,7 @@
                 android:layout_marginStart="30dp"
                android:gravity="center"
                 android:text="@string/privacy_policy"
-                android:textColor="@android:color/white"
+                android:textColor="@color/whiteToPale"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,10 +61,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9"
+        android:background="@color/changeableWhite"
         android:transitionName="menu_to_Activities_transition"
         android:scrollbarStyle="insideOverlay"
         android:scrollbarSize="2dp"
-        android:alpha="0.8">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +81,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/onim_nprivacy_policy"
                 android:textSize="30sp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textStyle="bold" />
 
             <TextView
@@ -91,7 +92,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/last_updated_january_2021"
                 android:textSize="16sp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textStyle="bold"
                 android:alpha="0.6"/>
 
@@ -99,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="1.5dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:text="@string/privacypolicyfirstpart"
                 android:textSize="16sp"
                 android:textAllCaps="true"/>
@@ -108,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:text="@string/information_collection_and_use"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -118,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:lineSpacingExtra="1.5dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:text="@string/privacy_policy_2nd_part"
                 android:textSize="16sp" />
 
@@ -128,6 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
+                android:textColor="@color/UnchangeableBlue1"
                 />
 
             <org.sufficientlysecure.htmltextview.HtmlTextView
@@ -136,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
+                android:textColor="@color/UnchangeableBlue1"
                 />
 
             <org.sufficientlysecure.htmltextview.HtmlTextView
@@ -144,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
+                android:textColor="@color/UnchangeableBlue1"
                 />
             <org.sufficientlysecure.htmltextview.HtmlTextView
                 android:id="@+id/google_admob"
@@ -151,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="16sp"
+                android:textColor="@color/UnchangeableBlue1"
                 />
 
            <!-- <TextView
@@ -193,7 +198,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/log_data"
                 android:textSize="20sp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textStyle="bold" />
 
 
@@ -201,7 +206,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/onim_wants_to_inform_you_our_user_that_whenever_you_use_our_service_in_case_of_an_error_in_the_app_we_collect_certain_system_data_and_information_through_third_party_products_on_your_device_called_log_data_this_log_data_may_include_information_such_as_your_device_internet_protocol_ip_address_device_name_operating_system_version_the_configuration_of_the_app_when_utilizing_our_service_the_time_and_date_of_your_use_of_the_service_and_other_statistics_we_collect_this_data_to_help_us_in_addressing_technical_issues_to_further_improve_our_services" />
 
@@ -212,14 +217,14 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/cookies"
                 android:textSize="20sp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/cookies_are_files_with_a_small_amount_of_data_that_are_commonly_used_as_anonymous_unique_identifiers_these_are_sent_to_your_browser_from_the_websites_that_you_visit_and_are_stored_on_your_device_s_internal_memory_n_nthis_service_does_not_use_these_cookies_explicitly_however_the_app_may_use_third_party_code_and_libraries_that_use_cookies_to_collect_information_and_improve_their_services_you_have_the_option_to_either_accept_or_refuse_these_cookies_and_know_when_a_cookie_is_being_sent_to_your_device_if_you_choose_to_refuse_our_cookies_you_may_not_be_able_to_use_some_portions_of_this_service"/>
 
@@ -228,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/service_providers"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -236,7 +241,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/we_may_employ_third_party_companies_and_individuals_due_to_the_following_reasons_n_nto_facilitate_our_service_nto_provide_services_on_our_behalf_nto_perform_service_related_services_nto_assist_us_in_analyzing_how_our_service_is_used_n_nwe_want_to_inform_users_of_this_service_that_these_third_parties_have_access_to_your_personal_information_the_reason_is_to_perform_the_tasks_assigned_to_them_on_our_behalf_however_they_are_obligated_not_to_disclose_or_use_the_information_for_any_other_purpose"/>
 
@@ -244,7 +249,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:text="@string/security"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -253,7 +258,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/we_value_your_trust_in_providing_us_your_information_thus_we_are_striving_to_use_commercially_acceptable_means_of_protecting_it_but_remember_that_no_method_of_transmission_over_the_internet_or_method_of_electronic_storage_is_100_secure_and_reliable_and_we_cannot_guarantee_its_absolute_security"/>
 
@@ -262,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/links_to_other_sites"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -270,7 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/this_service_may_contain_links_to_other_sites_if_you_click_on_a_third_party_link_you_will_be_directed_to_that_site_note_that_these_external_sites_are_not_operated_by_us_therefore_we_strongly_advise_you_to_review_the_privacy_policy_of_these_websites_we_have_no_control_over_and_assume_no_responsibility_for_the_content_privacy_policies_or_practices_of_any_third_party_sites_or_services"/>
 
@@ -280,7 +285,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/children_s_privacy"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -289,7 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/the_services_comply_with_the_children_s_online_privacy_protection_act_onim_does_not_knowingly_collect_personal_information_from_children_under_the_age_of_13_through_the_services_in_the_event_that_a_user_identifies_himself_or_herself_as_a_child_under_the_age_of_13_in_connection_with_any_of_our_services_we_will_not_collect_store_or_use_any_personal_information_of_such_user_in_addition_if_onim_receives_personal_information_provided_by_a_child_under_the_age_of_13_the_information_will_promptly_be_deleted_in_a_secure_manner_further_if_any_user_being_a_parent_or_guardian_realizes_that_his_or_her_child_under_the_age_of_13_has_provided_us_with_his_or_her_personal_information_such_user_should_please_contact_us_so_that_we_will_be_able_to_take_the_necessary_action"/>
 
@@ -298,7 +303,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:text="@string/changes_to_this_privacy_policy"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -308,7 +313,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="16sp"
                 android:text="@string/onim_may_update_this_privacy_policy_from_time_to_time_and_at_onim_s_sole_discretion_thus_you_are_advised_to_review_this_page_periodically_for_any_changes_we_may_notify_you_of_any_changes_by_posting_the_new_privacy_policy_on_this_page"/>
 
@@ -318,7 +323,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/contact_us"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -329,7 +334,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/smokyBlack"
+        android:textColor="@color/changeableSmokyBlack"
         android:textSize="16sp"
         android:text="@string/have_questions_or_legal_concerns_about_our_privacy_policy"/>
 
@@ -345,7 +350,7 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="openContactUsActivity"
-        android:textColor="@color/blue1"
+        android:textColor="@color/UnchangeableBlue1"
         android:transitionName="privacy_and_terms_to_Activities_transition"/>
 
 

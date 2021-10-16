@@ -13,7 +13,7 @@
 
     <!--Navigation menu Theme-->
     <style name="NavigationTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/blue2</item>
+        <item name="colorPrimary">@color/changeableBlue2</item>
         <item name="colorControlHighlight">@color/blue10</item> <!--yellowOrange is the previous colorControlHighlight color-->
     </style>
 
@@ -30,14 +30,14 @@
     </style>
 
     <style name="CustomNavigateDialogStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">@color/White</item> <!--americanOrange is the previous color-->
+        <item name="android:background">@color/changeableWhite</item> <!--americanOrange is the previous color-->
         <item name="android:fontFamily">@font/typographica_regular</item>
 
     </style>
 
     <style name="CustomToolbarStyle2" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/blue1</item> <!--americanOrange is the previous color-->
-        <item name="android:textColor">@color/White</item>
+        <item name="android:textColor">@color/whiteToPale</item>
         <item name="android:textSize">20sp</item>
 
     </style>

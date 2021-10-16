@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ndroid="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    xmlns:ndroid="http://schemas.android.com/tools"
 
     android:layout_margin="15dp">
 
@@ -12,7 +12,7 @@
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/White"
+        android:background="@color/changeableWhite"
         app:cardCornerRadius="30dp">
 
         <LinearLayout
@@ -23,42 +23,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/blue9"
+                android:background="@color/changeableBlue4"
                 android:orientation="horizontal">
-
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_margin="15dp"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_margin="15dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_margin="0dp"
+                        android:drawablePadding="2dp"
                         android:fontFamily="@font/typographica_regular"
                         android:gravity="center_vertical"
                         android:text="@string/moment_today"
+                        android:textColor="@color/whiteToPale"
                         android:textSize="18sp"
-                        android:textColor ="@color/blue1"/>
+                        app:drawableEndCompat="@drawable/ic_mem_blue_white_stroke" />
 
-                    <ImageView
+                    <!-- <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_mem_blue_white_stroke"
                         android:layout_marginStart="2dp"
-                        android:contentDescription="@string/todo" />
+                        android:contentDescription="@string/todo" />-->
 
                 </LinearLayout>
-
-
-
-
 
 
             </LinearLayout>
@@ -68,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbarSize="2dp"
-                >
+                android:background="@color/changeableWhite">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -80,8 +77,8 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="5dp"
                         android:hint="@string/title"
                         android:textColorHint="@color/grayColor"
@@ -92,7 +89,7 @@
                         app:helperText="Title of moment"
                         app:helperTextTextColor="@color/grayRippleColor"
                         app:hintEnabled="true"
-                        app:hintTextColor="@color/smokyBlack">
+                        app:hintTextColor="@color/changeableSmokyBlack">
 
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +98,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="sans-serif"
                             android:inputType="textCapWords"
-                            android:textColor="@color/smokyBlack" />
+                            android:textColor="@color/changeableSmokyBlack" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -111,9 +108,9 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="5dp"
-                        android:layout_marginStart="5dp"
                         android:hint="@string/moment"
                         android:textColorHint="@color/grayColor"
                         app:boxStrokeColor="@color/blue9"
@@ -123,7 +120,7 @@
                         app:helperText="Briefly describe  moment"
                         app:helperTextTextColor="@color/grayRippleColor"
                         app:hintEnabled="true"
-                        app:hintTextColor="@color/smokyBlack">
+                        app:hintTextColor="@color/changeableSmokyBlack">
 
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +129,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="sans-serif"
                             android:inputType="textCapSentences"
-                            android:textColor="@color/smokyBlack" />
+                            android:textColor="@color/changeableSmokyBlack" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,54 +146,53 @@
                         android:id="@+id/memoryIcons_cardView_headLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/blue12"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="0dp">
+                        android:layout_marginBottom="0dp"
+                        android:background="@color/changeableBlue12">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="@string/select_a_mood_that_describes_the_moment"
-                            android:textColor="@color/blue2"
-                            android:textStyle="bold"
-                            android:textSize="14sp" />
+                            android:textColor="@color/UnchangeableBlue1"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <HorizontalScrollView
                         android:id="@+id/memoryIcons_scrollView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scrollbarStyle="insideOverlay"
+                        android:background="@color/changeableBlue12"
                         android:scrollbarSize="2dp"
-                        android:background="@color/blue12">
+                        android:scrollbarStyle="insideOverlay">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                           >
+                            android:orientation="horizontal">
 
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/lovely_cardView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
-                                app:cardElevation="5dp"
                                 android:saveEnabled="true"
-                                app:cardCornerRadius="20dp"> <!--change radius for all cards to 20dp on update-->
+                                app:cardCornerRadius="20dp"
+                                app:cardElevation="5dp"> <!--change radius for all cards to 20dp on update-->
 
                                 <ImageView
                                     android:layout_width="45dp"
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_love"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_love" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -205,10 +201,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -218,8 +214,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_happy"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_happy" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -228,10 +224,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -241,8 +237,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_selfie"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_selfie" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -251,10 +247,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -264,8 +260,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_sad"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_sad" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -274,10 +270,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -287,8 +283,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_cool"
-                                    android:contentDescription="@string/todo"/>
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_cool" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -297,10 +293,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -310,8 +306,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_angry1"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_angry1" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -320,10 +316,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -333,8 +329,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_pain"
-                                    android:contentDescription="@string/todo"/>
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_pain" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -343,10 +339,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -356,20 +352,20 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_awkward"
-                                    android:contentDescription="@string/todo"/>
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_awkward" />
 
-                          </com.google.android.material.card.MaterialCardView>
+                            </com.google.android.material.card.MaterialCardView>
 
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/confused_cardView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -379,8 +375,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_confused"
-                                    android:contentDescription="@string/todo"/>
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_confused" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -390,10 +386,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -403,8 +399,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_crying"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_crying" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -413,10 +409,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -426,8 +422,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_highweed"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_highweed" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -436,10 +432,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -449,8 +445,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_kiss"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_kiss" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -459,10 +455,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -472,8 +468,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_laugh"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_laugh" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -482,10 +478,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -495,8 +491,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_pampered"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_pampered" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -505,10 +501,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -518,19 +514,20 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_scared"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_scared" />
 
                             </com.google.android.material.card.MaterialCardView>
+
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/shock_cardView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -540,8 +537,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_shock"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_shock" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -550,10 +547,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -563,8 +560,8 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_sleeping"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_sleeping" />
 
                             </com.google.android.material.card.MaterialCardView>
 
@@ -573,10 +570,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:background="@color/blue12"
+                                android:background="@color/changeableBlue12"
+                                android:checkable="true"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:checkable="true"
                                 android:saveEnabled="true"
                                 app:cardCornerRadius="20dp"
                                 app:cardElevation="5dp">
@@ -586,14 +583,13 @@
                                     android:layout_height="45dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="10dp"
-                                    android:src="@drawable/ic_teasing"
-                                    android:contentDescription="@string/todo" />
+                                    android:contentDescription="@string/todo"
+                                    android:src="@drawable/ic_teasing" />
 
                             </com.google.android.material.card.MaterialCardView>
                         </LinearLayout>
 
                     </HorizontalScrollView>
-
 
 
                     <View
@@ -620,8 +616,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:layout_marginBottom="15dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginBottom="15dp"
                             android:background="@drawable/exit_dialog_exit_button_backgrnd"
                             android:text="@string/add_moment"
                             android:textAllCaps="false"

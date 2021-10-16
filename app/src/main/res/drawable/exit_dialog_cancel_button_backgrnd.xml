@@ -33,7 +33,7 @@
                 />
             <stroke
                 android:width="0.2dp"
-                android:color="@color/blue2"
+                android:color="@color/changeableBlue2"
                 /> #C880FF
         </shape>
 

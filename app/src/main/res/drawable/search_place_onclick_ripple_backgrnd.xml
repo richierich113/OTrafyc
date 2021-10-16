@@ -2,7 +2,7 @@
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/blue12"
+    android:color="#eefbfe"
     tools:targetApi="LOLLIPOP">
 
     <item>

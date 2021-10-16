@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/changeableBlue2</color>
+    <color name="colorPrimaryDark">@color/changeableBlue2</color>
+    <color name="colorAccent">@color/changeableBlue2</color>
+
+
+    <color name="memoryIconsYellow">#FFBF0B</color>
+
+    <color name="americanOrange">#FE8B02</color>
+
+    <color name="mapOverlay">#11111111</color>
+    <color name="transparentColor">#00FF0000</color>
+    <color name="myOrange">#FF7700</color>
+    <color name="smokyBlack">#0F0F0F</color>
+    <color name="changeableSmokyBlack">#ECECEC</color>
+    <color name="rippleEffectColor" >#C880FF</color>
+    <color name="grayColor">#AFACA7</color>
+    <color name="grayRippleColor">#CCC9C9</color>
+    <color name="lightgrayColor">#F5F5F5</color>
+    <color name="lightgrayColor1">#ECECEC</color>
+    <color name="changeableWhite">#17263c</color>
+    <color name="whiteToPale">#ECECEC</color>
+    <color name="quantum_googred200">#ffeda29b</color>
+    <color name="quantum_lightblue600">#039be5</color>
+
+    <color name="darkBlueBlackColor">#17263c</color>
+    <color name="iconDarkBlueBlackColor">#2a3b90</color>
+
+
+    <color name="layoutRegisterColor">#ECECEC</color>
+
+    <color name="veryHighTrafficColor">#8B0000</color>
+
+
+    <color name="switchBasePressColor">#4BCE2B</color>
+
+
+    <color name="blue1">#17263c</color>
+    <color name="UnchangeableBlue1">#13c3ef</color>
+    <color name="changeableBlue2">#17263c</color>
+    <color name="changeableBlue4">#2a3b90</color>
+    <color name="blue9">#a5e9f8</color>
+    <color name="blue10">#caf2fb</color>
+    <color name="changeableBlue12">#17263c</color>
+
+
+
+
+    <color name="newBlue2">#2196f3</color>
+    <color name="newBlue3">#1e88e5</color>
+    <color name="newBlue1">#187bcd</color>
+    <color name="newBlue4">#0d47a1</color>
+
+</resources>

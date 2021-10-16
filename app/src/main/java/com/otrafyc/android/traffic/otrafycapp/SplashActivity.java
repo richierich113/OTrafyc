@@ -14,8 +14,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -63,6 +65,29 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  //hiding status bar in activity
 
           setContentView(R.layout.activity_splash);
+
+
+
+        SharedPreferences sharedPreferences1 = getSharedPreferences("darkModePref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+        final boolean isDarkModeOn = sharedPreferences1.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+
+            //Toast.makeText(this, getResources().getString(R.string.YouSetNightMode), Toast.LENGTH_SHORT).show();
+
+
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+           // Toast.makeText(this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
+
+
+        }
+
 
         // lock screen orientation to portrait ...works when placed after setContentView
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);

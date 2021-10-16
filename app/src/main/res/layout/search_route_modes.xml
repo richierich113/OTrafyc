@@ -34,14 +34,14 @@
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_margin="5dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/changeableWhite"
 
                 android:clickable="true"
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 android:padding="5dp"
                 app:cardElevation="4dp"
-                app:strokeColor="@color/white"
+                app:strokeColor="@color/changeableWhite"
                 app:strokeWidth="2dp"
                 android:layout_gravity="center">
 
@@ -57,14 +57,14 @@
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_margin="5dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/changeableWhite"
 
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="5dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:strokeColor="@color/white"
+                app:strokeColor="@color/changeableWhite"
                 app:strokeWidth="2dp"
                 android:layout_gravity="center">
 
@@ -81,14 +81,14 @@
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_margin="5dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/changeableWhite"
 
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="5dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:strokeColor="@color/white"
+                app:strokeColor="@color/changeableWhite"
                 app:strokeWidth="2dp"
                 android:layout_gravity="center">
 
@@ -106,14 +106,14 @@
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_margin="5dp"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/changeableWhite"
 
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="5dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:strokeColor="@color/white"
+                app:strokeColor="@color/changeableWhite"
                 app:strokeWidth="2dp">
 
                 <ImageView

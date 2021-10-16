@@ -29,7 +29,7 @@
                 />
             <stroke
                 android:width="0dp"
-                android:color="@color/blue4"
+                android:color="@color/changeableBlue4"
                 />
         </shape>
 

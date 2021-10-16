@@ -3,6 +3,7 @@ package com.otrafyc.android.traffic.otrafycapp;
 import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Pair;
@@ -14,12 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.material.card.MaterialCardView;
 
 public class ContactUsActivity extends AppCompatActivity {
@@ -47,6 +50,33 @@ public class ContactUsActivity extends AppCompatActivity {
         .build());*/
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_contact_us);
+
+
+
+
+
+        SharedPreferences sharedPreferences1 = getSharedPreferences("darkModePref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+        final boolean isDarkModeOn = sharedPreferences1.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+
+            //Toast.makeText(this, getResources().getString(R.string.YouSetNightMode), Toast.LENGTH_SHORT).show();
+
+
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+          //  Toast.makeText(this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
+
+
+        }
+
+
+
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {

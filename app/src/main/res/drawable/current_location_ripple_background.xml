@@ -2,7 +2,7 @@
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:color="@color/grayRippleColor"
+    android:color="@color/blue9"
     tools:targetApi="LOLLIPOP">
 
     <item>
@@ -13,9 +13,9 @@
             <gradient
                 android:angle="45"
                 android:centerX="35%"
-                android:centerColor="#FFFF"
-                android:startColor="#FFFF"
-                android:endColor="#FFFF"
+                android:centerColor="@color/whiteToPale"
+                android:startColor="@color/whiteToPale"
+                android:endColor="@color/whiteToPale"
                 android:type="linear"
                 />
             <padding

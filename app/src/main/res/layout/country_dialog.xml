@@ -49,19 +49,25 @@
                 android:id="@+id/dialog_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:drawableStart="@drawable/ic_countries"
                 android:drawableTint="@color/grayRippleColor"
                 android:hint="@string/search_countryHint"
-                android:padding="20dp" />
+                android:textColorHint="@color/changeableSmokyBlack"
+                android:padding="20dp"
+                android:background="@color/changeableWhite"
+                android:textColor="@color/changeableSmokyBlack"/>
 
 
             <ListView
                 android:id="@+id/country_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="20dp"/>
+                android:paddingBottom="20dp"
+                android:background="@color/changeableWhite"
+                android:cacheColorHint="@color/changeableSmokyBlack"
+                />
 
         </LinearLayout>
 

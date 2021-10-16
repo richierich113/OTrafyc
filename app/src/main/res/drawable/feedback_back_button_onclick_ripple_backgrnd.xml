@@ -13,9 +13,9 @@
             <gradient
                 android:angle="45"
                 android:centerX="35%"
-                android:centerColor="@android:color/white"
-                android:startColor="@android:color/white"
-                android:endColor="@android:color/white"
+                android:centerColor="@color/changeableWhite"
+                android:startColor="@color/changeableWhite"
+                android:endColor="@color/changeableWhite"
                 android:type="linear"
                 />
             <padding

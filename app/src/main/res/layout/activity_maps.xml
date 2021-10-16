@@ -29,7 +29,8 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/bar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/toolbar_rel"
@@ -43,8 +44,7 @@
                         android:background="@color/blue1"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:theme="@style/CustomToolbarStyle"
-                        app:popupTheme="@style/CustomPopupStyle"
-                        >
+                        app:popupTheme="@style/CustomPopupStyle">
                         <!--app:title="OTrafyc"
                         app:titleMarginStart="30dp"-->
 
@@ -53,11 +53,11 @@
                             android:id="@+id/toolbalTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="@string/app_name"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
                             android:layout_marginStart="30dp"
-                            android:gravity="center_vertical"/>
+                            android:gravity="center_vertical"
+                            android:text="@string/app_name"
+                            android:textColor="@color/whiteToPale"
+                            android:textStyle="bold" />
 
                     </androidx.appcompat.widget.Toolbar>
 
@@ -76,7 +76,7 @@
                         android:padding="5dp"
 
                         android:src="@drawable/ic_search_icon"
-                        app:tint="@android:color/white" />
+                        app:tint="@color/whiteToPale" />
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/how_to_use_icon_lottie"
@@ -149,7 +149,7 @@
                     app:cardCornerRadius="30dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/white">
+                    app:strokeColor="@color/changeableWhite">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -177,7 +177,7 @@
                     app:cardCornerRadius="30dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/white">
+                    app:strokeColor="@color/changeableWhite">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -261,7 +261,7 @@
                     app:cardCornerRadius="30dp"
                     app:cardElevation="4dp"
                     app:strokeWidth="2dp"
-                    app:strokeColor="@color/white">
+                    app:strokeColor="@color/changeableWhite">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -297,13 +297,13 @@
                             android:id="@+id/trafficLegend_button"
                             android:layout_width="135dp"
                             android:layout_height="20dp"
-                            android:background="@color/smokyBlack"
+                            android:background="@color/changeableSmokyBlack"
                             android:drawableEnd="@drawable/ic_arrow_drop_down2"
                             android:drawableTint="@color/grayColor"
                             android:onClick="btnLegend"
                             android:text="@string/legend"
                             android:textAlignment="center"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/changeableWhite"
                             android:textSize="10sp"
                             android:textStyle="normal" />
 
@@ -570,11 +570,12 @@
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
                     android:alpha="0.85"
-                    android:background="@color/grayColor"
+                    app:cardBackgroundColor="@color/changeableWhite"
+                    android:background="@color/changeableWhite"
                     android:visibility="gone"
                     app:cardCornerRadius="25dp"
                     app:cardElevation="10dp"
-                    app:strokeColor="@color/blue2"
+                    app:strokeColor="@color/changeableBlue2"
                     app:strokeWidth="0.2dp"
                     tools:targetApi="O"> <!--americanOrange was the previous stroke color-->
 
@@ -664,9 +665,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_margin="5dp"
-                        app:fab_addButtonColorNormal="@android:color/white"
+                        app:fab_addButtonColorNormal="@color/whiteToPale"
                         app:fab_addButtonColorPressed="@color/blue9"
-                        app:fab_addButtonPlusIconColor="@color/blue2"
+                        app:fab_addButtonPlusIconColor="@color/changeableBlue2"
                         app:fab_addButtonSize="normal"
                         app:fab_addButtonStrokeVisible="true"
                         app:fab_expandDirection="up"
@@ -680,35 +681,36 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:baselineAlignBottom="true"
-                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorNormal="@color/whiteToPale"
                             app:fab_colorPressed="@color/blue9"
                             app:fab_icon="@drawable/ic_sharelocation_icon1"
                             app:fab_size="mini"
-                            app:fab_title="Share Location" />
+                            app:fab_title="@string/ShareLocation" />
 
                         <com.getbase.floatingactionbutton.FloatingActionButton
                             android:id="@+id/traffficFab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorNormal="@color/whiteToPale"
                             app:fab_colorPressed="@color/blue9"
                             app:fab_icon="@drawable/ic_fab_traffic"
                             app:fab_size="mini"
-                            app:fab_title="Traffic On / Off" />
+                            app:fab_title="@string/TrafficOnOff" />
 
                         <com.getbase.floatingactionbutton.FloatingActionButton
                             android:id="@+id/dark_light_MapFab"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:onClick="changeMapStyle"
-                            app:fab_colorNormal="@android:color/white"
+                            app:fab_colorNormal="@color/whiteToPale"
                             app:fab_colorPressed="@color/blue9"
                             app:fab_icon="@drawable/ic_dark"
                             app:fab_size="mini"
-                            app:fab_title="Night / Day Map" />
+                            app:fab_title="@string/NightDayMode" />
 
                     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
+                    <!--android:onClick="changeMapStyle"-->
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/locationImageLayout"
@@ -724,8 +726,8 @@
 
                         app:cardCornerRadius="27dp"
                         app:cardElevation="4dp"
-                        app:strokeColor="@color/blue2"
-                        app:strokeWidth="0.3dp"> <!--americanOrange is the previous color-->  <!-- increase the corner radius size to about 90dp to create the cool transparent look of the location imageview below -->
+                        app:strokeColor="@color/changeableBlue2"
+                        app:strokeWidth="0.3dp">  <!-- increase the corner radius size to about 90dp to create the cool transparent look of the location imageview below -->
 
                         <ImageView
                             android:id="@+id/locationImage"
@@ -735,7 +737,7 @@
                             android:layout_gravity="center"
                             android:contentDescription="@string/move_to_my_location"
                             android:src="@drawable/ic_location"
-                            app:tint="@color/blue2" /> <!--myOrange was the previous color-->
+                            app:tint="@color/changeableBlue2" /> <!--myOrange was the previous color-->
 
 
                     </com.google.android.material.card.MaterialCardView>
@@ -746,7 +748,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginTop="0dp"
-                        app:cardBackgroundColor="@color/blue12"
+                        app:cardBackgroundColor="@color/changeableBlue12"
                         app:cardElevation="4dp">
 
 
@@ -770,7 +772,7 @@
                                 app:splitTrack="true"
                                 app:thumbTextPadding="2dp"
                                 app:thumbTint="@android:color/white"
-                                app:trackTint="@color/smokyBlack"
+                                app:trackTint="#0F0F0F"
                                 app:useMaterialThemeColors="true" />
 
 
@@ -842,6 +844,7 @@
         android:transitionName="menu_to_Activities_transition"
         app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/grayColor"
+        android:background="@color/changeableWhite"
         app:itemTextColor="@color/layoutRegisterColor"
         app:menu="@menu/nav_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

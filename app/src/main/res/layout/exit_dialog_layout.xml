@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
-        android:background="@color/White">
+        android:background="@color/changeableWhite"
+        app:cardBackgroundColor="@color/changeableWhite">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,14 +31,14 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="15dp">
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_mem_black"
                     android:layout_gravity="center"
                     android:alpha="0.9"
                     android:contentDescription="@string/todo" />
-
+-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,9 +47,9 @@
                     android:layout_marginStart="-1dp"
                     android:layout_gravity="center_vertical"
                     android:textSize="20sp"
-                    android:textColor="@color/smokyBlack"
-                    android:alpha="0.9"
-                    />
+                    android:textColor="@color/changeableSmokyBlack"
+                    android:padding="5dp"
+                    app:drawableStartCompat="@drawable/ic_mem_black" />
 
             </LinearLayout>
 
@@ -57,10 +58,11 @@
             <com.google.android.gms.ads.AdView
                 xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"
+                android:layout_gravity="center_horizontal"
 
                 android:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
 
                 ads:adSize="MEDIUM_RECTANGLE"
                 ads:adUnitId="ca-app-pub-7732231090579598/8433222623">
@@ -74,7 +76,7 @@
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/changeableSmokyBlack"
                 android:alpha="0.7"
                 android:layout_marginBottom="15dp"/>
 

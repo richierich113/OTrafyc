@@ -2,6 +2,15 @@
     <string name="app_name" translatable="false">OTrafyc</string>
     <string name="title_activity_map" translatable="true">Map</string>
     <string name="motto" translatable="true">Smooth   rides   with   fun</string>
+    <string name="NightDayMode" translatable="true">Night / Day Mode</string>
+    <string name="TrafficOnOff" translatable="true">Traffic On / Off</string>
+    <string name="TrafficOn" translatable="true">Traffic Enabled</string>
+    <string name="TrafficOff" translatable="true">Traffic Disabled</string>
+    <string name="ShareLocation" translatable="true">Share Location</string>
+    <string name="DayMode" translatable="true">Light</string>
+    <string name="NightMode" translatable="true">Dark</string>
+    <string name="YouSetDayMode" translatable="true">Light Mode</string>
+    <string name="YouSetNightMode" translatable="true">Dark Mode</string>
 
     <string name="google_direction_api" translatable="false">AIzaSyBsqBmV1mQ_FP_YyKkGLHjcc7LkzlET7wk</string>
     <string name="interstitial_AdUnit" translatable="false">ca-app-pub-7732231090579598/2255020600</string>
@@ -167,5 +176,12 @@
     <string name="trafyc" translatable="false">Trafyc</string>
     <string name="navigate_using" translatable="true">Navigate Using . . .</string>
     <string name="or" translatable="true">OR</string>
+    <string name="map">Map</string>
+    <string name="help">Help</string>
+    <string name="support_us">Support Us</string>
+    <string name="invite_a_friend">Invite a Friend</string>
+    <string name="rate_otrafyc">Rate OTrafyc</string>
+    <string name="legal">Legal</string>
+    <string name="theme">Theme</string>
 
 </resources>

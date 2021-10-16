@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@android:color/white"
+    android:background="@color/changeableWhite"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
@@ -14,7 +14,7 @@
         android:id="@+id/imageProfile"
         android:layout_width="100dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_mem_blue_icon_white_stroke_circle_playstore"
+        android:src="@drawable/ic_mem_blue_white_stroke"
         android:contentDescription="@string/todo" />
 
     <LinearLayout
@@ -36,12 +36,12 @@
             android:layout_height="wrap_content"
             android:text="@string/trafyc"
             android:fontFamily="@font/typographica_regular"
-            android:layout_marginStart="-1dp"
+            android:layout_marginStart="1dp"
             android:layout_gravity="center_vertical"
             android:textSize="20sp"
-            android:textColor="@color/blue1"
+            android:textColor="@color/UnchangeableBlue1"
             android:alpha="0.9"
-            android:drawableStart="@drawable/ic_mem_black_stroke_circle"/>
+            app:drawableStartCompat="@drawable/ic_mem_black_stroke_circle" />
 
     </LinearLayout>
 
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="@string/motto"
-        android:textColor="@android:color/black"
+        android:textColor="@color/changeableSmokyBlack"
         android:textStyle="bold"
         android:textSize="14sp"
         android:alpha="0.7"/>

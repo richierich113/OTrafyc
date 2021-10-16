@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
 
 
-    <group android:checkableBehavior="single">  <!-- android:checkableBehavior="single" -->
+    <group android:checkableBehavior="none">  <!-- android:checkableBehavior="single" -->
 
 
 
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map"
-            android:title="Map" />
+            android:title="@string/map" />
        <!-- <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
@@ -22,25 +23,25 @@
     </group>
 
 
-    <item android:title="Help">
+    <item android:title="">
         <menu>
             <group android:checkableBehavior="none">
 
                 <item
                     android:id="@+id/nav_ContactUs"
                     android:icon="@drawable/ic_contact_us"
-                    android:title= "Contact Us"
+                    android:title= "@string/contact_us"
                     />
 
                 <item
                     android:id="@+id/nav_HowToUse"
                     android:icon="@drawable/ic_help"
-                    android:title= "How to Use"/>
+                    android:title= "@string/how_to_use"/>
 
                 <item
                     android:id="@+id/nav_Settings"
                     android:icon="@drawable/ic_settings"
-                    android:title= "Settings"
+                    android:title= "@string/settings"
 
                     />
 
@@ -52,19 +53,19 @@
 
     </item>
 
-    <item android:title="Support Us">
+    <item android:title="">
         <menu>
             <group android:checkableBehavior="none">
 
                 <item
                     android:id="@+id/nav_inviteFriends"
                     android:icon="@drawable/ic_invite_friends"
-                    android:title="Invite a Friend" />
+                    android:title="@string/invite_a_friend" />
 
                 <item
                     android:id="@+id/nav_rateUs"
                     android:icon="@drawable/ic_rate_us"
-                    android:title="Rate OTrafyc" />
+                    android:title="@string/rate_otrafyc" />
 
             </group>
 
@@ -74,19 +75,19 @@
 
     </item>
 
-    <item android:title="Legal">
+    <item android:title="">
         <menu>
             <group android:checkableBehavior="none">
 
                 <item
                     android:id="@+id/nav_privacy_policy"
                     android:icon="@drawable/ic_privacy_policy"
-                    android:title="Privacy Policy" />
+                    android:title="@string/privacy_policy" />
 
                 <item
                     android:id="@+id/nav_terms"
                     android:icon="@drawable/ic_terms"
-                    android:title="Terms of Service" />
+                    android:title="@string/terms_of_service" />
 
             </group>
 
@@ -101,7 +102,7 @@
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/ic_logout"
-                android:title="Exit" />
+                android:title="@string/exit" />
 
 
         </menu>

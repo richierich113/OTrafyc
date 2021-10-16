@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/changeableWhite"
     android:fitsSystemWindows="true"
 
     android:orientation="vertical"
@@ -21,7 +21,7 @@
         android:background="@drawable/feedback_back_button_onclick_ripple_backgrnd"
         android:src="@drawable/ic_arrow_back_"
         android:transitionName="contactUs_to_feedback_img_transition"
-        app:tint="@color/smokyBlack"
+        app:tint="@color/changeableSmokyBlack"
         android:contentDescription="@string/todo" />
 
     <ScrollView
@@ -45,7 +45,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="@string/feedback"
                 android:textAllCaps="true"
-                android:textColor="@color/smokyBlack"
+                android:textColor="@color/changeableSmokyBlack"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:alpha="0.9"
@@ -57,7 +57,7 @@
                 android:text="@string/have_feedback_we_are_always_seeking_how_best_we_can_improve_our_services_for_our_users_nplease_don_t_share_sensitive_information"
                 android:textSize="14sp"
 
-                android:textColor="@color/smokyBlack"/>
+                android:textColor="@color/changeableSmokyBlack"/>
 
            <!-- <LinearLayout
                 android:layout_width="match_parent"
@@ -104,14 +104,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/to"
-                    android:textColorHint="@color/smokyBlack"
-                    app:boxStrokeColor="@color/smokyBlack"
+                    android:textColorHint="@color/changeableSmokyBlack"
+                    app:boxStrokeColor="@color/changeableSmokyBlack"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="@color/smokyBlack"
+                    app:endIconTint="@color/changeableSmokyBlack"
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/smokyBlack"
+                    app:hintTextColor="@color/changeableSmokyBlack"
                     app:startIconDrawable="@drawable/ic_email_icon"
-                    app:startIconTint="@color/smokyBlack">
+                    app:startIconTint="@color/changeableSmokyBlack">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +120,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/smokyBlack" />
+                        android:textColor="@color/changeableSmokyBlack" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -131,15 +131,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="@string/subject"
-                    android:textColorHint="@color/smokyBlack"
-                    app:boxStrokeColor="@color/smokyBlack"
+                    android:textColorHint="@color/changeableSmokyBlack"
+                    app:boxStrokeColor="@color/changeableSmokyBlack"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="@color/smokyBlack"
+                    app:endIconTint="@color/changeableSmokyBlack"
 
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/smokyBlack"
+                    app:hintTextColor="@color/changeableSmokyBlack"
 
-                    app:startIconTint="@color/smokyBlack">
+                    app:startIconTint="@color/changeableSmokyBlack">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -148,7 +148,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif"
                         android:inputType="textCapWords"
-                        android:textColor="@color/smokyBlack" />
+                        android:textColor="@color/changeableSmokyBlack" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -162,13 +162,13 @@
                     app:hintAnimationEnabled="true"
 
                     app:helperTextEnabled="true"
-                    android:textColorHint="@color/smokyBlack"
-                    app:boxStrokeColor="@color/smokyBlack"
+                    android:textColorHint="@color/changeableSmokyBlack"
+                    app:boxStrokeColor="@color/changeableSmokyBlack"
                     app:boxStrokeWidthFocused="2dp"
-                    app:endIconTint="@color/smokyBlack"
+                    app:endIconTint="@color/changeableSmokyBlack"
                     app:hintEnabled="true"
-                    app:hintTextColor="@color/smokyBlack"
-                    app:startIconTint="@color/smokyBlack">
+                    app:hintTextColor="@color/changeableSmokyBlack"
+                    app:startIconTint="@color/changeableSmokyBlack">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -177,7 +177,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif"
                         android:inputType="textMultiLine"
-                        android:textColor="@color/smokyBlack" />
+                        android:textColor="@color/changeableSmokyBlack" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -192,13 +192,13 @@
                         android:id="@+id/sendText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/send"
-                        android:textColor="@color/smokyBlack"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/send_feedback_button"
                         android:clickable="true"
                         android:focusable="true"
+                        android:text="@string/send"
                         android:textAllCaps="true"
-                        android:layout_toStartOf="@+id/send_feedback_button"
-                        android:layout_centerVertical="true"/>
+                        android:textColor="@color/changeableSmokyBlack" />
 
                     <ImageView
                         android:id="@+id/send_feedback_button"
@@ -209,10 +209,10 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="5dp"
                         android:background="@drawable/feedback_send_button_onclick_ripple_backgrnd"
-                        android:src="@drawable/ic_send"
+                        android:contentDescription="TODO"
                         android:padding="5dp"
-                        app:tint="@color/blue2"
-                        android:contentDescription="TODO" />
+                        android:src="@drawable/ic_send"
+                        app:tint="@color/UnchangeableBlue1" />
 
 
                 </RelativeLayout>

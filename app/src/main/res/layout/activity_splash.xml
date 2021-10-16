@@ -5,7 +5,7 @@
     android:id="@+id/splashConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue2"
+    android:background="@color/changeableBlue2"
     tools:context=".SplashActivity"
     android:paddingTop="25dp"> <!--myOrange is the previous background color-->
 
