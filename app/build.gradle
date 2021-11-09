@@ -11,7 +11,7 @@ android {
         targetSdkVersion 30
         // Enabling multidex support.
         multiDexEnabled true
-        versionCode 39
+        versionCode 40
         versionName "v1.2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
