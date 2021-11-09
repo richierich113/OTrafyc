@@ -27,6 +27,7 @@
 
     <color name="darkBlueBlackColor">#17263c</color>
     <color name="iconDarkBlueBlackColor">#2a3b90</color>
+    <color name="iconChangeableDarkBlueBlackColor">#ffffff</color>
 
 
     <color name="layoutRegisterColor">#0a091b</color>

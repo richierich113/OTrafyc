@@ -1,4 +1,5 @@
 package com.otrafyc.android.traffic.otrafycapp;
+
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,9 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
 public class SplashActivity extends AppCompatActivity {
 
+    public SplashActivity() {
+    }
+
     //call views
     TextView OTrafyc, slogan, welcome;
     ImageView appIcon;
@@ -37,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
     Animation topAnim, bottomAnim, welcomeAnim, IconAppearAnim;
     //LottieAnimationView trafficLottie;
     ConstraintLayout splashConstraintLayout;
-
 
 
     @Override
@@ -55,17 +58,15 @@ public class SplashActivity extends AppCompatActivity {
 
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Typographica-Blp5.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()))
+                        .setDefaultFontPath("fonts/Typographica-Blp5.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()))
                 .build());
 
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  //hiding status bar in activity
 
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);  //hiding status bar in activity
-
-          setContentView(R.layout.activity_splash);
-
+        setContentView(R.layout.activity_splash);
 
 
         SharedPreferences sharedPreferences1 = getSharedPreferences("darkModePref", MODE_PRIVATE);
@@ -83,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-           // Toast.makeText(this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
 
 
         }
@@ -98,18 +99,15 @@ public class SplashActivity extends AppCompatActivity {
 
 
         OTrafyc = (TextView) findViewById(R.id.trafycView);
-       // slogan = (TextView) findViewById(R.id.sloganView);
-       // welcome = (TextView) findViewById(R.id.welcomeView);
+        // slogan = (TextView) findViewById(R.id.sloganView);
+        // welcome = (TextView) findViewById(R.id.welcomeView);
         appIcon = findViewById(R.id.splash_icon);
 //
-       // trafficLottie = (LottieAnimationView) findViewById(R.id.animation_view);
-
-
-
+        // trafficLottie = (LottieAnimationView) findViewById(R.id.animation_view);
 
 
         //init animations
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
         bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
         welcomeAnim = AnimationUtils.loadAnimation(this, R.anim.welcome_animation);
         IconAppearAnim = AnimationUtils.loadAnimation(this, R.anim.splashtraffic_appear_animation);
@@ -118,7 +116,7 @@ public class SplashActivity extends AppCompatActivity {
         //set animations to views
         OTrafyc.setAnimation(topAnim);
         //slogan.setAnimation(bottomAnim);
-       // welcome.setAnimation(welcomeAnim);
+        // welcome.setAnimation(welcomeAnim);
         //trafficLottie.setAnimation(bottomAnim);
         appIcon.setAnimation(bottomAnim);
 
@@ -126,39 +124,41 @@ public class SplashActivity extends AppCompatActivity {
         //this is a global variable and can be converted to a local variable by using just define it as
         // int SPLASH_TIME = 7000; before the handler
         int SPLASH_TIME = 4000;
-        new  Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
 
-                    Intent intent = new Intent(SplashActivity.this, MapsActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MapsActivity.class);
 
-                    Pair[] pairs1 = new Pair[1];
-                    pairs1[0] = new Pair<View, String>(OTrafyc, "splash_screen_to_maps_transition");
+                startActivity(intent);
+                finish();
+
+                /*Pair[] pairs1 = new Pair[1];
+                pairs1[0] = new Pair<View, String>(OTrafyc, "splash_screen_to_maps_transition");
 
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this, pairs1);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this, pairs1);
 
 
-                        startActivity(intent, options.toBundle());
-                        //means you dnt come back to this activity wen u press back at the subsequent activity
-                        finish();
+                    startActivity(intent, options.toBundle());
+                    //means you dnt come back to this activity wen u press back at the subsequent activity
+                    finish();
 
-                    } else {
+                } else {
 
-                        startActivity(intent);
-                        finish();
+                    startActivity(intent);
+                    finish();
 
-                    }
+                }
 
 
                 finish();
 
-
+*/
             }
         }, SPLASH_TIME);
-
 
 
     }

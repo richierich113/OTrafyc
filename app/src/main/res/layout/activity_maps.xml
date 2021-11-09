@@ -685,7 +685,8 @@
                             app:fab_colorPressed="@color/blue9"
                             app:fab_icon="@drawable/ic_sharelocation_icon1"
                             app:fab_size="mini"
-                            app:fab_title="@string/ShareLocation" />
+                            app:fab_title="@string/ShareLocation"
+                            android:visibility="gone"/>
 
                         <com.getbase.floatingactionbutton.FloatingActionButton
                             android:id="@+id/traffficFab"

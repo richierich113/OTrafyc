@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -73,7 +74,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
-
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
@@ -94,7 +94,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -102,6 +104,9 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -172,132 +177,91 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     //MaterialCardView search_routeModeLayout;
 
-    private static final String REQUESTING_LOCATION_UPDATES_KEY = "";
+    public static final int REQUEST_CHECK_LOC_SETTINGS = 1005;
     //private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
-
-    private static int DELAY_TIME = 30000;
-    private GoogleMap mMap;
-
-    LatLng currentLocation;
-
-
+    //    for navigation menu animation
+    static final float END_SCALE = 0.7f;
+    private static final String REQUESTING_LOCATION_UPDATES_KEY = "";
     private static final int MY_PERMISSION_REQUEST_CODE = 7000;
     private static final int PLAY_SERVICE_RES_REQUEST = 7001;
-
-    //location
-    private LocationRequest locationRequest;
-    private GoogleApiClient mGoogleApiClient;
-
-    private LocationCallback locationCallback;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
-
-    private Location mLastLocation;
-
+    private static final int[] COLORS = new int[]{R.color.colorPrimary, R.color.colorAccent, R.color.rippleEffectColor, R.color.colorPrimaryDark, R.color.primary_dark_material_light};
+    //for editActivity data sharing
+    private static final int EDIT_REQUEST = 1;
+    //for  app update notification
+    private static final int REQ_CODE_VERSION_UPDATE = 530;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static int DELAY_TIME = 30000;
     private static int UPDATE_INTERVAL = 3000;
     private static int FASTEST_INTERVAL = 1000;
     private static int DISPLACEMENT = 1;
-
-
+    private static String TAG = "info";
+    private static String[] PERMISSION_STORAGE = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+    LatLng currentLocation;
     Animation bottomAnim, bottomAnimReverse, blinkAnim, buttonBounceAnim, blinkAnim2;
-    boolean mBlinkingCardView = false;
     //boolean isMemoryAddIconBlinking = false;
-
+    boolean mBlinkingCardView = false;
     boolean requestingLocationUpdates = false;
-
-    private Marker mUserMarker;
     Marker poiMarker;
     Marker destinationMarker;
-    private Marker memoryMarker;
     Button displayOnOffButton;
     Button trafficLegendButton;
-
-
-    // String memoryTitleText, memoryDescriptionText;
-
-
-    private SwitchMaterial locationSwitch;
-
     // Places fragment
     AutocompleteSupportFragment places;
 
+
+    // String memoryTitleText, memoryDescriptionText;
     SupportMapFragment mapFragment;
-
-    //country list selection
-
     ArrayList<String> countryListArray;
     ListView countryList;
 
-    Dialog countryCodeSearchDialog, navigationDialog, tapNavigationDialog, poiNavigationDialog, exitAppDialog, networkCheckErrorDialog, locationSettingDialog, memoryMarkerDialog, howToUseDialog, mapTypeDialog;
-
+    //country list selection
+    Dialog countryCodeSearchDialog, navigationDialog, tapNavigationDialog, poiNavigationDialog, exitAppDialog, networkCheckErrorDialog, locationSettingDialog, memoryMarkerDialog, howToUseDialog, mapTypeDialog, cannotCaptureDialog;
     EditText dialogEditText;
-
-
     ImageView countriesSelectImg, helpMessageImg, memoryAddIconImg, searchPlace;
     MaterialCardView navigateCardView, tapNavigateCardView, poiNavigateCardView, trafficLegend_cardView, autocompleteCardView;
     MaterialCardView lovelyCardView, happyCardView, amazingCardView, sadCardView, coolCardView, angryCardView, painCardView, awkwardCardView, confuseCardView, cryingCardView, highWeedCardView;
     MaterialCardView kissCardView, laughCardView, pamperedCardView, scaredCardView, shockCardView, sleepingCardView, teasingCardView;
     MaterialCardView shareMemoryCardView, bottomCardview, mapTypeCardView, defaultMapCardView, darkMapCardView, satelliteMapCardView;
-
-
     Toolbar toolbar1;
-
-
     LinearLayout memoryIconsCardViewHeadLayout;
     HorizontalScrollView memoryIconScrollView;
-
-
     TextView distanceTextView, distanceShowText;
-
     TextInputLayout memoryTitle, memoryDescription;
     TextInputEditText memoryTitle_editText2, memoryDescription_editText2;
-
     LottieAnimationView locationSettingOnOffLottie, howToUseIconLottie;
-
-
     DrawerLayout drawer;
     NavigationView navigationView;
-    private RelativeLayout wholeScreen;
     String jobId = "1";
-
-
-    //    for navigation menu animation
-    static final float END_SCALE = 0.7f;
-
-
+    LatLng currentPosition, startPosition, endPosition, destinationLatLng, currentLatLong, poiLatLng;
+    String mDestination, mDestinationLat, mDestinationLong, poiLat, poiLong;
+    String destinationLoc, destinationLong, destinationLat, destinationName;
+    String currentLocationLat, currentLocationLong;
+    AppUpdateManager appUpdateManager;
+    ProgressDialog progressDialog;
+    LatLng camera;
+    boolean isMapStyleNotLight = false;
+    private GoogleMap mMap;
+    //location
+    private LocationRequest locationRequest;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationCallback locationCallback;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private Location mLastLocation;
+    private Marker mUserMarker;
+    private Marker memoryMarker;
+    private SwitchMaterial locationSwitch;
+    private RelativeLayout wholeScreen;
     //car animation
     private List<LatLng> polyLineList;
-
     private float v;
     private double lat, lng;
     private Handler handler;
-    LatLng currentPosition, startPosition, endPosition, destinationLatLng, currentLatLong, poiLatLng;
     private int index, next;
-
-    String mDestination, mDestinationLat, mDestinationLong, poiLat, poiLong;
-
-    String destinationLoc, destinationLong, destinationLat, destinationName;
-    String currentLocationLat, currentLocationLong;
     private PolylineOptions polylineOptions, blackPolylineOptions;
     private Polyline blackPolyline, greyPolyline;
     private List<Polyline> polylines;
-    private static final int[] COLORS = new int[]{R.color.colorPrimary, R.color.colorAccent, R.color.rippleEffectColor, R.color.colorPrimaryDark, R.color.primary_dark_material_light};
-
-    private static String TAG = "info";
-
-    private IGoogleAPI mService;
-
-    //for editActivity data sharing
-    private static final int EDIT_REQUEST = 1;
-
-
-    //for  app update notification
-    private static final int REQ_CODE_VERSION_UPDATE = 530;
-    AppUpdateManager appUpdateManager;
-    private InstallStateUpdatedListener installStateUpdatedListener;
-    private AdView mAdView;
-    private InterstitialAd mInterstitialAd;
-    ProgressDialog progressDialog;
 
 
 
@@ -347,7 +311,106 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }*/
+    private IGoogleAPI mService;
+    private InstallStateUpdatedListener installStateUpdatedListener;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
+    public static void verifyStoragePermission(Activity activity) {
+
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, PERMISSION_STORAGE, REQUEST_EXTERNAL_STORAGE);
+
+
+        }
+
+    }
+
+    public static Boolean isLocationEnabled(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+// This is new method provided in API 28
+            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            return locationManager != null && locationManager.isLocationEnabled();
+        } else {
+// This is Deprecated in API 28
+            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF);
+            return (mode != Settings.Secure.LOCATION_MODE_OFF);
+
+        }
+    }
+
+    //START
+    //this takes screenshot of wholeScreen and share it very great but map is blank since with Google api v2,
+    // GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() should be used
+
+   /* protected File takeScreenShot(View view, String fileName) {
+
+
+        //init current date time setter
+        Calendar calendar = Calendar.getInstance();
+
+        String timeFormat = "dd-MM-yy  hh:mm:ss a";
+
+
+        //START...use this to set local time  and format
+        //SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance();
+        //END
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timeFormat);
+        String dateTime = simpleDateFormat.format(calendar.getTime());
+
+        try {
+            String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/Screenshots";
+            File fileDir = new File(dirPath);
+            if (!fileDir.exists()) {
+                boolean mkdir = fileDir.mkdir();
+            }
+
+            String path = dirPath+"/"+fileName+"-"+dateTime+".jpeg";
+
+
+            view.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+            view.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(path);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            fileDir.setReadable(true, false);
+
+
+
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile));
+            sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            sharingIntent.setType("image/png");
+            String shareBody = "In Tweecher,  My highest score with screen shot";
+            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "My Tweecher score");
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+
+
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+            return  imageFile;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }*/
+
+    // END
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -361,19 +424,15 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         setContentView(R.layout.activity_maps);
 
 
-
-
-
-
         final ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
 
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        /*MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
                 //loadInterstitialAd();
             }
-        });
+        });*/
 
         loadInterstitialAd();
 
@@ -422,6 +481,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         locationSettingDialog = new Dialog(this);
         memoryMarkerDialog = new Dialog(this);
         howToUseDialog = new Dialog(this);
+        cannotCaptureDialog = new Dialog(this);
         //mapTypeDialog = new Dialog(this);
 
         displayOnOffButton = findViewById(R.id.displayOnOffButton);
@@ -717,13 +777,12 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         countryListArray.add("ZW");
 
 
-
+        //countryList.setBackgroundColor(getResources().getColor(R.color.changeableWhite));
 
         //init  locationSettingOnOffLottie
         locationSettingOnOffLottie = findViewById(R.id.animation_view);
         howToUseIconLottie = findViewById(R.id.how_to_use_icon_lottie);
         howToUseIconLottie.setRepeatCount(200);
-
 
 
         //sharedpreference for howtouse for first installers or when data is cleared by user
@@ -760,7 +819,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         // copyLocationImg init
         memoryAddIconImg = findViewById(R.id.copy_locationImg);
 
-        int MEMORY_ICON_DELAY = 20000;
+        int MEMORY_ICON_DELAY = 25000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -774,24 +833,31 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             @Override
             public void onClick(View v) {
                 //copyLocationImg.startAnimation(buttonBounceAnim);
-                memoryAddIconImg.clearAnimation();
 
-                Toast.makeText(MapsActivity.this, "Location coordinates are copied to clipboard for your use.", Toast.LENGTH_LONG).show();
+                if (currentLatLong != null) {
+
+                    memoryAddIconImg.clearAnimation();
+
+                    Toast.makeText(MapsActivity.this, "Location coordinates are copied to clipboard for your use.", Toast.LENGTH_LONG).show();
 
 
-                final double latitude = mLastLocation.getLatitude();
-                final double longitude = mLastLocation.getLongitude();
-                currentLatLong = new LatLng(latitude, longitude);
-                String currentLat = String.valueOf(latitude);
-                String currentLong = String.valueOf(longitude);
-                String currentLocCoordinates = currentLat + "," + currentLong;
+                    final double latitude = mLastLocation.getLatitude();
+                    final double longitude = mLastLocation.getLongitude();
+                    currentLatLong = new LatLng(latitude, longitude);
+                    String currentLat = String.valueOf(latitude);
+                    String currentLong = String.valueOf(longitude);
+                    String currentLocCoordinates = currentLat + "," + currentLong;
 
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText(null, currentLocCoordinates);
-                if (clipboard == null) return;
-                clipboard.setPrimaryClip(clip);
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText(null, currentLocCoordinates);
+                    if (clipboard == null) return;
+                    clipboard.setPrimaryClip(clip);
 
-                ShowAddMomentSnackBar();
+                    ShowAddMomentSnackBar();
+
+                } else {
+                    showLocationSettingDialog();
+                }
 
             }
         });
@@ -850,7 +916,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             dialogEditText = countryCodeSearchDialog.findViewById(R.id.dialog_edit_text);
             countryList = countryCodeSearchDialog.findViewById(R.id.country_list_view);
             helpMessageImg = countryCodeSearchDialog.findViewById(R.id.help_img);
-            countryList.setBackgroundColor(getResources().getColor(R.color.grayRippleColor));
+            countryList.setBackgroundColor(getResources().getColor(R.color.changeableWhite));
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                countryList.setForeground(getResources().getDrawable(R.drawable.country_list_backgrnd));
+            }*/
 
 
             helpMessageImg.setOnClickListener(new View.OnClickListener() {
@@ -932,6 +1001,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             @Override
             public void onClick(View v) {
 
+                shareMemoryCardView.setVisibility(View.GONE);
 
                 //takeScreenShot(getWindow().getDecorView().getRootView(), "result");
 
@@ -951,8 +1021,14 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 }
                 mMap.setMyLocationEnabled(false);*/
                 //END
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                captureScreen();
+                    showCannotCaptureDialog();
+
+                } else {
+                    captureScreen();
+
+                }
 
 
             }
@@ -1207,11 +1283,16 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //FloatingActionButton darkLightMapFloatingActionButton = (FloatingActionButton) findViewById(R.id.dark_light_MapFab);
 
 
-
-
-
-
         //both codes work but i reduced it by a line of code
+        int SHARE_FLOAT_DELAY = 25000;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                shareLocationFloatingActionButton.setVisibility(View.VISIBLE);
+            }
+        }, SHARE_FLOAT_DELAY);
+
+
         shareLocationFloatingActionButton.setOnClickListener(v -> {
 
             shareLocationFloatingActionButton.startAnimation(buttonBounceAnim);
@@ -1294,27 +1375,35 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //  navigate to current location
         final MaterialCardView locationImageLayout = findViewById(R.id.locationImageLayout);
         locationImageLayout.setOnClickListener(v -> {
+
+
             locationImageLayout.startAnimation(buttonBounceAnim);
 
             if (!isLocationEnabled(this)) {
 
                 showLocationSettingDialog();
             } else {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                    return;
-                }
-                fusedLocationProviderClient.getLastLocation()
-                        .addOnFailureListener(e -> Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show())
-                        .addOnSuccessListener(location -> {
-                            LatLng userLoc = new LatLng(location.getLatitude(), location.getLongitude());
-                            //double offset = 0.0016;
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLoc.latitude, userLoc.longitude), 17f));
 
 
-                        });
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                        return;
+                    }
+                    fusedLocationProviderClient.getLastLocation()
+                            .addOnFailureListener(e -> Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show())
+                            .addOnSuccessListener(location -> {
+                                LatLng userLoc = new LatLng(location.getLatitude(), location.getLongitude());
+                                //double offset = 0.0016;
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userLoc.latitude, userLoc.longitude), 17f));
+
+
+                            });
+
 
             }
+
+
+
 
 
         });
@@ -1330,14 +1419,23 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    if (!isLocationEnabled(MapsActivity.this)) {
+
+                        showLocationSettingDialog();
+                    } else {
+
+                        startLocationUpdates();
+                        displayLocation();
+
+                        Snackbar.make(mapFragment.requireView(), getResources().getString(R.string.you_are_onRoad_driveSafely), Snackbar.LENGTH_LONG).show();
+
+                        displayOnOffButton.setText(R.string.you_are_onRoad);
+
+
+                    }
+
                     //add multiple markers for predefined pickup/destination locations when online
 
-                    startLocationUpdates();
-                    displayLocation();
-
-                    Snackbar.make(mapFragment.requireView(), getResources().getString(R.string.you_are_onRoad_driveSafely), Snackbar.LENGTH_LONG).show();
-
-                    displayOnOffButton.setText(R.string.you_are_onRoad);
 
                 } else {
                     stopLocationUpdates();
@@ -1425,7 +1523,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         //String apiKey = getString(R.string.api_key);
         // String apiKey = getResources().getString(R.string.google_maps_key);
 
-        String apiKey = "AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74";
+        String apiKey = getResources().getString(R.string.place_API);
         if (!Places.isInitialized()) {
             // initialize sdk
             Places.initialize(getApplicationContext(), apiKey);
@@ -1556,8 +1654,15 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         destinationLocation.setLatitude(place.getLatLng().latitude);
                         destinationLocation.setLongitude(place.getLatLng().longitude);
 
+
+                        float speed = startLocation.getSpeed();
                         float distance = startLocation.distanceTo(destinationLocation);
                         DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
+
+
+                        if (speed > 0) {
+
+                        }
 
                         // displayOnOffButton.setBackgroundColor(getResources().getColor(R.color.quantum_lightblue700));
                         //displayOnOffButton.setTextSize(12);
@@ -1648,6 +1753,28 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 */
     }
 
+    private void showCannotCaptureDialog() {
+        cannotCaptureDialog.setContentView(R.layout.cannot_capture_dialog_layout);
+
+        Objects.requireNonNull(cannotCaptureDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(cannotCaptureDialog.getWindow()).getAttributes().windowAnimations = R.style.DialogAnimationScale;
+
+
+        cannotCaptureDialog.show();
+        cannotCaptureDialog.setCancelable(true);
+        cannotCaptureDialog.setCanceledOnTouchOutside(true);
+
+        final Button okButton = cannotCaptureDialog.findViewById(R.id.okButton);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cannotCaptureDialog.dismiss();
+            }
+        });
+
+
+    }
+
     private void loadInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder().build();
 
@@ -1658,6 +1785,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                         mInterstitialAd = interstitialAd;
                         Log.i(TAG, "onAdLoaded");
+                        //Toast.makeText(MapsActivity.this, "Ad Loaded", Toast.LENGTH_SHORT).show();
 
 
                         //set fullscreen callback
@@ -1787,6 +1915,39 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+
+
+
+
+
+
+
+
+   /* private void shareIt() {
+        String imagePath = Environment.getExternalStorageDirectory().toString() + "/Screenshots";
+        Uri uri = Uri.fromFile(getExternalFilesDir(imagePath));
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("image/png");
+
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "gdghdhg");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, "hfjyfyfd");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        try {
+            startActivity(Intent.createChooser(intent, "Share Screenshot"));
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
+        }
+    }*/
+
+
+    /*public Bitmap takeScreenshot() {
+        View rootView = findViewById(android.R.id.content).getRootView();
+        rootView.setDrawingCacheEnabled(true);
+        return rootView.getDrawingCache();
+    }
+*/
+
     /* private void showMapTypeDialog() {
          mapTypeDialog.setContentView(R.layout.map_type_select_dialog);
          Objects.requireNonNull(mapTypeDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -1892,7 +2053,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         howToUseIconLottie.cancelAnimation();
 
     }
-
 
     public void captureScreen() {
 
@@ -2028,128 +2188,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-    //START
-    //this takes screenshot of wholeScreen and share it very great but map is blank since with Google api v2,
-    // GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() should be used
-
-   /* protected File takeScreenShot(View view, String fileName) {
-
-
-        //init current date time setter
-        Calendar calendar = Calendar.getInstance();
-
-        String timeFormat = "dd-MM-yy  hh:mm:ss a";
-
-
-        //START...use this to set local time  and format
-        //SimpleDateFormat simpleDateFormat = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance();
-        //END
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(timeFormat);
-        String dateTime = simpleDateFormat.format(calendar.getTime());
-
-        try {
-            String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + "/Screenshots";
-            File fileDir = new File(dirPath);
-            if (!fileDir.exists()) {
-                boolean mkdir = fileDir.mkdir();
-            }
-
-            String path = dirPath+"/"+fileName+"-"+dateTime+".jpeg";
-
-
-            view.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-            view.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(path);
-
-            FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
-
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-            fileDir.setReadable(true, false);
-
-
-
-            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imageFile));
-            sharingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            sharingIntent.setType("image/png");
-            String shareBody = "In Tweecher,  My highest score with screen shot";
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "My Tweecher score");
-            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
-
-
-            startActivity(Intent.createChooser(sharingIntent, "Share via"));
-
-            return  imageFile;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        return null;
-    }*/
-
-    // END
-
-
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-
-    private static String[] PERMISSION_STORAGE = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-    };
-
-    public static void verifyStoragePermission(Activity activity) {
-
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, PERMISSION_STORAGE, REQUEST_EXTERNAL_STORAGE);
-
-
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-   /* private void shareIt() {
-        String imagePath = Environment.getExternalStorageDirectory().toString() + "/Screenshots";
-        Uri uri = Uri.fromFile(getExternalFilesDir(imagePath));
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_SEND);
-        intent.setType("image/png");
-
-        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "gdghdhg");
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, "hfjyfyfd");
-        intent.putExtra(Intent.EXTRA_STREAM, uri);
-        try {
-            startActivity(Intent.createChooser(intent, "Share Screenshot"));
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "No App Available", Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
-
-    /*public Bitmap takeScreenshot() {
-        View rootView = findViewById(android.R.id.content).getRootView();
-        rootView.setDrawingCacheEnabled(true);
-        return rootView.getDrawingCache();
-    }
-*/
-
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
@@ -2158,6 +2196,61 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+
+
+    //START ...used to validate  MemoryDialog Title edit text
+   /* private boolean validateMemoryDialogTitle() {
+        String memoryTitleText = memoryTitle.getEditText().getText().toString().trim();
+
+        if (memoryTitleText.isEmpty()) {
+            memoryTitle.setError("Title cannot be empty");
+            memoryTitle.setErrorEnabled(true);
+            return false;
+
+       *//* } else if (memoryTitleText.length() < 2) {
+            memoryTitle.setError("Title is too short!");
+
+            return false;*//*
+
+        } else {
+            memoryTitle.setError(null);
+            memoryTitle.setErrorEnabled(false);
+            return true;
+        }
+
+
+    }*/
+    //END
+
+
+    //START ...used to validate  MemoryDialog Description edit text
+   /* private boolean validateMemoryDialogDescription() {
+        String memoryDescriptionText = memoryDescription.getEditText().getText().toString().trim();
+
+        if (memoryDescriptionText.isEmpty()) {
+            memoryDescription.setError("Memory description cannot be empty");
+            return false;
+
+        *//*} else if (memoryDescriptionText.length() < 2) {
+            memoryDescription.setError("Memory description is too short!");
+
+            return false;*//*
+
+        } else if (memoryDescriptionText.length() > 1000) {
+            memoryDescription.setError("Memory description is too long!");
+
+            return false;
+
+        } else {
+            memoryDescription.setError(null);
+            memoryDescription.setErrorEnabled(false);
+            return true;
+        }
+
+
+    }
+*/
+    //END
 
     private void ShowAddMomentSnackBar() {
         int DelayTime = 10000;
@@ -3169,6 +3262,44 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+   /* public void openBottomSheet() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getApplicationContext(), R.style.BottomSheetDialogTheme);
+        View navigateBottomSheetView = LayoutInflater.from(MapsActivity.this)
+                .inflate(R.layout.bottomsheet_navigate, (CardView) findViewById(R.id.bottomSheetLayout));
+
+        navigateBottomSheetView.findViewById(R.id.bottomSheetNavigateCardView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri navIntentUri = Uri.parse("google.navigation:q=" + destinationLat + "," + destinationLong);
+                Intent navigationIntent = new Intent(Intent.ACTION_VIEW, navIntentUri);
+                navigationIntent.setPackage("com.google.android.apps.maps");
+                //checking if at least a map application is installed on the device so it opens it automatically for the navigation
+                // else the app crashes
+                //if more than one map application is installed, user is asked which to use for the action
+
+
+                if (navigationIntent.resolveActivity(getPackageManager()) != null) {
+
+                    navigationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(navigationIntent);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Google map is not installed on your device... \nPlease Install Google maps to handle task", Toast.LENGTH_SHORT).show();
+                    Uri gmmIntentUri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+                    Intent googleMapsIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+                    googleMapsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(googleMapsIntent);
+
+                }
+
+
+            }
+        });
+
+    }*/
+    // method to show navigateBottomSheet
+
     private void addMemoryMarker() {
 
 
@@ -3996,61 +4127,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
-    //START ...used to validate  MemoryDialog Title edit text
-   /* private boolean validateMemoryDialogTitle() {
-        String memoryTitleText = memoryTitle.getEditText().getText().toString().trim();
-
-        if (memoryTitleText.isEmpty()) {
-            memoryTitle.setError("Title cannot be empty");
-            memoryTitle.setErrorEnabled(true);
-            return false;
-
-       *//* } else if (memoryTitleText.length() < 2) {
-            memoryTitle.setError("Title is too short!");
-
-            return false;*//*
-
-        } else {
-            memoryTitle.setError(null);
-            memoryTitle.setErrorEnabled(false);
-            return true;
-        }
-
-
-    }*/
-    //END
-
-
-    //START ...used to validate  MemoryDialog Description edit text
-   /* private boolean validateMemoryDialogDescription() {
-        String memoryDescriptionText = memoryDescription.getEditText().getText().toString().trim();
-
-        if (memoryDescriptionText.isEmpty()) {
-            memoryDescription.setError("Memory description cannot be empty");
-            return false;
-
-        *//*} else if (memoryDescriptionText.length() < 2) {
-            memoryDescription.setError("Memory description is too short!");
-
-            return false;*//*
-
-        } else if (memoryDescriptionText.length() > 1000) {
-            memoryDescription.setError("Memory description is too long!");
-
-            return false;
-
-        } else {
-            memoryDescription.setError(null);
-            memoryDescription.setErrorEnabled(false);
-            return true;
-        }
-
-
-    }
-*/
-    //END
-
     private void showNavigationDialog() {
 
         navigationDialog.setContentView(R.layout.navigation_dialog_layout);
@@ -4140,7 +4216,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
     private void showTapNavigationDialog() {
         // tapNavigationDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         //tapNavigationDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
@@ -4229,45 +4304,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-   /* public void openBottomSheet() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getApplicationContext(), R.style.BottomSheetDialogTheme);
-        View navigateBottomSheetView = LayoutInflater.from(MapsActivity.this)
-                .inflate(R.layout.bottomsheet_navigate, (CardView) findViewById(R.id.bottomSheetLayout));
-
-        navigateBottomSheetView.findViewById(R.id.bottomSheetNavigateCardView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri navIntentUri = Uri.parse("google.navigation:q=" + destinationLat + "," + destinationLong);
-                Intent navigationIntent = new Intent(Intent.ACTION_VIEW, navIntentUri);
-                navigationIntent.setPackage("com.google.android.apps.maps");
-                //checking if at least a map application is installed on the device so it opens it automatically for the navigation
-                // else the app crashes
-                //if more than one map application is installed, user is asked which to use for the action
-
-
-                if (navigationIntent.resolveActivity(getPackageManager()) != null) {
-
-                    navigationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(navigationIntent);
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Google map is not installed on your device... \nPlease Install Google maps to handle task", Toast.LENGTH_SHORT).show();
-                    Uri gmmIntentUri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
-                    Intent googleMapsIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-                    googleMapsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(googleMapsIntent);
-
-                }
-
-
-            }
-        });
-
-    }*/
-    // method to show navigateBottomSheet
-
-
     private void getRouteToDestination() {
         currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
@@ -4280,6 +4316,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         routing.execute();
 
     }
+
+
+    // test api key with this
+    //https://maps.googleapis.com/maps/api/directions/json?mode=driving&transit_routing_preference=less_driving&origin=6.686979,%20-1.577775&destination=adum+road&key=AIzaSyCwMe6cI9XR8PUQUDojS4n9lngIpe-G-Ww
 
     private void animateNavigationDrawer() {
 
@@ -4309,7 +4349,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
     public void btnLegend(View view) {
         ExpandableRelativeLayout trafficLegendExpandableLayout = (ExpandableRelativeLayout) findViewById(R.id.trafficLegend_expLayout);
 
@@ -4324,15 +4363,13 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+    //decodePoly class code gotten fron online from
+    // https://github.com/bashantad/Tourfit-android/blob/master/src/com/example/tourfit/DirectionsJSONParser.java
 
     public void setSupportActionBar(Toolbar toolbar) {
         //setSupportActionBar(toolbar);
 
     }
-
-
-    // test api key with this
-    //https://maps.googleapis.com/maps/api/directions/json?mode=driving&transit_routing_preference=less_driving&origin=6.686979,%20-1.577775&destination=adum+road&key=AIzaSyCwMe6cI9XR8PUQUDojS4n9lngIpe-G-Ww
 
     public void getDirection() {
         /*final double latitude = mLastLocation.getLatitude();
@@ -4361,17 +4398,25 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             mService.getPath(requestApi)
                     .enqueue(new Callback<String>() {
                         @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
+                        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                             try {
-                                JSONObject jsonObject = new JSONObject(response.body().toString());
+                                JSONObject jsonObject = null;
+                                if (response.body() != null) {
+                                    jsonObject = new JSONObject(response.body().toString());
+                                }
 
-                                JSONArray jsonArray = jsonObject.getJSONArray("routes");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject route = jsonArray.getJSONObject(i);
-                                    JSONObject poly = route.getJSONObject("overview_polyline");
-                                    String polyline = poly.getString("points");
-                                    polyLineList = decodePoly(polyline);
+                                JSONArray jsonArray = null;
+                                if (jsonObject != null) {
+                                    jsonArray = jsonObject.getJSONArray("routes");
+                                }
+                                if (jsonArray != null) {
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject route = jsonArray.getJSONObject(i);
+                                        JSONObject poly = route.getJSONObject("overview_polyline");
+                                        String polyline = poly.getString("points");
+                                        polyLineList = decodePoly(polyline);
 
+                                    }
                                 }
                                 //Adjust Bounds
                                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -4583,9 +4628,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-    //decodePoly class code gotten fron online from
-    // https://github.com/bashantad/Tourfit-android/blob/master/src/com/example/tourfit/DirectionsJSONParser.java
-
     private List<LatLng> decodePoly(String encoded) {
 
         List<LatLng> poly = new ArrayList<LatLng>();
@@ -4619,7 +4661,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
         return poly;
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -4668,6 +4709,16 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
+
+   /* private void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+
+    }*/
 
     // GravityCompat.START is for when drawer is drawn from start (left side)
     //GravityCompat.END would be for when drawer is drawn from end (right side)
@@ -4762,6 +4813,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             } else {
 
+                showExitDialog();
+
 
                 /*progressDialog = new ProgressDialog(MapsActivity.this);
                 progressDialog.setContentView(R.layout.progress_layout);
@@ -4769,7 +4822,9 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 progressDialog.show();
 */
 
-                ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
+
+                //used progress dialog
+                /*ProgressDialogClass progressDialogClass = new ProgressDialogClass(MapsActivity.this);
 
                 progressDialogClass.startLoadingProgress();
 
@@ -4783,23 +4838,25 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                         showInterstitialAd();
 
-                        /*new Handler().postDelayed(new Runnable() {
+                        *//*new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 showExitDialog();
 
                             }
-                        }, 2000);*/
+                        }, 2000);*//*
 
 
                     }
                 }, 2000);
 
-
+*/
             }
 
-
     }
+
+
+    //remove Location with removeLocationUpdates when offline without locationRequest
 
     private void showInterstitialAd() {
 
@@ -4812,7 +4869,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     // Called when fullscreen content is dismissed.
                     //mInterstitialAd = null;
                     Log.d("TAG", "The ad was dismissed.");
-                    showExitDialog();
+                    //showExitDialog();
 
                 }
 
@@ -4836,13 +4893,12 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
         } else {
             Log.d("TAG", "ad did not load.");
-            showExitDialog();
+            //showExitDialog();
         }
     }
 
-
     private void createLocationRequest() {
-        locationRequest = new LocationRequest();
+        //locationRequest = new LocationRequest();
         //new locationRequest
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(UPDATE_INTERVAL);
@@ -4853,17 +4909,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
     }
-
-
-   /* private void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-
-    }*/
 
     // check if Google Play Services are installed on user's device
     private boolean checkPlayServices() {
@@ -4896,9 +4941,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
-    //remove Location with removeLocationUpdates when offline without locationRequest
-
     private void stopLocationUpdates() {
 
 
@@ -4909,7 +4951,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
             return;
         }
-       // mMap.setMyLocationEnabled(true);
+        // mMap.setMyLocationEnabled(true);
 
        /* String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference driverAvailableRef = FirebaseDatabase.getInstance().getReference("driversAvailable");
@@ -4945,7 +4987,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
     // rotate marker
     //remember to change int to float
     //it was private
@@ -4979,7 +5020,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -5024,11 +5064,35 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
             //showExitDialog();
+            //Context context = getApplicationContext();
 
-        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "map not responsive? we are restarting for you", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 3000);
+
+
+                    PackageManager packageManager = getApplicationContext().getPackageManager();
+                    Intent intent = packageManager.getLaunchIntentForPackage(getApplicationContext().getPackageName());
+                    ComponentName componentName = intent.getComponent();
+                    Intent restartIntent = Intent.makeRestartActivityTask(componentName);
+                    //restartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(restartIntent);
+                    System.exit(0);
+
+                }
+            }, 10000);
+
+
+        } else {
+
 
         }
-
 
 
         //sharedpreference for dark mode...placed here instead of onCreate method after setContView because mMap which is = googleMap will be null in the onCreate method
@@ -5046,23 +5110,15 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             //Toast.makeText(MapsActivity.this, getResources().getString(R.string.YouSetNightMode), Toast.LENGTH_SHORT).show();
 
 
-
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MapsActivity.this, R.raw.new_day_map));
 
 
-           // Toast.makeText(MapsActivity.this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
-
+            // Toast.makeText(MapsActivity.this, getResources().getString(R.string.YouSetDayMode), Toast.LENGTH_SHORT).show();
 
 
         }
-
-
-
-
-
-
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -5161,117 +5217,35 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             @Override
             public void onMapLongClick(LatLng latLng) {
 
-                if (locationSwitch.isChecked()) {
-                    if (destinationMarker != null) {
-                        destinationMarker.remove();
-                    }
+                if (!isLocationEnabled(MapsActivity.this)) {
 
-                    //remove polyline if it drawn on map...
-                    if (greyPolyline != null) {
-                        greyPolyline.remove();
-                    }
-
-                    if (poiMarker != null) {
-                        poiMarker.remove();
-                    }
-
-                    //mMap.clear();
-
-                    if (navigateCardView.getVisibility() == View.VISIBLE) {
-                        navigateCardView.setVisibility(View.GONE);
-                        if (mBlinkingCardView) {
-
-                            navigateCardView.clearAnimation();
-                            mBlinkingCardView = false;
-                        }
-                    }
-
-                    tapNavigateCardView.setVisibility(View.VISIBLE);
-                    if (!mBlinkingCardView) {
-                        tapNavigateCardView.startAnimation(blinkAnim);
-                        mBlinkingCardView = true;
-                    }
-
-                    //  mDestination = String.valueOf(latLng);
-
-                    LatLng mTapDestinationLatLng = new LatLng(latLng.latitude, latLng.longitude);
-                    mDestination = String.valueOf(mTapDestinationLatLng);
-                    mDestinationLat = String.valueOf(mTapDestinationLatLng.latitude);
-                    mDestinationLong = String.valueOf(mTapDestinationLatLng.longitude);
-
-                    //getting address when map is clicked
-                    /*List<Address> addresses = new ArrayList<>();
-                    try {
-                        addresses = geocoder.getFromLocation(mTapDestinationLatLng.latitude, mTapDestinationLatLng.longitude, 1);
-                    }catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    android.location.Address address = addresses.get(0);
-                    if (address != null) {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                            stringBuilder.append(address.getAddressLine(i) + "\n");
-                        }
-                        destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(stringBuilder.toString()).snippet(mDestinationLat + "," + mDestinationLong).flat(false));
-
-                        destinationMarker.showInfoWindow();
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
-                        getOnMapTapDirection();
-
-                    }
-*/
-                    destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_user_destination_marker)).title("Destination").flat(false)); //.snippet(mDestinationLat + "," + mDestinationLong)
-
-                    destinationMarker.showInfoWindow();
-
-
-                    //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
-                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-                            .target(mTapDestinationLatLng)
-                            .zoom(16f)
-                            .tilt(70f)
-                            .build()));
-                    getOnMapTapDirection();
-
-                    //set distance to destination
-                    Location startLocation = new Location("");
-                    startLocation.setLatitude(currentPosition.latitude);
-                    startLocation.setLongitude(currentPosition.longitude);
-
-                    Location TapdestinationLocation = new Location("");
-                    TapdestinationLocation.setLatitude(latLng.latitude);
-                    TapdestinationLocation.setLongitude(latLng.longitude);
-
-
-                    //float lineDistance = polyLineList.size() - 1;
-
-                    float distance = startLocation.distanceTo(TapdestinationLocation);
-                    DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
-
-                    displayOnOffButton.setText(String.format("~ %s km to %s", DecimalPlace.format(distance * 0.001), "Destination"));
+                    showLocationSettingDialog();
 
                 } else {
 
-                    if (!locationSwitch.isChecked()) {
+
+                    if (locationSwitch.isChecked()) {
+
 
                         if (destinationMarker != null) {
                             destinationMarker.remove();
-                        }
-
-                        if (poiMarker != null) {
-                            poiMarker.remove();
                         }
 
                         //remove polyline if it drawn on map...
                         if (greyPolyline != null) {
                             greyPolyline.remove();
                         }
+
+                        if (poiMarker != null) {
+                            poiMarker.remove();
+                        }
+
                         //mMap.clear();
 
                         if (navigateCardView.getVisibility() == View.VISIBLE) {
                             navigateCardView.setVisibility(View.GONE);
                             if (mBlinkingCardView) {
+
                                 navigateCardView.clearAnimation();
                                 mBlinkingCardView = false;
                             }
@@ -5282,6 +5256,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                             tapNavigateCardView.startAnimation(blinkAnim);
                             mBlinkingCardView = true;
                         }
+
                         //  mDestination = String.valueOf(latLng);
 
                         LatLng mTapDestinationLatLng = new LatLng(latLng.latitude, latLng.longitude);
@@ -5311,15 +5286,16 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                     }
 */
-
-                        destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_user_destination_marker)).title("Destination").snippet(mDestinationLat + "," + mDestinationLong).flat(false));
+                        destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_user_destination_marker)).title("Destination").flat(false)); //.snippet(mDestinationLat + "," + mDestinationLong)
 
                         destinationMarker.showInfoWindow();
+
+
                         //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
                         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
                                 .target(mTapDestinationLatLng)
                                 .zoom(16f)
-                                .tilt(60f)
+                                .tilt(70f)
                                 .build()));
                         getOnMapTapDirection();
 
@@ -5332,19 +5308,112 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                         TapdestinationLocation.setLatitude(latLng.latitude);
                         TapdestinationLocation.setLongitude(latLng.longitude);
 
+
+                        //float lineDistance = polyLineList.size() - 1;
+
                         float distance = startLocation.distanceTo(TapdestinationLocation);
                         DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
 
                         displayOnOffButton.setText(String.format("~ %s km to %s", DecimalPlace.format(distance * 0.001), "Destination"));
 
-                        Toast.makeText(MapsActivity.this, "Please you are Offline", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        if (!locationSwitch.isChecked()) {
+
+                            if (destinationMarker != null) {
+                                destinationMarker.remove();
+                            }
+
+                            if (poiMarker != null) {
+                                poiMarker.remove();
+                            }
+
+                            //remove polyline if it drawn on map...
+                            if (greyPolyline != null) {
+                                greyPolyline.remove();
+                            }
+                            //mMap.clear();
+
+                            if (navigateCardView.getVisibility() == View.VISIBLE) {
+                                navigateCardView.setVisibility(View.GONE);
+                                if (mBlinkingCardView) {
+                                    navigateCardView.clearAnimation();
+                                    mBlinkingCardView = false;
+                                }
+                            }
+
+                            tapNavigateCardView.setVisibility(View.VISIBLE);
+                            if (!mBlinkingCardView) {
+                                tapNavigateCardView.startAnimation(blinkAnim);
+                                mBlinkingCardView = true;
+                            }
+                            //  mDestination = String.valueOf(latLng);
+
+                            LatLng mTapDestinationLatLng = new LatLng(latLng.latitude, latLng.longitude);
+                            mDestination = String.valueOf(mTapDestinationLatLng);
+                            mDestinationLat = String.valueOf(mTapDestinationLatLng.latitude);
+                            mDestinationLong = String.valueOf(mTapDestinationLatLng.longitude);
+
+                            //getting address when map is clicked
+                    /*List<Address> addresses = new ArrayList<>();
+                    try {
+                        addresses = geocoder.getFromLocation(mTapDestinationLatLng.latitude, mTapDestinationLatLng.longitude, 1);
+                    }catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    android.location.Address address = addresses.get(0);
+                    if (address != null) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                            stringBuilder.append(address.getAddressLine(i) + "\n");
+                        }
+                        destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(stringBuilder.toString()).snippet(mDestinationLat + "," + mDestinationLong).flat(false));
+
+                        destinationMarker.showInfoWindow();
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+                        getOnMapTapDirection();
+
+                    }
+*/
+
+                            destinationMarker = mMap.addMarker(new MarkerOptions().position(mTapDestinationLatLng).icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_user_destination_marker)).title("Destination").snippet(mDestinationLat + "," + mDestinationLong).flat(false));
+
+                            destinationMarker.showInfoWindow();
+                            //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f));
+                            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+                                    .target(mTapDestinationLatLng)
+                                    .zoom(16f)
+                                    .tilt(60f)
+                                    .build()));
+                            getOnMapTapDirection();
+
+                            //set distance to destination
+                            Location startLocation = new Location("");
+                            startLocation.setLatitude(currentPosition.latitude);
+                            startLocation.setLongitude(currentPosition.longitude);
+
+                            Location TapdestinationLocation = new Location("");
+                            TapdestinationLocation.setLatitude(latLng.latitude);
+                            TapdestinationLocation.setLongitude(latLng.longitude);
+
+                            float distance = startLocation.distanceTo(TapdestinationLocation);
+                            DecimalFormat DecimalPlace = new DecimalFormat("#0.00");
+
+                            displayOnOffButton.setText(String.format("~ %s km to %s", DecimalPlace.format(distance * 0.001), "Destination"));
+
+                            Toast.makeText(MapsActivity.this, "Please you are Offline", Toast.LENGTH_SHORT).show();
 
 
-                        // displayOnOffButton.setText(R.string.youareoffline);
+                            // displayOnOffButton.setText(R.string.youareoffline);
+                        }
+
+
                     }
 
 
                 }
+
 
             }
 
@@ -5372,8 +5441,86 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             turnOnButton.setOnClickListener(v -> {
 
                 locationSettingDialog.dismiss();
-                Intent openLocationSettingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                /*Intent openLocationSettingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(openLocationSettingsIntent);
+*/
+                // createLocation Request
+                createLocationRequest();
+
+                // check if device location is enabled or not
+                LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                        .addLocationRequest(locationRequest);
+
+                //make sure to add builder.setAlwaysShow and set to true
+                builder.setAlwaysShow(true);
+
+
+                com.google.android.gms.tasks.Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
+                        .checkLocationSettings(builder.build());
+
+
+                result.addOnCompleteListener(new com.google.android.gms.tasks.OnCompleteListener<LocationSettingsResponse>() {
+                                                 @Override
+                                                 public void onComplete(@NonNull com.google.android.gms.tasks.Task<LocationSettingsResponse> task) {
+
+                                                     try {
+                                                         LocationSettingsResponse response = task.getResult(ApiException.class);
+                                                         Toast.makeText(MapsActivity.this, "GPS is turned on", Toast.LENGTH_SHORT).show();
+
+                                                     } catch (ApiException e) {
+                                                         e.printStackTrace();
+                                                         switch (e.getStatusCode()) {
+                                                             case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                                                                 try {
+                                                                     ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+
+                                                                     resolvableApiException.startResolutionForResult(MapsActivity.this, REQUEST_CHECK_LOC_SETTINGS);
+                                                                 } catch (IntentSender.SendIntentException sendIntentException) {
+                                                                     sendIntentException.printStackTrace();
+
+                                                                 }
+                                                                 break;
+
+                                                             case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+
+                                                                 break;
+                                                         }
+                                                     }
+                                                 }
+                                             }
+                );
+
+
+
+                /*result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+                    @Override
+                    public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+
+                        try {
+                            LocationSettingsResponse response = task.getResult(ApiException.class);
+                            Toast.makeText(MapsActivity.this, "GPS is turned on", Toast.LENGTH_SHORT).show();
+                        } catch (ApiException e) {
+                            //e.printStackTrace();
+                            switch (e.getStatusCode()) {
+
+                                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                                    try {
+                                        ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                                        resolvableApiException.startResolutionForResult(MapsActivity.this, REQUEST_CHECK_LOC_SETTINGS);
+                                    } catch (IntentSender.SendIntentException sendIntentException) {
+
+                                    }
+                                    break;
+
+                                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                    break;
+                            }
+                        }
+
+                    }
+                });
+*/
 
             });
 
@@ -5412,7 +5559,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         LocationSettingDialog.show();
     }
 
-
     private boolean isInternetConnected(MapsActivity mapsActivity) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) mapsActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -5431,20 +5577,14 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-    public static Boolean isLocationEnabled(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-// This is new method provided in API 28
-            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            return locationManager != null && locationManager.isLocationEnabled();
-        } else {
-// This is Deprecated in API 28
-            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
-                    Settings.Secure.LOCATION_MODE_OFF);
-            return (mode != Settings.Secure.LOCATION_MODE_OFF);
 
-        }
-    }
+   /* @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        displayLocation();
+        startLocationUpdates();
 
+    }*/
+    // display location
 
     private void showCheckInternetDialog() {
 
@@ -5508,15 +5648,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     }
 
-
-   /* @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        displayLocation();
-        startLocationUpdates();
-
-    }*/
-    // display location
-
     public float getBearing(LatLng begin, LatLng end) {
         /*begin = new LatLng(begin.latitude, begin.longitude);
         end = new LatLng(end.latitude, end.longitude);*/
@@ -5542,7 +5673,19 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camPos));
     }
 
-    LatLng camera;
+
+
+
+    /*@Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+
+    }*/
+
+  /*  @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }*/
 
     private void displayLocation() {
 // if location request permission is not granted by user then return (ie. no location is shown and subsequent methods to be executed after location permission is granted dnt start at all)
@@ -5691,31 +5834,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
 
-    /*@Override
-    public void onConnectionSuspended(int i) {
-        mGoogleApiClient.connect();
-
-    }*/
-
-  /*  @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }*/
-
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-        mLastLocation = location;
-        displayLocation();
-        updateCameraBearing(mMap, location.getBearing());
-
-
-    }
-
-
-
-
 
     /*@Override
     public boolean onMarkerClick(Marker marker) {
@@ -5858,6 +5976,15 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
      */
 
+    @Override
+    public void onLocationChanged(Location location) {
+
+        mLastLocation = location;
+        displayLocation();
+        updateCameraBearing(mMap, location.getBearing());
+
+
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -5891,6 +6018,8 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 //startActivity(new Intent(DriverMapActivity.this, RateUsActivity.class));
 
                 //you can  replace getPackageName() with OTrafyc package name as a string (ie. "com.otrafyc.android.traffic.otrafycapp")
+
+
                 try {
                     Intent rateUsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
                     startActivity(rateUsIntent);
@@ -5906,99 +6035,436 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                 break;
 
             case R.id.nav_ContactUs:
-                Intent ContactUsIntent = new Intent(MapsActivity.this, ContactUsActivity.class);
 
-                // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+                // showInterstitialAd();
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MapsActivity.this);
+
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            // Called when fullscreen content is dismissed.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad was dismissed.");
+                            //showExitDialog();
 
 
-                Pair[] pairs = new Pair[1];
-                pairs[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+                            Intent ContactUsIntent = new Intent(MapsActivity.this, ContactUsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs);
+                            Pair[] pairs = new Pair[1];
+                            pairs[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
 
 
-                    startActivity(ContactUsIntent, options.toBundle());
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs);
+
+
+                                startActivity(ContactUsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(ContactUsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            // Called when fullscreen content failed to show.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad failed to show.");
+                            //showExitDialog();
+
+
+                            Intent ContactUsIntent = new Intent(MapsActivity.this, ContactUsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+
+                            Pair[] pairs = new Pair[1];
+                            pairs[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs);
+
+
+                                startActivity(ContactUsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(ContactUsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            // Called when fullscreen content is shown.
+                            // Make sure to set your reference to null so you don't
+                            // show it a second time.
+                            mInterstitialAd = null;
+                            Log.d("TAG", "The ad was shown.");
+                        }
+                    });
+
                 } else {
 
-                    startActivity(ContactUsIntent);
+
+                    Intent ContactUsIntent = new Intent(MapsActivity.this, ContactUsActivity.class);
+
+                    // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+
+                    Pair[] pairs = new Pair[1];
+                    pairs[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs);
+
+
+                        startActivity(ContactUsIntent, options.toBundle());
+                    } else {
+
+                        startActivity(ContactUsIntent);
+
+                    }
+
 
                 }
+
 
                 break;
 
 
             case R.id.nav_HowToUse:
-                Intent HowToUseUsIntent = new Intent(MapsActivity.this, HowToUseActivity.class);
-
-                // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
 
 
-                Pair[] pairs4 = new Pair[1];
-                pairs4[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+                //showInterstitialAd();
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MapsActivity.this);
+
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            // Called when fullscreen content is dismissed.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad was dismissed.");
+                            //showExitDialog();
+
+                            Intent HowToUseUsIntent = new Intent(MapsActivity.this, HowToUseActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs4);
+                            Pair[] pairs4 = new Pair[1];
+                            pairs4[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
 
 
-                    startActivity(HowToUseUsIntent, options.toBundle());
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs4);
+
+
+                                startActivity(HowToUseUsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(HowToUseUsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            // Called when fullscreen content failed to show.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad failed to show.");
+                            //showExitDialog();
+
+                            Intent HowToUseUsIntent = new Intent(MapsActivity.this, HowToUseActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+
+                            Pair[] pairs4 = new Pair[1];
+                            pairs4[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs4);
+
+
+                                startActivity(HowToUseUsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(HowToUseUsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            // Called when fullscreen content is shown.
+                            // Make sure to set your reference to null so you don't
+                            // show it a second time.
+                            mInterstitialAd = null;
+                            Log.d("TAG", "The ad was shown.");
+                        }
+                    });
+
                 } else {
+                    Log.d("TAG", "ad did not load.");
+                    //showExitDialog();
 
-                    startActivity(HowToUseUsIntent);
+
+                    Intent HowToUseUsIntent = new Intent(MapsActivity.this, HowToUseActivity.class);
+
+                    // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+
+                    Pair[] pairs4 = new Pair[1];
+                    pairs4[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs4);
+
+
+                        startActivity(HowToUseUsIntent, options.toBundle());
+                    } else {
+
+                        startActivity(HowToUseUsIntent);
+
+                    }
+
 
                 }
+
 
                 break;
 
             case R.id.nav_Settings:
-                Intent SettingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
 
-                // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
-                //set transition animation
-                Pair[] pairs2 = new Pair[1];
-                pairs2[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+                //showInterstitialAd();
+
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MapsActivity.this);
+
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            // Called when fullscreen content is dismissed.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad was dismissed.");
+                            //showExitDialog();
+
+                            Intent SettingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+                            //set transition animation
+                            Pair[] pairs2 = new Pair[1];
+                            pairs2[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs2);
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs2);
 
 
-                    startActivity(SettingsIntent, options.toBundle());
+                                startActivity(SettingsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(SettingsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            // Called when fullscreen content failed to show.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad failed to show.");
+                            //showExitDialog();
+
+                            Intent SettingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+                            //set transition animation
+                            Pair[] pairs2 = new Pair[1];
+                            pairs2[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs2);
+
+
+                                startActivity(SettingsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(SettingsIntent);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            // Called when fullscreen content is shown.
+                            // Make sure to set your reference to null so you don't
+                            // show it a second time.
+                            mInterstitialAd = null;
+                            Log.d("TAG", "The ad was shown.");
+                        }
+                    });
+
                 } else {
+                    Log.d("TAG", "ad did not load.");
+                    //showExitDialog();
 
-                    startActivity(SettingsIntent);
+
+                    Intent SettingsIntent = new Intent(MapsActivity.this, SettingsActivity.class);
+
+                    // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+                    //set transition animation
+                    Pair[] pairs2 = new Pair[1];
+                    pairs2[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs2);
+
+
+                        startActivity(SettingsIntent, options.toBundle());
+                    } else {
+
+                        startActivity(SettingsIntent);
+
+                    }
 
                 }
+
 
                 break;
 
 
             case R.id.nav_exit:
 
-                showInterstitialAd();
+                showExitDialog();
 
 
                 break;
 
             case R.id.nav_privacy_policy:
-                Intent PrivacyIntent = new Intent(MapsActivity.this, PrivacyPolicyActivity.class);
 
-                // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
-
-                Pair[] pairs1 = new Pair[1];
-                pairs1[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+                // showInterstitialAd();
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs1);
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MapsActivity.this);
+
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            // Called when fullscreen content is dismissed.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad was dismissed.");
+                            //showExitDialog();
+
+                            Intent PrivacyIntent = new Intent(MapsActivity.this, PrivacyPolicyActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                            Pair[] pairs1 = new Pair[1];
+                            pairs1[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
 
 
-                    startActivity(PrivacyIntent, options.toBundle());
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs1);
+
+
+                                startActivity(PrivacyIntent, options.toBundle());
+                            } else {
+
+                                startActivity(PrivacyIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            // Called when fullscreen content failed to show.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad failed to show.");
+                            //showExitDialog();
+
+                            Intent PrivacyIntent = new Intent(MapsActivity.this, PrivacyPolicyActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                            Pair[] pairs1 = new Pair[1];
+                            pairs1[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs1);
+
+
+                                startActivity(PrivacyIntent, options.toBundle());
+                            } else {
+
+                                startActivity(PrivacyIntent);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            // Called when fullscreen content is shown.
+                            // Make sure to set your reference to null so you don't
+                            // show it a second time.
+                            mInterstitialAd = null;
+                            Log.d("TAG", "The ad was shown.");
+                        }
+                    });
+
                 } else {
+                    Log.d("TAG", "ad did not load.");
+                    //showExitDialog();
 
-                    startActivity(PrivacyIntent);
+
+                    Intent PrivacyIntent = new Intent(MapsActivity.this, PrivacyPolicyActivity.class);
+
+                    // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                    Pair[] pairs1 = new Pair[1];
+                    pairs1[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs1);
+
+
+                        startActivity(PrivacyIntent, options.toBundle());
+                    } else {
+
+                        startActivity(PrivacyIntent);
+
+                    }
 
                 }
 
@@ -6007,24 +6473,106 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
             case R.id.nav_terms:
-                Intent TermsIntent = new Intent(MapsActivity.this, TermsActivity.class);
 
-                // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
-
-                Pair[] pairs3 = new Pair[1];
-                pairs3[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+                //showInterstitialAd();
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs3);
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MapsActivity.this);
+
+                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            // Called when fullscreen content is dismissed.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad was dismissed.");
+                            //showExitDialog();
+
+                            Intent TermsIntent = new Intent(MapsActivity.this, TermsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                            Pair[] pairs3 = new Pair[1];
+                            pairs3[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
 
 
-                    startActivity(TermsIntent, options.toBundle());
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs3);
+
+
+                                startActivity(TermsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(TermsIntent);
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            // Called when fullscreen content failed to show.
+                            //mInterstitialAd = null;
+                            Log.d("TAG", "The ad failed to show.");
+                            //showExitDialog();
+
+                            Intent TermsIntent = new Intent(MapsActivity.this, TermsActivity.class);
+
+                            // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                            Pair[] pairs3 = new Pair[1];
+                            pairs3[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs3);
+
+
+                                startActivity(TermsIntent, options.toBundle());
+                            } else {
+
+                                startActivity(TermsIntent);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            // Called when fullscreen content is shown.
+                            // Make sure to set your reference to null so you don't
+                            // show it a second time.
+                            mInterstitialAd = null;
+                            Log.d("TAG", "The ad was shown.");
+                        }
+                    });
+
                 } else {
+                    Log.d("TAG", "ad did not load.");
+                    //showExitDialog();
 
-                    startActivity(TermsIntent);
+                    Intent TermsIntent = new Intent(MapsActivity.this, TermsActivity.class);
+
+                    // startActivity(new Intent(MapsActivity.this, ContactUsActivity.class));
+
+                    Pair[] pairs3 = new Pair[1];
+                    pairs3[0] = new Pair<View, String>(navigationView, "menu_to_Activities_transition");
+
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MapsActivity.this, pairs3);
+
+
+                        startActivity(TermsIntent, options.toBundle());
+                    } else {
+
+                        startActivity(TermsIntent);
+
+                    }
 
                 }
+
 
                 break;
 
@@ -6037,7 +6585,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         return true;
     }
 
-
     public void showExitDialog() {
 
 
@@ -6045,7 +6592,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         AdView mAdView;
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
             }
         });
 
@@ -6073,6 +6620,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
             public void onClick(View v) {
                 exitAppDialog.dismiss();
                 MapsActivity.super.onBackPressed();
+
             }
         });
 
@@ -6117,10 +6665,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         */
     }
 
-
-
-    boolean isMapStyleNotLight = false;
-
     public void changeMapStyle(View view) {
 
         FloatingActionButton darkLightMapfloatingActionButton = findViewById(R.id.dark_light_MapFab);
@@ -6130,14 +6674,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         switch (view.getId()) {
             case R.id.dark_light_MapFab: {
                 if (isMapStyleNotLight) {
-
-
-
-
-
-
-
-
 
 
                     mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.new_day_map));
@@ -6169,13 +6705,6 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
                     bottomCardview.setBackgroundColor(getResources().getColor(R.color.changeableBlue12));
 
                 } else {
-
-
-
-
-
-
-
 
 
                     mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.new_night_map_style));
@@ -6286,11 +6815,10 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         if (mInterstitialAd != null) {
             mInterstitialAd = null;
             //assert false;
-           // Objects.requireNonNull(mInterstitialAd.getFullScreenContentCallback()).onAdShowedFullScreenContent();
+            // Objects.requireNonNull(mInterstitialAd.getFullScreenContentCallback()).onAdShowedFullScreenContent();
         }
         stopLocationUpdates();
         super.onPause();
-
 
 
     }
@@ -6341,6 +6869,20 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
             }
+
+            case REQUEST_CHECK_LOC_SETTINGS:
+                if (resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(MapsActivity.this, " GPS Location turned on", Toast.LENGTH_SHORT).show();
+
+                }
+                if (resultCode == Activity.RESULT_CANCELED) {
+
+                    Toast.makeText(MapsActivity.this, " Hello! GPS Location is required to show you your location", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+
             /*case REQUEST_CODE_SPEECH_INPUT: {
                 if (requestCode == RESULT_OK && null != data) {
                     //Get text array from speech intent
@@ -6545,6 +7087,7 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
                 poiLong = String.valueOf(poiLatLng.longitude);
                 String poiName = poi.name;
+
 
                 if (poiMarker != null) {
                     poiMarker.remove();

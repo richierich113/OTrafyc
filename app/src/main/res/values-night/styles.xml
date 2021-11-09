@@ -29,6 +29,15 @@
 
     </style>
 
+    <style name="CountyListStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/changeableWhite</item> <!--americanOrange is the previous color-->
+        <item name="android:fontFamily">@font/typographica_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/changeableSmokyBlack</item>
+
+    </style>
+
+
     <style name="CustomNavigateDialogStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/changeableWhite</item> <!--americanOrange is the previous color-->
         <item name="android:fontFamily">@font/typographica_regular</item>

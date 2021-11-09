@@ -11,6 +11,25 @@
 
     </style>
 
+
+
+   <!-- <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        // Set the splash screen background, animated icon, and animation duration.
+        <item name="windowSplashScreenBackground">@color/changeableBlue2</item>
+
+        // Use windowSplashScreenAnimatedIcon to add either a drawable or an
+        // animated drawable. One of these is required.
+        <item name="windowSplashScreenAnimatedIcon">@anim/bottom_animation</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>  # Required for
+        # animated icons
+
+        // Set the theme of the Activity that directly follows your splash screen.
+        <item name="postSplashScreenTheme">@style/AppTheme</item>  # Required.
+    </style>
+
+-->
+
+
     <!--Navigation menu Theme-->
     <style name="NavigationTheme" parent="AppTheme">
         <item name="colorPrimary">@color/changeableBlue2</item>
@@ -28,6 +47,16 @@
         <item name="android:textSize">20sp</item>
 
     </style>
+
+    <style name="CountyListStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/changeableWhite</item> <!--americanOrange is the previous color-->
+        <item name="android:fontFamily">@font/typographica_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/changeableSmokyBlack</item>
+
+    </style>
+
+
 
     <style name="CustomNavigateDialogStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:background">@color/changeableWhite</item> <!--americanOrange is the previous color-->

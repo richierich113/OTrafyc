@@ -351,8 +351,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerInParent="true"
-                            android:background="@color/changeableWhite"
-                            android:src="@drawable/ic_navigate_next"
+
+                            android:background="@drawable/theme_button_design"
                             android:text="@string/DayMode"
                             android:textAllCaps="false"
                             android:textColor="@color/changeableSmokyBlack"
@@ -475,7 +475,7 @@
                             android:layout_below="@+id/review_head"
                             android:layout_marginStart="0dp"
                             android:layout_marginBottom="20dp"
-                            android:text="@string/_1_1_2"
+                            android:text="@string/_v_1_2_1"
                             android:textAllCaps="false"
                             android:textColor="@color/grayColor"
                             android:textSize="14sp" />

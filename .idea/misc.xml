@@ -13,11 +13,14 @@
         <entry key="..\:/OTrafyc/app/src/main/res/layout/activity_suggestions.xml" value="0.18645833333333334" />
         <entry key="..\:/OTrafyc/app/src/main/res/layout/activity_terms.xml" value="0.18645833333333334" />
         <entry key="..\:/OTrafyc/app/src/main/res/layout/search_route_modes.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable-v24/countryList_backgrnd.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable-v24/ic_mem_blue_icon_white_stroke_circle_foreground.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable-v24/ic_mem_blue_icon_white_stroke_square_foreground.xml" value="0.16623931623931623" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable-v24/theme_button_design.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/bottom_card_button_design.xml" value="0.25" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/contact_us_backbuton_onclick_ripple_backgrnd.xml" value="0.45550351288056207" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/contact_us_gray_ripple_backround.xml" value="0.45550351288056207" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/country_list_backgrnd.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/current_location_ripple_background.xml" value="0.45550351288056207" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/dark_ripple_background.xml" value="0.45550351288056207" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/exit_dialog_cancel_button_backgrnd.xml" value="0.16623931623931623" />
@@ -38,16 +41,18 @@
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/progress_bar_background.xml" value="0.18" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/search_place_onclick_ripple_backgrnd.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/theme_background.xml" value="0.16623931623931623" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/drawable/theme_button_design.xml" value="0.16623931623931623" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout-v21/activity_maps.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_contact_us.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_feedback.xml" value="0.16" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_how_to_use.xml" value="0.2" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_maps.xml" value="0.2" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_privacy_policy.xml" value="0.18209562563580875" />
-        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_settings.xml" value="0.22" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_splash.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_suggestions.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/activity_terms.xml" value="0.17864271457085829" />
+        <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/cannot_capture_dialog_layout.xml" value="0.2" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/country_dialog.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/custom_marker_info_window.xml" value="0.25" />
         <entry key="..\:/Users/DELL/OTrafyc/app/src/main/res/layout/exit_dialog_layout.xml" value="0.22" />

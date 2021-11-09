@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.otrafyc.android.traffic.otrafycapp"
-    android:installLocation="auto">
+    android:installLocation="auto"
+    >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -17,8 +18,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
+
     <application
-        android:name="androidx.multidex.MultiDexApplication"
+
+        android:name="com.otrafyc.android.traffic.otrafycapp.MyApplication"
+
         android:allowBackup="true"
 
         android:icon="@mipmap/ic_mem_blue_icon_white_stroke_circle"
@@ -26,6 +31,8 @@
         android:roundIcon="@mipmap/ic_mem_blue_icon_white_stroke_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--android:name="androidx.multidex.MultiDexApplication"--> <!--this is inside application tag-->
+
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -54,6 +61,7 @@
             android:screenOrientation="sensorPortrait"
             android:exported="true">
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

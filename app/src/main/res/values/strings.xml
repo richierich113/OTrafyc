@@ -14,6 +14,7 @@
 
     <string name="google_direction_api" translatable="false">AIzaSyBsqBmV1mQ_FP_YyKkGLHjcc7LkzlET7wk</string>
     <string name="interstitial_AdUnit" translatable="false">ca-app-pub-7732231090579598/2255020600</string>
+    <string name="place_API" translatable="false">AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74</string>
 
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
@@ -96,7 +97,7 @@
     <string name="send_suggestions_to" translatable="true">Send suggestions to</string>
     <string name="suggestions" translatable="true">Suggestions</string>
     <string name="have_suggestion_we_d_love_to_hear_it_we_always_want_to_serve_our_users_well_nplease_don_t_share_sensitive_information" translatable="true">Have suggestion? We\'d love to hear it. We always want to serve our users well.\nPlease don\'t share sensitive information</string>
-    <string name="_1_1_2" translatable="false">1.1.2</string>
+    <string name="_v_1_2_1" translatable="false">v1.2.1</string>
     <string name="do_you_want_to_exit_otrafyc" translatable="true">Do you want to exit OTrafyc?</string>
     <string name="information_collection_and_use" translatable="true">Information Collection and Use</string>
     <string name="log_data" translatable="false">Log Data</string>
@@ -183,5 +184,8 @@
     <string name="rate_otrafyc">Rate OTrafyc</string>
     <string name="legal">Legal</string>
     <string name="theme">Theme</string>
+    <string name="oops">Oops ! !</string>
+    <string name="sorry_this_feature_currently_works_on_android_version_6_0_and_below_nmanually_take_screenshot_with_your_device">Sorry! This feature currently works on Android version 6.0 and below\nManually take screenshot with your device</string>
+    <string name="ok">Ok</string>
 
 </resources>

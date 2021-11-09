@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
-        android:background="@color/White">
+        android:background="@color/changeableWhite"
+        app:cardBackgroundColor="@color/changeableWhite">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,14 +24,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="20dp"
-                android:background="@color/lightgrayColor">
+                android:background="@color/changeableWhite">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/select_country_codeText"
-                    android:textColor="@color/blue1"
+                    android:textColor="@color/changeableBlue4"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
@@ -42,7 +43,8 @@
                     android:onClick="showHelpMessage"
                     android:padding="5dp"
                     android:src="@drawable/ic_help_question_mark"
-                    android:contentDescription="@string/todo" />
+                    android:contentDescription="@string/todo"
+                    app:tint="@color/changeableSmokyBlack" />
             </LinearLayout>
 
             <EditText
@@ -65,7 +67,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="20dp"
+                android:layout_gravity="center"
+                android:foregroundTint="@color/changeableSmokyBlack"
                 android:background="@color/changeableWhite"
+                android:theme="@style/CountyListStyle"
+                style="@style/CountyListStyle"
                 android:cacheColorHint="@color/changeableSmokyBlack"
                 />
 
