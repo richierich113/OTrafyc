@@ -20,10 +20,10 @@ android {
     buildTypes {
 
         debug {
-            resValue "string", "google_maps_key", "AIzaSyD6ftXPVAisZGl-Uev8oK4JWJIFBmvym8o"
+            resValue "string", "google_maps_key", "your api key here"
         }
         release {
-            resValue "string", "google_maps_key", "AIzaSyBEVeqt-U8d1XoWPg-fMeeHhfXliAn4d74"
+            resValue "string", "google_maps_key", "your api key here"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             multiDexEnabled true
