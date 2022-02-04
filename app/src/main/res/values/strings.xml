@@ -3,7 +3,7 @@
     <string name="title_activity_map">Map</string>
     <string name="motto" translatable="true">Smooth   rides   with   fun</string>
 
-    <string name="google_direction_api">AIzaSyBsqBmV1mQ_FP_YyKkGLHjcc7LkzlET7wk</string>
+    <string name="google_direction_api"></string>
 
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
